@@ -1,0 +1,1 @@
+("~/src/patternengine-node-react/" "~/src/patternengine-node-underscore/" "~/src/edition-node-gulp/" "~/src/patternlab-node/" "~/src/styleguidekit-assets-default/" "~/src/styleguidekit-mustache-default/" "~/src/emacs/")
