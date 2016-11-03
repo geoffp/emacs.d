@@ -27,9 +27,10 @@
  '(ns-command-modifier (quote meta))
   '(package-selected-packages
      (quote
-       (js-doc auto-complete web-mode ag json-mode exec-path-from-shell flycheck markdown-mode jade editorconfig magit flx-ido projectile neotree js2-mode js2-refactor gruvbox-theme monokai-theme zenburn-theme spacegray-theme solarized-theme color-theme-solarized color-theme-sanityinc-tomorrow)))
+       (expand-region js-doc auto-complete web-mode ag json-mode exec-path-from-shell flycheck markdown-mode jade editorconfig magit flx-ido projectile neotree js2-mode js2-refactor gruvbox-theme monokai-theme zenburn-theme spacegray-theme solarized-theme color-theme-solarized color-theme-sanityinc-tomorrow)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(scroll-bar-mode nil)
+ '(show-paren-mode t)
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -76,6 +77,9 @@
 
 ;; also disable interlock symlinks
 (setq create-lockfiles nil)
+
+;; expand region binding
+(global-set-key (kbd "C-=") 'er/expand-region)
 
 ;; a function for reinstalling selected packages
 (defun package-reinstall-activated ()
