@@ -90,6 +90,9 @@
 ;; expand region binding
 (global-set-key (kbd "C-=") 'er/expand-region)
 
+;; Magit status key binding
+(global-set-key (kbd "C-M-g") 'magit-status)
+
 ;; a function for reinstalling selected packages
 (defun package-reinstall-activated ()
   "Reinstall all activated packages."
