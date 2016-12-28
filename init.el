@@ -59,6 +59,14 @@
 ;; js2 mode by default
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
+
+;; file types to open in web-mode
+(add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
+;; make .html underscore template work in web-mode
+(setq web-mode-engines-alist
+'(("underscore.js" . "\\.html\\'"))
+)
+
 ;; js2-refactor-mode by default
 (add-hook 'js2-mode-hook #'js2-refactor-mode)
 (js2r-add-keybindings-with-prefix "C-c C-m")
