@@ -28,7 +28,7 @@
  '(ns-command-modifier (quote meta))
   '(package-selected-packages
      (quote
-       (expand-region js-doc auto-complete web-mode ag json-mode exec-path-from-shell flycheck markdown-mode jade editorconfig magit flx-ido projectile neotree js2-mode js2-refactor gruvbox-theme monokai-theme zenburn-theme spacegray-theme solarized-theme color-theme-solarized color-theme-sanityinc-tomorrow)))
+       (rainbow-mode expand-region js-doc auto-complete web-mode ag json-mode exec-path-from-shell flycheck markdown-mode jade editorconfig magit flx-ido projectile neotree js2-mode js2-refactor gruvbox-theme monokai-theme zenburn-theme spacegray-theme solarized-theme color-theme-solarized color-theme-sanityinc-tomorrow)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
