@@ -104,7 +104,7 @@
                 (warn "Package %s failed to reinstall" package-name))))))
 
 ;; load machine-local init files
-(let ((f "~/.emacs.local"))
+(let ((f "~/.emacs.local.el"))
   (if (file-readable-p f)
     (load-file f)))
 
