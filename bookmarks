@@ -1,0 +1,15 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("raspberry pi printer server"
+ (filename . "/ssh:pi@raspberrypi:/")
+ (front-context-string . "bin\n  drwxr-xr-x")
+ (rear-context-string . "96 May  7  2016 ")
+ (position . 180))
+(".homeassistant"
+ (filename . "/ssh:geoff@basementcat:/home/hass/.homeassistant/")
+ (front-context-string . "configuration.ya")
+ (rear-context-string . "60 Nov 29 01:09 ")
+ (position . 225))
+)
