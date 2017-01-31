@@ -64,6 +64,7 @@
 ;; file types to open in web-mode
 (add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 
 ;; make .html underscore template work in web-mode
 (setq web-mode-engines-alist
@@ -111,9 +112,6 @@
   (if (file-readable-p f)
       (load-file f)))
 
-;; filetypes
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
 
 
 (provide 'init)
