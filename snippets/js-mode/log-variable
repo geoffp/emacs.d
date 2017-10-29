@@ -1,0 +1,4 @@
+# -*- mode: snippet -*-
+# key: lv
+# --
+console.log('$1:', $1);
