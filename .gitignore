@@ -43,3 +43,4 @@ site-lisp/package/
 /projectile-bookmarks.eld
 /anaconda-mode/
 *.cache
+elpa/archives/melpa/archive-contents
