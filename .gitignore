@@ -18,7 +18,6 @@ cookies
 /newsticker
 /ac-comphist.dat
 \#*
-/elpa
 site-lisp/package/
 /swank
 /.mc-lists.el
@@ -43,3 +42,4 @@ site-lisp/package/
 /viper
 /projectile-bookmarks.eld
 /anaconda-mode/
+*.cache

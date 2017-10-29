@@ -1,0 +1,21 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("Basementcat from outside"
+ (filename . "/ssh:geoff@pursell.duckdns.org#22222:/")
+ (front-context-string . "70-persistent-ne")
+ (rear-context-string . "48 Nov 10  2013 ")
+ (position . 220))
+("raspberry-pi"
+ (filename . "/ssh:pi@192.168.2.102:/")
+ (front-context-string . "bin\n  drwxr-xr-x")
+ (rear-context-string . "96 Mar 24 16:27 ")
+ (position . 183))
+("Design Systems OpenStack instance"
+ (filename . "/ssh:ds:/")
+ (front-context-string . "bin -> usr/bin\n ")
+ (rear-context-string . " 7 Mar  4  2016 ")
+ (position . 168)
+ (annotation . ""))
+)
