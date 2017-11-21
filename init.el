@@ -16,13 +16,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ag-ignore-list (quote ("node_modules" "*.map" "main.*.*")))
-  '(ansi-color-faces-vector
-     [default bold shadow italic underline bold bold-italic bold])
+ '(ansi-color-faces-vector
+	 [default bold shadow italic underline bold bold-italic bold])
  '(async-bytecomp-package-mode t)
  '(bookmark-save-flag 1)
  '(css-indent-offset 2)
- '(ansi-color-faces-vector
-	 [default bold shadow italic underline bold bold-italic bold])
  '(custom-enabled-themes (quote (solarized-dark)))
  '(custom-safe-themes
 	 (quote
@@ -40,13 +38,13 @@
  '(mocha-reporter "spec")
  '(ns-command-modifier (quote meta))
  '(package-enable-at-startup nil)
-  '(package-selected-packages
-     (quote
-       (vue-mode iedit mocha mmm-mode nginx-mode swift-mode rjsx-mode yaml-mode yasnippet rainbow-mode expand-region js-doc auto-complete web-mode ag json-mode exec-path-from-shell flycheck markdown-mode jade editorconfig magit flx-ido projectile neotree js2-mode js2-refactor gruvbox-theme monokai-theme zenburn-theme spacegray-theme solarized-theme color-theme-solarized color-theme-sanityinc-tomorrow)))
+ '(package-selected-packages
+	 (quote
+		(drag-stuff vue-mode iedit mocha mmm-mode nginx-mode swift-mode rjsx-mode yaml-mode yasnippet rainbow-mode expand-region js-doc auto-complete web-mode ag json-mode exec-path-from-shell flycheck markdown-mode jade editorconfig magit flx-ido projectile neotree js2-mode js2-refactor gruvbox-theme monokai-theme zenburn-theme spacegray-theme solarized-theme color-theme-solarized color-theme-sanityinc-tomorrow)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
-  '(rainbow-html-colors-major-mode-list
-     (quote
-       (html-mode css-mode php-mode nxml-mode xml-mode web-mode js2-mode rjsx-mode)))
+ '(rainbow-html-colors-major-mode-list
+	 (quote
+		(html-mode css-mode php-mode nxml-mode xml-mode web-mode js2-mode rjsx-mode)))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tab-width 2)
@@ -68,11 +66,15 @@
   (package-initialize))
 
 ;; window navigation keybindings
-(global-set-key (kbd "M-<up>") 'windmove-up)
-(global-set-key (kbd "M-<down>") 'windmove-down)
-(global-set-key (kbd "M-<right>") 'windmove-right)
-(global-set-key (kbd "M-<left>") 'windmove-left)
+;; (global-set-key (kbd "M-<up>") 'windmove-up)
+;; (global-set-key (kbd "M-<down>") 'windmove-down)
+;; (global-set-key (kbd "M-<right>") 'windmove-right)
+;; (global-set-key (kbd "M-<left>") 'windmove-left)
 (global-set-key (kbd "M-o") 'other-window)
+
+;; drag-stuff default keybindings
+(drag-stuff-global-mode 1)
+(drag-stuff-define-keys)
 
 ;; js2 mode by default
 (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
