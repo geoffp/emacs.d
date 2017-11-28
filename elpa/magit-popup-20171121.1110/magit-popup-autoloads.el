@@ -1,9 +1,10 @@
-;;; f-autoloads.el --- automatically extracted autoloads
+;;; magit-popup-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil nil ("f-pkg.el" "f.el") (23069 36426 0 0))
+;;;### (autoloads nil nil ("magit-popup-pkg.el" "magit-popup.el")
+;;;;;;  (23069 36421 0 0))
 
 ;;;***
 
@@ -12,4 +13,4 @@
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
 ;; End:
-;;; f-autoloads.el ends here
+;;; magit-popup-autoloads.el ends here
