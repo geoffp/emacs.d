@@ -87,7 +87,7 @@
 (require 'company-tern)
 (add-to-list 'company-backends 'company-tern)
 (add-hook 'after-init-hook 'global-company-mode)
-;; (add-to-list 'company-backends 'company-tern)
+(global-set-key (kbd "M-RET") 'company-complete)
 
 ;; file types to open in web-mode
 (add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
