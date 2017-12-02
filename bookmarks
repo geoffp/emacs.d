@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("Basementcat from outside"
+(("Home Assistant Config"
+ (filename . "/ssh:geoff@basementcat:/etc/homeassistant/")
+ (front-context-string . "appdaemon\n  -rw-")
+ (rear-context-string . "90 Nov 22 13:19 ")
+ (position . 220))
+("Basementcat from outside"
  (filename . "/ssh:geoff@pursell.duckdns.org#22222:/")
  (front-context-string . "70-persistent-ne")
  (rear-context-string . "48 Nov 10  2013 ")
@@ -18,9 +23,4 @@
  (rear-context-string . " 7 Mar  4  2016 ")
  (position . 168)
  (annotation . ""))
-(".homeassistant"
- (filename . "/ssh:geoff@basementcat:/home/hass/.homeassistant/")
- (front-context-string . "configuration.ya")
- (rear-context-string . "60 Nov 29 01:09 ")
- (position . 225))
 )
