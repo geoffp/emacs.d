@@ -38,9 +38,9 @@
  '(mocha-reporter "spec")
  '(ns-command-modifier (quote meta))
  '(package-enable-at-startup nil)
-  '(package-selected-packages
-     (quote
-       (prettier-js drag-stuff vue-mode iedit mocha mmm-mode nginx-mode swift-mode rjsx-mode yaml-mode yasnippet rainbow-mode expand-region js-doc auto-complete web-mode ag json-mode exec-path-from-shell flycheck markdown-mode jade editorconfig magit flx-ido projectile neotree js2-mode js2-refactor gruvbox-theme monokai-theme zenburn-theme spacegray-theme solarized-theme color-theme-solarized color-theme-sanityinc-tomorrow)))
+ '(package-selected-packages
+	 (quote
+		(prettier-js company-tern drag-stuff vue-mode iedit mocha mmm-mode nginx-mode swift-mode rjsx-mode yaml-mode yasnippet rainbow-mode expand-region js-doc auto-complete web-mode ag json-mode exec-path-from-shell flycheck markdown-mode jade editorconfig magit flx-ido projectile neotree js2-mode js2-refactor gruvbox-theme monokai-theme zenburn-theme spacegray-theme solarized-theme color-theme-solarized color-theme-sanityinc-tomorrow)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
   '(rainbow-html-colors-major-mode-list
      (quote
@@ -79,6 +79,15 @@
 ;; js2 mode by default
 (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
 
+;; company mode, for auto-completion wherever possible.
+;; for javascript, this means you have to:
+;;   npm install -g tern
+;; tern provides the code analysis and type inference
+(require 'company)
+(require 'company-tern)
+(add-to-list 'company-backends 'company-tern)
+(add-hook 'after-init-hook 'global-company-mode)
+(global-set-key (kbd "M-RET") 'company-complete)
 
 ;; file types to open in web-mode
 (add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
