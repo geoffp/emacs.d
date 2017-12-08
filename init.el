@@ -82,12 +82,17 @@
 ;; company mode, for auto-completion wherever possible.
 ;; for javascript, this means you have to:
 ;;   npm install -g tern
-;; tern provides the code analysis and type inference
+;; tern provides the code analysis and type inference, so you must also enable tern-mode for JS
+;; buffers
 (require 'company)
 (require 'company-tern)
 (add-to-list 'company-backends 'company-tern)
 (add-hook 'after-init-hook 'global-company-mode)
 (global-set-key (kbd "M-RET") 'company-complete)
+;; js modes
+(add-hook 'rjsx-mode-hook 'tern-mode)
+(add-hook 'js2-mode-hook 'tern-mode)
+(add-hook 'javascript-mode-hook 'tern-mode)
 
 ;; file types to open in web-mode
 (add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
