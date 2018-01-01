@@ -33,6 +33,7 @@
  '(global-auto-complete-mode t)
  '(global-flycheck-mode t)
  '(ido-mode (quote both) nil (ido))
+ '(js-indent-level 2)
  '(js2-strict-missing-semi-warning nil)
  '(mocha-options "--recursive --colors")
  '(mocha-reporter "spec")
@@ -54,7 +55,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Ubuntu Mono" :foundry "DAMA" :slant normal :weight normal :height 120 :width normal)))))
+ '(default ((t (:family "Ubuntu Mono" :foundry "DAMA" :slant normal :weight normal :height 120 :width normal))))
+ '(mmm-default-submode-face ((t nil))))
 
 ;; add melpa
 (when (>= emacs-major-version 24)
@@ -108,6 +110,13 @@
 (add-hook 'js2-mode-hook #'js2-refactor-mode)
 (js2r-add-keybindings-with-prefix "C-c C-m")
 
+
+;; load up rainbow-mode in various modes in which we may find it useful
+(add-hook 'js2-mode-hook `rainbow-mode)
+(add-hook 'rjsx-mode-hook `rainbow-mode)
+(add-hook 'javascript-mode-hook `rainbow-mode)
+(add-hook 'css-mode-hook `rainbow-mode)
+(add-hook 'vue-mode-hook `rainbow-mode)
 
 ;; ido setup
 (flx-ido-mode)
