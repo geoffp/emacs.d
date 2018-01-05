@@ -44,3 +44,4 @@ site-lisp/package/
 /anaconda-mode/
 *.cache
 elpa/archives/melpa/archive-contents
+elpa/archives/gnu/archive-contents
