@@ -17,7 +17,7 @@
  ;; If there is more than one, they won't work right.
  '(ag-ignore-list (quote ("node_modules" "*.map" "main.*.*" "*.snap")))
   '(ansi-color-faces-vector
-     [default bold shadow italic underline bold bold-italic bold])
+   [default bold shadow italic underline bold bold-italic bold])
  '(async-bytecomp-package-mode t)
  '(bookmark-save-flag 1)
  '(css-indent-offset 2)
@@ -33,6 +33,7 @@
  '(global-auto-complete-mode t)
  '(global-flycheck-mode t)
  '(ido-mode (quote both) nil (ido))
+ '(indent-tabs-mode nil)
  '(js-indent-level 2)
  '(js-switch-indent-offset 2)
  '(js2-include-node-externs t)
@@ -43,13 +44,14 @@
  '(ns-command-modifier (quote meta))
  '(package-enable-at-startup nil)
   '(package-selected-packages
-     (quote
+   (quote
        (gh-md prettier-js eslint-fix company-emoji emojify add-node-modules-path company-tern drag-stuff vue-mode iedit mocha mmm-mode nginx-mode swift-mode rjsx-mode yaml-mode yasnippet rainbow-mode expand-region js-doc auto-complete web-mode ag json-mode exec-path-from-shell flycheck markdown-mode jade editorconfig magit flx-ido projectile neotree js2-mode js2-refactor gruvbox-theme monokai-theme zenburn-theme spacegray-theme solarized-theme color-theme-solarized color-theme-sanityinc-tomorrow)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
   '(rainbow-html-colors-major-mode-list
-     (quote
-       (html-mode css-mode php-mode nxml-mode xml-mode web-mode js2-mode rjsx-mode)))
+   (quote
+    (html-mode css-mode php-mode nxml-mode xml-mode web-mode js2-mode rjsx-mode)))
  '(scroll-bar-mode nil)
+ '(sh-indentation 2)
  '(show-paren-mode t)
  '(tab-width 2)
  '(tool-bar-mode nil))
