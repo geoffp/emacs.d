@@ -15,18 +15,18 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ag-ignore-list (quote ("node_modules" "*.map" "main.*.*")))
- '(ansi-color-faces-vector
-	 [default bold shadow italic underline bold bold-italic bold])
+ '(ag-ignore-list (quote ("node_modules" "*.map" "main.*.*" "*.snap")))
+  '(ansi-color-faces-vector
+     [default bold shadow italic underline bold bold-italic bold])
  '(async-bytecomp-package-mode t)
  '(bookmark-save-flag 1)
  '(css-indent-offset 2)
  '(custom-enabled-themes (quote (solarized-dark)))
- '(custom-safe-themes
-	 (quote
-		("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "0e219d63550634bc5b0c214aced55eb9528640377daf486e13fb18a32bf39856" "a800120841da457aa2f86b98fb9fd8df8ba682cebde033d7dbf8077c1b7d677a" "3fd0fda6c3842e59f3a307d01f105cce74e1981c6670bb17588557b4cebfe1a7" "d8f76414f8f2dcb045a37eb155bfaa2e1d17b6573ed43fb1d18b936febc7bbc2" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
+  '(custom-safe-themes
+     (quote
+       ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "0e219d63550634bc5b0c214aced55eb9528640377daf486e13fb18a32bf39856" "a800120841da457aa2f86b98fb9fd8df8ba682cebde033d7dbf8077c1b7d677a" "3fd0fda6c3842e59f3a307d01f105cce74e1981c6670bb17588557b4cebfe1a7" "d8f76414f8f2dcb045a37eb155bfaa2e1d17b6573ed43fb1d18b936febc7bbc2" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(editorconfig-mode t)
- '(fill-column 95)
+ '(fill-column 80)
  '(flycheck-check-syntax-automatically (quote (save idle-change mode-enabled)))
  '(flycheck-disabled-checkers (quote (javascript-standard)))
  '(flycheck-idle-change-delay 1)
@@ -34,18 +34,21 @@
  '(global-flycheck-mode t)
  '(ido-mode (quote both) nil (ido))
  '(js-indent-level 2)
+ '(js-switch-indent-offset 2)
+ '(js2-include-node-externs t)
  '(js2-strict-missing-semi-warning nil)
+ '(js2-strict-trailing-comma-warning nil)
  '(mocha-options "--recursive --colors")
  '(mocha-reporter "spec")
  '(ns-command-modifier (quote meta))
  '(package-enable-at-startup nil)
- '(package-selected-packages
-	 (quote
-		(add-node-modules-path company-tern drag-stuff vue-mode iedit mocha mmm-mode nginx-mode swift-mode rjsx-mode yaml-mode yasnippet rainbow-mode expand-region js-doc auto-complete web-mode ag json-mode exec-path-from-shell flycheck markdown-mode jade editorconfig magit flx-ido projectile neotree js2-mode js2-refactor gruvbox-theme monokai-theme zenburn-theme spacegray-theme solarized-theme color-theme-solarized color-theme-sanityinc-tomorrow)))
+  '(package-selected-packages
+     (quote
+       (gh-md prettier-js eslint-fix company-emoji emojify add-node-modules-path company-tern drag-stuff vue-mode iedit mocha mmm-mode nginx-mode swift-mode rjsx-mode yaml-mode yasnippet rainbow-mode expand-region js-doc auto-complete web-mode ag json-mode exec-path-from-shell flycheck markdown-mode jade editorconfig magit flx-ido projectile neotree js2-mode js2-refactor gruvbox-theme monokai-theme zenburn-theme spacegray-theme solarized-theme color-theme-solarized color-theme-sanityinc-tomorrow)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
- '(rainbow-html-colors-major-mode-list
-	 (quote
-		(html-mode css-mode php-mode nxml-mode xml-mode web-mode js2-mode rjsx-mode)))
+  '(rainbow-html-colors-major-mode-list
+     (quote
+       (html-mode css-mode php-mode nxml-mode xml-mode web-mode js2-mode rjsx-mode)))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tab-width 2)
@@ -90,6 +93,11 @@
 (require 'company-tern)
 (add-to-list 'company-backends 'company-tern)
 (add-hook 'after-init-hook 'global-company-mode)
+;; global emojify: no thanks
+;; (add-hook 'after-init-hook #'global-emojify-mode)
+(require 'company-emoji)
+(add-to-list 'company-backends 'company-emoji)
+
 (global-set-key (kbd "M-RET") 'company-complete)
 ;; js modes
 (add-hook 'rjsx-mode-hook 'tern-mode)
@@ -117,6 +125,7 @@
 (add-hook 'javascript-mode-hook `rainbow-mode)
 (add-hook 'css-mode-hook `rainbow-mode)
 (add-hook 'vue-mode-hook `rainbow-mode)
+(add-hook 'web-mode-hook `rainbow-mode)
 
 ;; load node_modules into the exec path when we open certain things in a buffer
 (eval-after-load 'js-mode
@@ -131,6 +140,11 @@
   '(add-hook 'rjsx-mode-hook #'add-node-modules-path))
 (eval-after-load 'vue-mode
   '(add-hook 'vue-mode-hook #'add-node-modules-path))
+(eval-after-load 'web-mode
+  '(add-hook 'vue-mode-hook #'add-node-modules-path))
+
+;; manually add this one until https://github.com/codesuki/add-node-modules-path/issues/8 is resolved
+(add-to-list 'exec-path "~/src/nicollet/node_modules/.bin")
 
 ;; ido setup
 (flx-ido-mode)
@@ -152,6 +166,11 @@
 
 ;; Magit status key binding
 (global-set-key (kbd "C-M-g") 'magit-status)
+
+;; yasnippet setup
+;; Bind yas-expand to shift-tab
+(global-set-key (kbd "<S-tab>") 'yas-expand)
+(yas-global-mode 1)
 
 ;; a function for reinstalling selected packages
 (defun package-reinstall-activated ()
