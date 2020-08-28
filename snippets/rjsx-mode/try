@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# key: try
+# name: try / catch block
+# binding: C-c C-t
+# --
+try {
+  $0
+} catch (err) {
+  console.log("Error $1.", err);
+}

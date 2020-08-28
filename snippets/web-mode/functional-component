@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# key: func-component
+# name: React Functional Component
+# binding: C-c C-r f c
+# --
+
+const $1 = ({ $2 }) => (
+  $0
+);
+$1.defaultProps = {
+${2:$(mapconcat (lambda (x) (format "%s: 'replace me'" (string-trim x)))
+                (split-string yas-text ", ") ",
+")}
+};
+$1.propTypes = {
+${2:$(mapconcat (lambda (x) (format "%s: PropTypes.replaceMe" (string-trim x)))
+                (split-string yas-text ", ") ",
+")}
+};

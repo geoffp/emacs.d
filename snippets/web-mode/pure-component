@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# key: pure
+# name: React PureComponent
+# binding: C-c C-r p c
+# --
+
+class $1 extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    const { $2 } = this.props;
+  }
+}
+$1.defaultProps = {
+${2:$(mapconcat (lambda (x) (format "%s: 'replace me'" (string-trim x)))
+                (split-string yas-text ", ") ",
+")}
+};
+$1.propTypes = {
+${2:$(mapconcat (lambda (x) (format "%s: PropTypes.replaceMe" (string-trim x)))
+                (split-string yas-text ", ") ",
+")}
+};

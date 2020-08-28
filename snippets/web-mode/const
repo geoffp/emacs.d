@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# key: const
+# name: react constructor
+# binding: C-c C-r C-c
+# --
+  constructor(props) {
+    super(props);
+    $0
+  }

@@ -45,3 +45,4 @@ site-lisp/package/
 *.cache
 elpa/archives/melpa/archive-contents
 elpa/archives/gnu/archive-contents
+.DS_Store

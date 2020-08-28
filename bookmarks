@@ -1,8 +1,33 @@
-;;;; Emacs Bookmark Format Version 1 ;;;;
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8 -*-
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("basementcat scripts"
+(("Filmstrip"
+ (filename . "~/src/nicollet/packages/nicollet-react/src/components/Filmstrip/")
+ (front-context-string . "  /Users/z002kxx")
+ (rear-context-string)
+ (position . 1))
+("AdaptiveUI"
+ (filename . "~/src/AdaptiveUI/")
+ (front-context-string . "sers     435 May")
+ (rear-context-string . "x  DHC\\\\Domain U")
+ (position . 1125))
+("TODO.org"
+ (filename . "~/TODO.org")
+ (front-context-string . "\n* Tasks\n**\n\n\n* ")
+ (rear-context-string)
+ (position . 1))
+("nicollet"
+ (filename . "~/src/nicollet/")
+ (front-context-string . ".drone.yml\n  -rw")
+ (rear-context-string . "61 Apr 12 14:11 ")
+ (position . 290))
+("init.el"
+ (filename . "~/.emacs.d/init.el")
+ (front-context-string . ";;; init --- my ")
+ (rear-context-string)
+ (position . 1))
+("basementcat scripts"
  (filename . "/ssh:geoff@basementcat:/home/geoff/bin/")
  (front-context-string . "\n  -rwxrwxr-x 1 ")
  (rear-context-string . "t_lutron_cert.py")

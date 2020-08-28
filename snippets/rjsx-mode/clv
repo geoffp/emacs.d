@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# key: clv
+# name: console.log variable
+# binding: C-c C-l C-v
+# --
+console.log('$1:', $1);

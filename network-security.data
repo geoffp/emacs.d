@@ -1,4 +1,11 @@
 (
+ (:id "sha1:8509c552ebf17fbdd20d1c533ea9633f6314bd49" :fingerprints ("sha1:ef:ae:6a:d4:de:f6:2a:e8:8a:91:db:73:60:83:fb:c4:33:3c:6d:43") :host "graph.facebook.com:443" :conditions (:unknown-ca :invalid :verify-cert))
+ (:id "sha1:4c5bd0335f4e830e0e8ae5cb5ccda68a0c960410" :fingerprints ("sha1:93:7c:28:49:8c:51:89:b7:fd:95:22:27:92:37:e3:e3:6f:3b:6c:7c") :host "lh6.googleusercontent.com:443" :conditions (:unknown-ca :invalid :verify-cert))
+ (:id "sha1:557d8f9d026b5aeb279fa1fbaf50f99797506a85" :fingerprints ("sha1:48:6a:7c:01:f2:0c:1d:4b:ce:1d:6c:21:4b:56:a4:b8:57:10:73:c8") :host "pixel.quantserve.com:443" :conditions (:unknown-ca :invalid :verify-cert))
+ (:id "sha1:6d4eb958390599243ba9f5035cb671fa8dd6a93a" :fingerprints ("sha1:96:05:a1:7e:b9:cb:80:a0:45:2a:ff:29:5b:da:f9:38:80:44:c1:84" "sha1:98:16:ed:5e:c4:60:72:bd:2a:60:f9:c0:b3:69:fe:7b:9e:30:84:23") :host "elpa.gnu.org:443" :conditions (:unknown-ca :invalid :verify-cert :same-cert))
+ (:id "sha1:310f5e08323ce2be715e9fb09fddc617debb1982" :fingerprints ("sha1:98:16:ed:5e:c4:60:72:bd:2a:60:f9:c0:b3:69:fe:7b:9e:30:84:23") :host "mdn.mozillademos.org:443" :conditions (:unknown-ca :invalid :verify-cert))
+ (:id "sha1:a925ef07a1790d65378c10b32e1c3885448fcf03" :fingerprints ("sha1:98:16:ed:5e:c4:60:72:bd:2a:60:f9:c0:b3:69:fe:7b:9e:30:84:23") :host "media.prod.mdn.mozit.cloud:443" :conditions (:unknown-ca :invalid :verify-cert))
+ (:id "sha1:344932629b967c25d241b0b094d94992858ce8a1" :fingerprint "sha1:b8:de:96:67:94:f7:ab:6d:91:51:f5:66:09:e5:68:cc:95:70:02:5c" :host "git.target.com:443" :conditions (:insecure :unknown-ca :invalid))
  (:id "sha1:88d4df3ce5800820f90edda8f27d13572234b2b9" :fingerprint "sha1:13:0e:b7:b0:c1:b7:75:40:89:0f:0b:64:20:6b:53:a5:d2:2a:a8:07" :host "api.github.com:443" :conditions (:insecure :unknown-ca :invalid))
  (:id "sha1:5cce342a9a99ff6632dc081a41f5f4a28e8e10fc" :fingerprint "sha1:c9:4f:05:0e:50:48:da:fd:71:ee:ca:36:bf:ab:10:0a:52:70:16:99" :host "raw.githubusercontent.com:443" :conditions (:insecure :unknown-ca :invalid))
  (:id "sha1:379522f41fcdf5d279b33c30780e7512c9348430" :fingerprint "sha1:d4:ee:9d:2a:67:12:b3:61:4c:27:2d:15:8b:04:fc:c8:ca:08:a0:b6" :host "github.com:443" :conditions (:insecure :unknown-ca :invalid))

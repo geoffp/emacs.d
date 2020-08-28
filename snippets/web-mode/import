@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# key: import
+# name: es module named import
+# binding: C-c i
+# --
+import { $0 } from '$1';
