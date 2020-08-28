@@ -39,7 +39,6 @@
  '(flycheck-idle-change-delay 1)
  '(global-auto-complete-mode t)
  '(global-auto-revert-mode t)
- '(global-flycheck-mode t)
  '(highlight-changes-colors '("#d33682" "#6c71c4"))
   '(highlight-symbol-colors
      (--map
@@ -125,6 +124,7 @@
 ;; (add-to-list 'gnutls-trustfiles "/etc/ssl/certs/tgt-ca-bundle.crt")
 
 ;; Default working directory
+;; TODO: does this actually work?
 (setq default-directory "~/src/nicollet")
 
 ;; window navigation keybindings
@@ -134,12 +134,7 @@
 (drag-stuff-global-mode 1)
 (drag-stuff-define-keys)
 
-(require 'magit)
-
-;; js2/rjsx mode by default
-;; (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
-;; (add-to-list 'auto-mode-alist '("\\.mjs\\'" . rjsx-mode))
-;; (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
+(use-package magit)
 
 ;; prettier-js-mode by default for JS
 (add-hook 'js2-mode-hook 'prettier-js-mode)
@@ -174,20 +169,30 @@
   (flycheck-add-mode 'typescript-tslint 'web-mode)
   (flycheck-add-mode 'javascript-eslint 'web-mode))
 
+;; TODO: maybe make a list of filetypes and iterate over it here, and below.
+(defun tide-file-init-is-js (extension)
+  (or (string= "tsx" extension)
+    (string= "jsx" extension)
+    (string= "ts" extension)
+    (string= "js" extension)
+    (string= "mjs" extension)))
+
+(defun tide-file-init ()
+  "Do everything necessary when we go into typescript-mode or web-mode"
+  (when (tide-file-init-is-js (file-name-extension buffer-file-name))
+    (tide-setup)
+    (tide-hl-identifier-mode)))
+
 (use-package tide
   :ensure t
   :after (typescript-mode company flycheck web-mode)
   :mode (("\\.ts\\'" . typescript-mode)
           ("\\.js\\'" . typescript-mode)
-          ("\\.jsx\\'" . typescript-mode)
+          ("\\.jsx\\'" . web-mode)
           ("\\.tsx\\'" . web-mode)
           ("\\.mjs\\'" . typescript-mode))
-  :hook ((typescript-mode . tide-setup)
-          (typescript-mode . tide-hl-identifier-mode)
-          (web-mode . (lambda ()
-                        (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                          (tide-setup)
-                          (tide-hl-identifier-mode)))))
+  :hook ((typescript-mode . tide-file-init)
+          (web-mode . tide-file-init))
   :bind (("C-c t n" . 'tide-rename-symbol)
           ("C-c t f" . 'tide-refactor)
           ("C-c t r" . 'tide-references)

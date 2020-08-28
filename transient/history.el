@@ -18,9 +18,8 @@
   (("--" "packages/viewer/src/PropCard/PropCard.tsx"))
   (("--" "lerna.json")))
  (magit-dispatch nil)
- (magit-fetch
-  ("--prune")
-  nil)
+ (magit-fetch nil
+              ("--prune"))
  (magit-gitignore nil)
  (magit-log
   ("-n256"
@@ -31,9 +30,9 @@
   ("-n256" "--author=Geoff" "--graph" "--decorate"))
  (magit-merge nil)
  (magit-pull nil)
- (magit-push nil
-             ("--force-with-lease")
-             ("--no-verify"))
+ (magit-push
+  ("--force-with-lease")
+  ("--no-verify"))
  (magit-rebase nil
                ("--interactive")
                ("--autosquash"))
