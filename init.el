@@ -39,6 +39,8 @@
 (drag-stuff-global-mode 1)
 (drag-stuff-define-keys)
 
+(global-auto-revert-mode)
+
 (use-package all-the-icons)
 
 (use-package magit)
@@ -48,39 +50,45 @@
 (add-hook 'rjsx-mode-hook 'prettier-js-mode)
 (add-hook 'javascript-mode-hook 'prettier-js-mode)
 
-(use-package prettier-js-mode
-  :hook (typescript-mode web-mode rjsx-mode js2-mode javascript-mode))
-;; (add-hook 'web-mode-hook 'prettier-js-mode)
-;; (add-hook 'typescript-mode-hook 'prettier-js-mode)
+;; Let's make a list of all the JS-ish modes for use-package hooks
+
 
 ;; TIDE: TypeScript IDE mode
-;; (defun setup-tide-mode ()
-;;   (interactive)
-;;   (tide-setup)
-;;   (flycheck-mode +1)
-;;   (setq flycheck-check-syntax-automatically '(save mode-enabled))
-;;   (eldoc-mode +1)
-;;   (tide-hl-identifier-mode +1)
-;;   ;; company is an optional dependency. You have to
-;;   ;; install it separately via package-install
-;;   ;; `M-x package-install [ret] company`
-;;   (company-mode +1)
-;;   ;; Use eslint also
-;;   (flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
-;;   (flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
-;;   ;; set keyboard shortcuts
-;;   )
-
 (use-package typescript-mode)
 (use-package company)
 (use-package web-mode)
-(use-package flycheck
+;; (use-package rjsx-mode)
+;; (use-package js2-mode)
+
+(defmacro js-mode-list ()
+  `(typescript-mode
+    web-mode
+    rjsx-mode
+    js2-mode
+    javascript-mode))
+
+(use-package prettier-js-mode
+  :hook (typescript-mode
+         web-mode
+         rjsx-mode
+         js2-mode
+         javascript-mode))
+
+(use-package flycheck-mode
+  :hook (typescript-mode
+         web-mode
+         rjsx-mode
+         js2-mode
+         javascript-mode)
   :config
   (flycheck-add-mode 'typescript-tslint 'web-mode)
   (flycheck-add-mode 'javascript-eslint 'web-mode))
 
+
+
 ;; TODO: maybe make a list of filetypes and iterate over it here, and below.
 (defun tide-file-init-is-js (extension)
+  "Test whether a file extension implies a Javascript-like language"
   (or (string= "tsx" extension)
     (string= "jsx" extension)
     (string= "ts" extension)
@@ -106,7 +114,8 @@
   :bind (("C-c t n" . 'tide-rename-symbol)
           ("C-c t f" . 'tide-refactor)
           ("C-c t r" . 'tide-references)
-          ("C-c t p" . 'tide-documentation-at-point))
+          ("C-c t p" . 'tide-documentation-at-point)
+          ("C-c t s" . 'tide-restart-server))
   :config
   (flycheck-remove-next-checker 'typescript-tide 'typescript-tslint)
   (flycheck-remove-next-checker 'tsx-tide 'typescript-tslint)
@@ -128,6 +137,12 @@
 (add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+
+(defun web-jsx ()
+  "Set a JS file to web mode, with JSX content."
+  (interactive)
+  (web-mode)
+  (web-mode-set-content-type "jsx"))
 
 ;; make .html underscore template work in web-mode
 ;; (setq web-mode-content-types-alist
