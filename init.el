@@ -81,7 +81,7 @@
          js2-mode
          javascript-mode)
   :config
-  (flycheck-add-mode 'typescript-tslint 'web-mode)
+  ;; (flycheck-add-mode 'typescript-tslint 'web-mode)
   (flycheck-add-mode 'javascript-eslint 'web-mode))
 
 
@@ -119,8 +119,9 @@
   :config
   (flycheck-remove-next-checker 'typescript-tide 'typescript-tslint)
   (flycheck-remove-next-checker 'tsx-tide 'typescript-tslint)
-  (flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
-  (flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append))
+  ;; (flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
+  ;; (flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
+  )
 
 ;;
 ;; company mode, for auto-completion wherever possible.
@@ -230,21 +231,6 @@
 (let ((f "~/.emacs.d/init.local.el"))
   (if (file-readable-p f)
       (load-file f)))
-
-
-;; as long we're talking flycheck, let's teach it to find eslint in node_modules.
-;; ripped from https://emacs.stackexchange.com/a/21207
-;; (defun my/use-eslint-from-node-modules ()
-;;   (let* ((root (locate-dominating-file
-;;                 (or (buffer-file-name) default-directory)
-;;                 "node_modules"))
-;;          (eslint (and root
-;;                       (expand-file-name "node_modules/eslint/bin/eslint.js"
-;;                                         root))))
-;;     (when (and eslint (file-executable-p eslint))
-;;       (setq-local flycheck-javascript-eslint-executable eslint))))
-
-;; (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
 ;; pretty printing commands
 (defun reformat-xml ()
