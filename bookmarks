@@ -2,7 +2,22 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("Filmstrip"
+(("apache2"
+ (filename . "/sudo:root@basementcat:/etc/apache2/")
+ (front-context-string . "conf-available\n ")
+ (rear-context-string . "38 Aug 15 06:34 ")
+ (position . 286))
+("ssl"
+ (filename . "/sudo:root@basementcat:/etc/ssl/")
+ (front-context-string . "  /sudo:root@bas")
+ (rear-context-string)
+ (position . 1))
+("Plex logs"
+ (filename . "/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/Logs/")
+ (front-context-string . "Plex (anonymous)")
+ (rear-context-string . "89 Aug 26  2013 ")
+ (position . 278))
+("Filmstrip"
  (filename . "~/src/nicollet/packages/nicollet-react/src/components/Filmstrip/")
  (front-context-string . "  /Users/z002kxx")
  (rear-context-string)

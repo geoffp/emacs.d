@@ -19,8 +19,7 @@
   (("--" "lerna.json")))
  (magit-dispatch nil)
  (magit-fetch
-  ("--prune")
-  nil)
+  ("--prune"))
  (magit-gitignore nil)
  (magit-log
   ("-n256" "--graph" "--decorate")
@@ -38,6 +37,8 @@
  (magit-rebase nil
                ("--interactive")
                ("--autosquash"))
+ (magit-remote
+  ("-f"))
  (magit-remote\.<remote>\.*url "git@github.com:geoffp/emacs.d.git" "https://github.com/geoffp/emacs.d.git")
  (magit-reset nil)
  (magit-revert
