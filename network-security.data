@@ -1,4 +1,8 @@
 (
+ (:id "sha1:81c28f8a83b0419021c5a551bc38356c8d83bd29" :fingerprints ("sha1:72:93:78:1c:5f:2a:df:a8:00:5f:c3:2e:6c:ea:c2:2f:58:ec:b8:a5" "sha1:02:81:4b:b1:b2:f3:ae:4a:55:46:b3:ed:01:bd:39:80:4a:71:01:d7") :host "github.githubassets.com:443" :conditions (:same-cert))
+ (:id "sha1:0d8eef0547cb20bfb2d9d7c3bdaad1ec98c79e8e" :fingerprints ("sha1:6b:f9:d6:37:87:74:b3:56:6e:c8:81:b1:74:17:27:46:c7:0a:5a:53") :host "static.fsf.org:443" :conditions (:unknown-ca :invalid :verify-cert))
+ (:id "sha1:fb978c85c0cf3c9d62d497157827b311f7197e87" :fingerprints ("sha1:6b:f9:d6:37:87:74:b3:56:6e:c8:81:b1:74:17:27:46:c7:0a:5a:53") :host "www.gnu.org:443" :conditions (:unknown-ca :invalid :verify-cert))
+ (:id "sha1:85b31c268009209a8d3c5387033b219264f7e62b" :fingerprints ("sha1:92:f4:ca:8e:34:2a:ba:37:14:90:46:95:b9:1c:ef:4c:9e:35:65:38" "sha1:48:d2:94:74:a3:a6:99:c9:4c:05:82:b2:48:a7:32:b0:f2:2c:25:04") :host "melpa.org:443" :conditions (:unknown-ca :invalid :same-cert))
  (:id "sha1:8509c552ebf17fbdd20d1c533ea9633f6314bd49" :fingerprints ("sha1:ef:ae:6a:d4:de:f6:2a:e8:8a:91:db:73:60:83:fb:c4:33:3c:6d:43") :host "graph.facebook.com:443" :conditions (:unknown-ca :invalid :verify-cert))
  (:id "sha1:4c5bd0335f4e830e0e8ae5cb5ccda68a0c960410" :fingerprints ("sha1:93:7c:28:49:8c:51:89:b7:fd:95:22:27:92:37:e3:e3:6f:3b:6c:7c") :host "lh6.googleusercontent.com:443" :conditions (:unknown-ca :invalid :verify-cert))
  (:id "sha1:557d8f9d026b5aeb279fa1fbaf50f99797506a85" :fingerprints ("sha1:48:6a:7c:01:f2:0c:1d:4b:ce:1d:6c:21:4b:56:a4:b8:57:10:73:c8") :host "pixel.quantserve.com:443" :conditions (:unknown-ca :invalid :verify-cert))

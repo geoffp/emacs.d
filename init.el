@@ -39,27 +39,65 @@
 (drag-stuff-global-mode 1)
 (drag-stuff-define-keys)
 
+;;
+;; use-package config
+;;
+
+;; Well, of course. Plus it seems like like we might need this early
+(use-package magit
+  :ensure t)
+
+;; always install packages managed by use-package if they're missing
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+
+;; keep packages up to date
+(use-package auto-package-update
+  :config
+  (setq auto-package-update-delete-old-versions t)
+  (setq auto-package-update-hide-results t)
+  (auto-package-update-maybe))
+
+;; Reload files if they change on disk, all the time
 (global-auto-revert-mode)
 
+(use-package ivy
+  :bind (
+          ;; Ivy-based interface to standard commands
+          ("C-s" . 'swiper-isearch)
+          ("M-x" . 'counsel-M-x)
+          ("C-x C-f" . 'counsel-find-file)
+          ("M-y" . 'counsel-yank-pop)
+          ("<f1> f" . 'counsel-describe-function)
+          ("<f1> v" . 'counsel-describe-variable)
+          ("<f1> l" . 'counsel-find-library)
+          ("<f2> i" . 'counsel-info-lookup-symbol)
+          ("<f2> u" . 'counsel-unicode-char)
+          ("<f2> j" . 'counsel-set-variable)
+          ("C-x b" . 'ivy-switch-buffer)
+          ("C-c v" . 'ivy-push-view)
+          ("C-c V" . 'ivy-pop-view)
+
+          ;; Ivy-resume and other commands
+          ("C-c C-r" . 'ivy-resume)
+          ("C-c b" . 'counsel-bookmark)
+          ("C-c d" . 'counsel-descbinds)
+          ("C-c g" . 'counsel-git)
+          ("C-c o" . 'counsel-outline)
+          ;; This conflicts with my typescript bindings
+          ;; ("C-c t" . 'counsel-load-theme)
+          ("C-c F" . 'counsel-org-file)
+          ))
+
+;; Icons plz
 (use-package all-the-icons)
-
-(use-package magit)
-
-;; prettier-js-mode by default for JS
-(add-hook 'js2-mode-hook 'prettier-js-mode)
-(add-hook 'rjsx-mode-hook 'prettier-js-mode)
-(add-hook 'javascript-mode-hook 'prettier-js-mode)
-
-;; Let's make a list of all the JS-ish modes for use-package hooks
-
 
 ;; TIDE: TypeScript IDE mode
 (use-package typescript-mode)
 (use-package company)
 (use-package web-mode)
-;; (use-package rjsx-mode)
-;; (use-package js2-mode)
 
+;; Let's make a list of all the JS-ish modes for use-package hooks
 (defmacro js-mode-list ()
   `(typescript-mode
     web-mode
@@ -67,14 +105,14 @@
     js2-mode
     javascript-mode))
 
-(use-package prettier-js-mode
+(use-package prettier
   :hook (typescript-mode
          web-mode
          rjsx-mode
          js2-mode
          javascript-mode))
 
-(use-package flycheck-mode
+(use-package flycheck
   :hook (typescript-mode
          web-mode
          rjsx-mode
@@ -98,8 +136,10 @@
 (defun tide-file-init ()
   "Do everything necessary when we go into typescript-mode or web-mode"
   (when (tide-file-init-is-js (file-name-extension buffer-file-name))
+    (message "hey, this is tide-file-init")
     (tide-setup)
-    (tide-hl-identifier-mode)))
+    (tide-hl-identifier-mode)
+    (add-node-modules-path)))
 
 (use-package tide
   :ensure t
@@ -110,6 +150,7 @@
           ("\\.tsx\\'" . web-mode)
           ("\\.mjs\\'" . typescript-mode))
   :hook ((typescript-mode . tide-file-init)
+          (javascript-mode . tide-file-init)
           (web-mode . tide-file-init))
   :bind (("C-c t n" . 'tide-rename-symbol)
           ("C-c t f" . 'tide-refactor)
@@ -119,9 +160,13 @@
   :config
   (flycheck-remove-next-checker 'typescript-tide 'typescript-tslint)
   (flycheck-remove-next-checker 'tsx-tide 'typescript-tslint)
+  (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
+  (flycheck-add-next-checker 'tsx-tide 'javascript-eslint)
   ;; (flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
   ;; (flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
   )
+
+(use-package visual-regexp)
 
 ;;
 ;; company mode, for auto-completion wherever possible.
@@ -182,12 +227,6 @@
 (eval-after-load 'typescript-mode
   '(add-hook 'typescript-mode-hook #'add-node-modules-path))
 
-;; manually add this one until https://github.com/codesuki/add-node-modules-path/issues/8 is resolved
-(add-to-list 'exec-path "~/src/nicollet/node_modules/.bin")
-
-;; ido setup
-(flx-ido-mode)
-
 ;; projectile
 (use-package projectile
   :ensure t
@@ -244,17 +283,43 @@
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
 
-;; formats the buffer before saving
-;; (add-hook 'before-save-hook 'tide-format-before-save)
-;; (add-hook 'typescript-mode-hook #'setup-tide-mode)
-
-;; (load-file "~/src/nicollet-emacs-tools/nicollet-changelogs.el")
-
 ;; Dired
 ;; Add icons to dired
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 (add-hook 'dired-mode-hook 'dired-hide-details-mode)
 
+;; Nicollet tools
+(load-file "~/.emacs.d/nicollet.el")
+
+;; Set the right modes for JSX in .js files
+(defun jsx ()
+  (interactive)
+  (web-mode)
+  (web-mode-set-content-type "jsx"))
+
+;; Org-Jira
+(use-package org-jira
+  :config
+  (setq jiralib-url "https://jira.target.com"))
+
+;; eshell-toggle
+(use-package eshell-toggle
+  :custom
+  (eshell-toggle-size-fraction 3)
+  (eshell-toggle-use-projectile-root t)
+  (eshell-toggle-run-command nil)
+  (eshell-toggle-init-function #'eshell-toggle-init-ansi-term)
+  ;; :quelpa
+  ;; (eshell-toggle :repo "4DA/eshell-toggle" :fetcher github :version original)
+  :bind
+  ("C-`" . eshell-toggle))
+
+;; Python IDE
+(use-package elpy
+  :ensure t
+  :defer t
+  :init
+  (advice-add 'python-mode :before 'elpy-enable))
 
 
 (provide 'init)

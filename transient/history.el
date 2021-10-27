@@ -9,8 +9,8 @@
   nil
   ("--ff" "-x"))
  (magit-commit nil
-               ("--no-verify")
-               ("--allow-empty"))
+               ("--allow-empty")
+               ("--no-verify"))
  (magit-diff
   ("--no-ext-diff" "--stat")
   (("--" "client/containers/RecsContainer/RecsWithEndcap/__tests__/RecsWithEndcap.test.tsx"))
@@ -18,9 +18,8 @@
   (("--" "packages/viewer/src/PropCard/PropCard.tsx"))
   (("--" "lerna.json")))
  (magit-dispatch nil)
- (magit-fetch
-  ("--prune")
-  nil)
+ (magit-fetch nil
+              ("--prune"))
  (magit-gitignore nil)
  (magit-log
   ("-n256" "--graph" "--decorate")
@@ -29,7 +28,9 @@
    "--graph" "--decorate")
   ("-n256" "--author=Geoffrey Pursell" "--graph" "--decorate")
   ("-n256" "--author=Geoff" "--graph" "--decorate"))
- (magit-merge nil)
+ (magit-merge nil
+              ("--strategy=ours"))
+ (magit-merge:--strategy "ours")
  (magit-patch nil)
  (magit-pull nil)
  (magit-push nil
@@ -38,6 +39,8 @@
  (magit-rebase nil
                ("--interactive")
                ("--autosquash"))
+ (magit-remote
+  ("-f"))
  (magit-remote\.<remote>\.*url "git@github.com:geoffp/emacs.d.git" "https://github.com/geoffp/emacs.d.git")
  (magit-reset nil)
  (magit-revert

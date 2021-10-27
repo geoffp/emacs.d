@@ -2,55 +2,31 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("Filmstrip"
- (filename . "~/src/nicollet/packages/nicollet-react/src/components/Filmstrip/")
- (front-context-string . "  /Users/z002kxx")
+(("alter.py"
+ (filename . "~/src/skunkworks/src/65c816/alter.py")
+ (front-context-string . "\n        print(p")
+ (rear-context-string . "  parts = lines.")
+ (position . 2668))
+("CreateAccount"
+ (filename . "~/src/AdaptiveUI/packages/tgt-web-auth-components/src/components/CreateAccount/")
+ (front-context-string . "__tests__\n  -rw-")
+ (rear-context-string . "96 Mar 29 14:55 ")
+ (position . 306))
+("client.ts"
+ (filename . "~/src/AdaptiveUI/packages/watchtower/src/client.ts")
+ (front-context-string . "import { pathnam")
  (rear-context-string)
  (position . 1))
-("AdaptiveUI"
- (filename . "~/src/AdaptiveUI/")
- (front-context-string . "sers     435 May")
- (rear-context-string . "x  DHC\\\\Domain U")
- (position . 1125))
-("TODO.org"
- (filename . "~/TODO.org")
- (front-context-string . "\n* Tasks\n**\n\n\n* ")
- (rear-context-string)
- (position . 1))
-("nicollet"
- (filename . "~/src/nicollet/")
- (front-context-string . ".drone.yml\n  -rw")
- (rear-context-string . "61 Apr 12 14:11 ")
- (position . 290))
+("(ivy) Global key bindings"
+ (front-context-string . "\n\n   You can als")
+ (rear-context-string . "ounsel-org-file)")
+ (position . 11385)
+ (filename . "/Users/Z002KXX/.emacs.d/elpa/ivy-20210225.1251/ivy")
+ (info-node . "Global key bindings")
+ (handler . Info-bookmark-jump))
 ("init.el"
  (filename . "~/.emacs.d/init.el")
  (front-context-string . ";;; init --- my ")
  (rear-context-string)
  (position . 1))
-("basementcat scripts"
- (filename . "/ssh:geoff@basementcat:/home/geoff/bin/")
- (front-context-string . "\n  -rwxrwxr-x 1 ")
- (rear-context-string . "t_lutron_cert.py")
- (position . 619))
-("Home Assistant Config"
- (filename . "/ssh:geoff@basementcat:/etc/homeassistant/")
- (front-context-string . "appdaemon\n  -rw-")
- (rear-context-string . "90 Nov 22 13:19 ")
- (position . 220))
-("Basementcat from outside"
- (filename . "/ssh:geoff@pursell.duckdns.org#22222:/")
- (front-context-string . "70-persistent-ne")
- (rear-context-string . "48 Nov 10  2013 ")
- (position . 220))
-("DS raspberry-pi"
- (filename . "/ssh:pi@192.168.2.102:/")
- (front-context-string . "bin\n  drwxr-xr-x")
- (rear-context-string . "96 Mar 24 16:27 ")
- (position . 183))
-("Design Systems OpenStack instance"
- (filename . "/ssh:ds:/")
- (front-context-string . "bin -> usr/bin\n ")
- (rear-context-string . " 7 Mar  4  2016 ")
- (position . 168)
- (annotation . ""))
 )
