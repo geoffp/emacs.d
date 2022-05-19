@@ -28,24 +28,27 @@
 
 ;; Default working directory
 ;; TODO: does this actually work?
-;; (cd "~/src/nicollet/")
 (setq default-directory "~/src/")
 (setq command-line-default-directory "~/src/")
 
-;; window navigation keybindings
+;; Message about native compilation
+(if (and (fboundp 'native-comp-available-p)
+       (native-comp-available-p))
+  (message "Native compilation is available")
+  (message "Native complation is *not* available"))
+
+;; Message about native JSON
+(if (functionp 'json-serialize)
+  (message "Native JSON is available")
+(message "Native JSON is *not* available"))
+
+;; Window navigation keybindings
 (global-set-key (kbd "M-o") 'ace-window)
 
-;; drag-stuff default keybindings
-(drag-stuff-global-mode 1)
-(drag-stuff-define-keys)
 
 ;;
 ;; use-package config
 ;;
-
-;; Well, of course. Plus it seems like like we might need this early
-(use-package magit
-  :ensure t)
 
 ;; always install packages managed by use-package if they're missing
 (require 'use-package-ensure)
@@ -57,6 +60,9 @@
   (setq auto-package-update-delete-old-versions t)
   (setq auto-package-update-hide-results t)
   (auto-package-update-maybe))
+
+(use-package magit
+  :bind (("C-M-g" . 'magit-status)))
 
 ;; Reload files if they change on disk, all the time
 (global-auto-revert-mode)
@@ -92,13 +98,16 @@
 ;; Icons plz
 (use-package all-the-icons)
 
+(use-package string-inflection
+  :bind (("C-<tab>" . 'string-inflection-java-style-cycle)))
+
 ;; TIDE: TypeScript IDE mode
 (use-package typescript-mode)
 (use-package company)
 (use-package web-mode)
 
-;; Let's make a list of all the JS-ish modes for use-package hooks
 (defmacro js-mode-list ()
+  "Let's make a list of all the JS-ish modes for use-package hooks."
   `(typescript-mode
     web-mode
     rjsx-mode
@@ -106,27 +115,19 @@
     javascript-mode))
 
 (use-package prettier
-  :hook (typescript-mode
+  :hook ((typescript-mode
          web-mode
          rjsx-mode
          js2-mode
-         javascript-mode))
+           javascript-mode) . prettier-mode))
 
 (use-package flycheck
-  :hook (typescript-mode
-         web-mode
-         rjsx-mode
-         js2-mode
-         javascript-mode)
-  :config
-  ;; (flycheck-add-mode 'typescript-tslint 'web-mode)
-  (flycheck-add-mode 'javascript-eslint 'web-mode))
-
+  :hook ((json-mode emacs-lisp-mode) . flycheck-mode))
 
 
 ;; TODO: maybe make a list of filetypes and iterate over it here, and below.
 (defun tide-file-init-is-js (extension)
-  "Test whether a file extension implies a Javascript-like language"
+  "Test whether a file EXTENSION implies a Javascript-like language."
   (or (string= "tsx" extension)
     (string= "jsx" extension)
     (string= "ts" extension)
@@ -134,12 +135,13 @@
     (string= "mjs" extension)))
 
 (defun tide-file-init ()
-  "Do everything necessary when we go into typescript-mode or web-mode"
+  "Do everything necessary when we go into typescript-mode or web-mode."
   (when (tide-file-init-is-js (file-name-extension buffer-file-name))
     (message "hey, this is tide-file-init")
     (tide-setup)
     (tide-hl-identifier-mode)
-    (add-node-modules-path)))
+    (add-node-modules-path)
+    (flycheck-mode)))
 
 (use-package tide
   :ensure t
@@ -158,13 +160,14 @@
           ("C-c t p" . 'tide-documentation-at-point)
           ("C-c t s" . 'tide-restart-server))
   :config
+  ;; To make eslint work in .tsx files
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+
+  ;; For TS, I don't want tslint and do want eslint
   (flycheck-remove-next-checker 'typescript-tide 'typescript-tslint)
   (flycheck-remove-next-checker 'tsx-tide 'typescript-tslint)
-  (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
-  (flycheck-add-next-checker 'tsx-tide 'javascript-eslint)
-  ;; (flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
-  ;; (flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
-  )
+  (flycheck-add-next-checker 'typescript-tide '(warning . javascript-eslint))
+  (flycheck-add-next-checker 'tsx-tide '(warning . javascript-eslint)))
 
 (use-package visual-regexp)
 
@@ -184,30 +187,15 @@
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 
-(defun web-jsx ()
-  "Set a JS file to web mode, with JSX content."
-  (interactive)
-  (web-mode)
-  (web-mode-set-content-type "jsx"))
-
-;; make .html underscore template work in web-mode
-;; (setq web-mode-content-types-alist
-;;   '(("underscore.js" . "\\.html\\'")
-;;      ("jsx"          . "\\.js[x]?\\'")))
-
-;; js2-refactor-mode by default
-;; (add-hook 'js2-mode-hook #'js2-refactor-mode)
-;; (js2r-add-keybindings-with-prefix "C-c C-m")
-
 
 ;; load up rainbow-mode in various modes in which we may find it useful
-;; (add-hook 'js2-mode-hook `rainbow-mode)
-;; (add-hook 'rjsx-mode-hook `rainbow-mode)
-(add-hook 'javascript-mode-hook `rainbow-mode)
-(add-hook 'css-mode-hook `rainbow-mode)
-(add-hook 'vue-mode-hook `rainbow-mode)
-(add-hook 'web-mode-hook `rainbow-mode)
-(add-hook 'typescript-mode-hook `rainbow-mode)
+(use-package rainbow-mode
+  :hook (javascript-mode typescript-mode css-mode vue-mode web-mode))
+;; (add-hook 'javascript-mode-hook `rainbow-mode)
+;; (add-hook 'css-mode-hook `rainbow-mode)
+;; (add-hook 'vue-mode-hook `rainbow-mode)
+;; (add-hook 'web-mode-hook `rainbow-mode)
+;; (add-hook 'typescript-mode-hook `rainbow-mode)
 
 ;; load node_modules into the exec path when we open certain things in a buffer
 (eval-after-load 'js-mode
@@ -291,8 +279,8 @@
 ;; Nicollet tools
 (load-file "~/.emacs.d/nicollet.el")
 
-;; Set the right modes for JSX in .js files
 (defun jsx ()
+  "Set the right modes for JSX in .js files."
   (interactive)
   (web-mode)
   (web-mode-set-content-type "jsx"))
@@ -320,6 +308,8 @@
   :defer t
   :init
   (advice-add 'python-mode :before 'elpy-enable))
+
+;; Org Mode customizations
 
 
 (provide 'init)

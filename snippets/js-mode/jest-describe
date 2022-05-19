@@ -1,0 +1,8 @@
+# name: jest describe block
+# key: desc
+# --
+describe('$1', () => {
+  it('$2', () => {
+    $3
+  });
+});

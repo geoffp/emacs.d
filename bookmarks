@@ -1,8 +1,28 @@
-;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8 -*-
+;;;; Emacs Bookmark Format Version 1;;;; -*- coding: utf-8; mode: lisp-data -*-
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("alter.py"
+(("auth-components"
+ (filename . "~/src/web/platform/packages/auth-components/")
+ (front-context-string)
+ (rear-context-string . "2 tsconfig.json\n")
+ (position . 789))
+("PictureNew"
+ (filename . "~/src/web/nicollet/packages/react/src/Picture/PictureNew/")
+ (front-context-string . "\n  -rw-r--r--   ")
+ (rear-context-string . "6:41 stories.tsx")
+ (position . 614))
+("use-images.ts"
+ (filename . "~/src/web/nicollet/packages/common/src/utilities/hooks/use-images.ts")
+ (front-context-string . "import { useMemo")
+ (rear-context-string)
+ (position . 1))
+("Picture"
+ (filename . "~/src/web/nicollet/packages/react/src/Picture/")
+ (front-context-string . "FallbackImage.ts")
+ (rear-context-string . "37 Jan  4 11:22 ")
+ (position . 277))
+("alter.py"
  (filename . "~/src/skunkworks/src/65c816/alter.py")
  (front-context-string . "\n        print(p")
  (rear-context-string . "  parts = lines.")

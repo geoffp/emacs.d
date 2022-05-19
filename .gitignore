@@ -44,4 +44,5 @@ site-lisp/package/
 *.cache
 elpa
 elpy
+eln-cache
 .DS_Store

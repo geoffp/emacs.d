@@ -9,8 +9,8 @@
   nil
   ("--ff" "-x"))
  (magit-commit nil
-               ("--allow-empty")
-               ("--no-verify"))
+               ("--no-verify")
+               ("--allow-empty"))
  (magit-diff
   ("--no-ext-diff" "--stat")
   (("--" "client/containers/RecsContainer/RecsWithEndcap/__tests__/RecsWithEndcap.test.tsx"))
@@ -18,8 +18,9 @@
   (("--" "packages/viewer/src/PropCard/PropCard.tsx"))
   (("--" "lerna.json")))
  (magit-dispatch nil)
- (magit-fetch nil
-              ("--prune"))
+ (magit-fetch
+  ("--prune")
+  nil)
  (magit-gitignore nil)
  (magit-log
   ("-n256" "--graph" "--decorate")
@@ -35,8 +36,10 @@
  (magit-pull nil)
  (magit-push nil
              ("--force-with-lease")
+             ("--force")
              ("--no-verify"))
  (magit-rebase nil
+               ("--autostash")
                ("--interactive")
                ("--autosquash"))
  (magit-remote
@@ -48,6 +51,7 @@
   nil)
  (magit-stash nil
               ("--include-untracked"))
+ (magit-status-jump nil)
  (magit-submodule nil)
  (magit-tag nil)
  (magit:-- "packages/nicollet-react/src/components/Filmstrip" "")
