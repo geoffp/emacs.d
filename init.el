@@ -8,9 +8,6 @@
 
 ;; (package-initialize)
 
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
-
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
@@ -61,13 +58,26 @@
   (setq auto-package-update-hide-results t)
   (auto-package-update-maybe))
 
+;; start requiring packages we need
+
+(use-package dracula-theme
+  (load-theme 'dracula t))
+
+(use-package exec-path-from-shell
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
+
 (use-package magit
   :bind (("C-M-g" . 'magit-status)))
 
 ;; Reload files if they change on disk, all the time
 (global-auto-revert-mode)
 
+(use-package counsel)
+
 (use-package ivy
+  :after (counsel)
   :bind (
           ;; Ivy-based interface to standard commands
           ("C-s" . 'swiper-isearch)
@@ -97,6 +107,8 @@
 
 ;; Icons plz
 (use-package all-the-icons)
+(use-package all-the-icons-dired
+  :after (all-the-icons))
 
 (use-package string-inflection
   :bind (("C-<tab>" . 'string-inflection-java-style-cycle)))
@@ -124,6 +136,7 @@
 (use-package flycheck
   :hook ((json-mode emacs-lisp-mode) . flycheck-mode))
 
+(use-package add-node-modules-path)
 
 ;; TODO: maybe make a list of filetypes and iterate over it here, and below.
 (defun tide-file-init-is-js (extension)
@@ -145,7 +158,7 @@
 
 (use-package tide
   :ensure t
-  :after (typescript-mode company flycheck web-mode)
+  :after (typescript-mode company flycheck web-mode add-node-modules-path)
   :mode (("\\.ts\\'" . typescript-mode)
           ("\\.js\\'" . typescript-mode)
           ("\\.jsx\\'" . web-mode)
@@ -241,8 +254,10 @@
 
 ;; yasnippet setup
 ;; Bind yas-expand to shift-tab
-(global-set-key (kbd "<S-tab>") 'yas-expand)
-(yas-global-mode 1)
+(use-package yasnippet
+  :config
+  (global-set-key (kbd "<S-tab>") 'yas-expand)
+  (yas-global-mode 1))
 
 ;; a function for reinstalling selected packages
 (defun package-reinstall-activated ()
