@@ -46,3 +46,4 @@ elpa
 elpy
 eln-cache
 .DS_Store
+/transient/history.el
