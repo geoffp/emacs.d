@@ -25,8 +25,10 @@
 
 ;; Default working directory
 ;; TODO: does this actually work?
-(setq default-directory "~/src/")
-(setq command-line-default-directory "~/src/")
+(let ((default-dir "~/src/"))
+  (when (file-directory-p default-dir)
+    (setq default-directory default-dir)
+    (setq command-line-default-directory default-dir)))
 
 ;; Message about native compilation
 (if (and (fboundp 'native-comp-available-p)
