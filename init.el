@@ -24,7 +24,6 @@
 ;; (add-to-list 'gnutls-trustfiles "/etc/ssl/certs/tgt-ca-bundle.crt")
 
 ;; Default working directory
-;; TODO: does this actually work?
 (let ((default-dir "~/src/"))
   (when (file-directory-p default-dir)
     (setq default-directory default-dir)
@@ -40,9 +39,6 @@
 (if (functionp 'json-serialize)
   (message "Native JSON is available")
 (message "Native JSON is *not* available"))
-
-;; Window navigation keybindings
-(global-set-key (kbd "M-o") 'ace-window)
 
 
 ;;
@@ -74,10 +70,11 @@
 (use-package magit
   :bind (("C-M-g" . 'magit-status)))
 
-;; Reload files if they change on disk, all the time
-(global-auto-revert-mode)
+(use-package ace-window
+  :bind (("M-o" . 'ace-window)))
 
 (use-package counsel)
+
 
 (use-package ivy
   :after (counsel)
@@ -326,6 +323,9 @@
   :defer t
   :init
   (advice-add 'python-mode :before 'elpy-enable))
+
+;; Reload files if they change on disk, all the time
+(global-auto-revert-mode)
 
 ;; Org Mode customizations
 
