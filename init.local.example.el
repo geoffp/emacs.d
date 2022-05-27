@@ -6,5 +6,5 @@
 (set-face-attribute 'default nil :font "Fira Code-12")
 ;; (set-frame-font FONT nil t)
 
-u(provide 'init.local.example)
+(provide 'init.local.example)
 ;;; init.local.example.el ends here
