@@ -48,3 +48,4 @@ eln-cache
 .DS_Store
 /transient/history.el
 /.last-package-update-day
+init.local.el

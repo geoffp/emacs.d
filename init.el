@@ -75,6 +75,7 @@
 
 (use-package counsel)
 
+(use-package iedit)
 
 (use-package ivy
   :after (counsel)
