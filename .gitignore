@@ -49,3 +49,4 @@ eln-cache
 /transient/history.el
 /.last-package-update-day
 init.local.el
+.lsp-session-*
