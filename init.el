@@ -250,9 +250,6 @@
 ;; expand region binding
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-;; Magit status key binding
-(global-set-key (kbd "C-M-g") 'magit-status)
-
 ;; yasnippet setup
 ;; Bind yas-expand to shift-tab
 (use-package yasnippet
@@ -281,8 +278,6 @@
   (interactive)
   (call-process-region (point-min) (point-max) "xmllint" t t t "--format" "-")
   (goto-char (point-min)))
-
-(reformat-xml)
 
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
@@ -324,11 +319,6 @@
   :defer t
   :init
   (advice-add 'python-mode :before 'elpy-enable))
-
-;; Reload files if they change on disk, all the time
-(global-auto-revert-mode)
-
-;; Org Mode customizations
 
 
 (provide 'init)
