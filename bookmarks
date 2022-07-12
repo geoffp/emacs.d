@@ -2,7 +2,13 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("auth-components"
+(("geoff@basementcat"
+ (filename . "/ssh:geoff@basementcat:~/")
+ (front-context-string . ".aptitude\n  -rw-")
+ (rear-context-string . "12 Apr  3  2019 ")
+ (position . 188)
+ (last-modified 25258 12716 667949 727000))
+("auth-components"
  (filename . "~/src/web/platform/packages/auth-components/")
  (front-context-string)
  (rear-context-string . "2 tsconfig.json\n")

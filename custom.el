@@ -62,7 +62,7 @@
  '(org-export-with-section-numbers nil)
  '(package-enable-at-startup nil)
  '(package-selected-packages
-   '(dracula-theme ivy string-inflection prettier-mode flycheck prettier flycheck-mode prettier-js-mode auto-package-update elpy kotlin-mode eshell-toggle org-jira counsel-css counsel-projectile counsel restclient dockerfile-mode smart-mode-line swift-mode edit-indirect exec-path-from-shell yasnippet projectile-ripgrep use-package presentation polymode magit doom-themes tide all-the-icons all-the-icons-dired company projectile visual-regexp web-mode with-editor pcre2el visual-regexp-steroids ace-window nginx-mode yaml-mode typescript-mode gh-md emojify add-node-modules-path iedit rainbow-mode expand-region js-doc auto-complete ag json-mode markdown-mode editorconfig neotree))
+   '(atomic-chrome edit-server glsl-mode dracula-theme ivy string-inflection prettier-mode flycheck prettier flycheck-mode prettier-js-mode auto-package-update elpy kotlin-mode eshell-toggle org-jira counsel-css counsel-projectile counsel restclient dockerfile-mode smart-mode-line swift-mode edit-indirect exec-path-from-shell yasnippet projectile-ripgrep use-package presentation polymode magit doom-themes tide all-the-icons all-the-icons-dired company projectile visual-regexp web-mode with-editor pcre2el visual-regexp-steroids ace-window nginx-mode yaml-mode typescript-mode gh-md emojify add-node-modules-path iedit rainbow-mode expand-region js-doc auto-complete ag json-mode markdown-mode editorconfig neotree))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(presentation-default-text-scale 2)

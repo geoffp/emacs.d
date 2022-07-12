@@ -320,6 +320,23 @@
   :init
   (advice-add 'python-mode :before 'elpy-enable))
 
+(use-package glsl-mode
+  :ensure t)
+
+;; (use-package edit-server
+;;   :ensure t
+;;   :init
+;;   (setq edit-server-new-frame nil)
+;;   (edit-server-start))
+
+(use-package atomic-chrome
+  :ensure t
+  :custom
+  (atomic-chrome-url-major-mode-alist
+   '(("shadertoy\\.com" . glsl-mode)))
+  :init
+  (atomic-chrome-start-server))
+
 
 (provide 'init)
 ;;; init.el ends here
