@@ -313,6 +313,9 @@
   :bind
   ("C-`" . eshell-toggle))
 
+;; Use Emacs terminfo, not system terminfo
+(setq system-uses-terminfo nil)
+
 ;; Python IDE
 (use-package elpy
   :ensure t
