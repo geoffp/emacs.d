@@ -94,6 +94,7 @@
      js-doc
      json-mode
      kotlin-mode
+     lispy
      magit
      markdown-mode
      neotree
@@ -121,7 +122,8 @@
      with-editor
      yaml-mode
      yasnippet
-     ))
+     zenburn-theme
+       ))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(presentation-default-text-scale 2)

@@ -1,5 +1,6 @@
 ;;; init --- my .emacs.d/init.el
 ;;; Commentary:
+
 ;;; Code:
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
@@ -7,6 +8,9 @@
 ;; You may delete these explanatory comments.
 
 ;; (package-initialize)
+
+;; TODO:
+;; - Consolidate defuns in their own file maybe?
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
@@ -58,9 +62,13 @@
 
 ;; start requiring packages we need
 
-(use-package dracula-theme
+;; (use-package dracula-theme
+;;   :config
+;;   (load-theme 'dracula t))
+
+(use-package zenburn-theme
   :config
-  (load-theme 'dracula t))
+  (load-theme 'zenburn t))
 
 (use-package exec-path-from-shell
   :config
@@ -339,6 +347,11 @@
    '(("shadertoy\\.com" . glsl-mode)))
   :init
   (atomic-chrome-start-server))
+
+(defun edit-init ()
+  "Edit the init.el."
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
 
 
 (provide 'init)
