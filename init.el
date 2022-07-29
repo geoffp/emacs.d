@@ -334,12 +334,7 @@
 (use-package glsl-mode
   :ensure t)
 
-;; (use-package edit-server
-;;   :ensure t
-;;   :init
-;;   (setq edit-server-new-frame nil)
-;;   (edit-server-start))
-
+;; This makes GhostEdit (Firefox) work -- for editing text in browser from Emacs
 (use-package atomic-chrome
   :ensure t
   :custom
