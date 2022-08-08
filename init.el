@@ -198,10 +198,6 @@
 ;;
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
-;; global emojify: no thanks
-;; (add-hook 'after-init-hook #'global-emojify-mode)
-;; (require 'company-emoji)
-;; (add-to-list 'company-backends 'company-emoji)
 (global-set-key (kbd "M-RET") 'company-complete)
 
 ;; file types to open in web-mode
@@ -213,23 +209,14 @@
 ;; load up rainbow-mode in various modes in which we may find it useful
 (use-package rainbow-mode
   :hook (javascript-mode typescript-mode css-mode vue-mode web-mode))
-;; (add-hook 'javascript-mode-hook `rainbow-mode)
-;; (add-hook 'css-mode-hook `rainbow-mode)
-;; (add-hook 'vue-mode-hook `rainbow-mode)
-;; (add-hook 'web-mode-hook `rainbow-mode)
-;; (add-hook 'typescript-mode-hook `rainbow-mode)
 
 ;; load node_modules into the exec path when we open certain things in a buffer
 (eval-after-load 'js-mode
   '(add-hook 'js-mode-hook #'add-node-modules-path))
-;; (eval-after-load 'js2-mode
-;;   '(add-hook 'js2-mode-hook #'add-node-modules-path))
 (eval-after-load 'css-mode
   '(add-hook 'css-mode-hook #'add-node-modules-path))
 (eval-after-load 'scss-mode
   '(add-hook 'scss-mode-hook #'add-node-modules-path))
-;; (eval-after-load 'rjsx-mode
-;;   '(add-hook 'rjsx-mode-hook #'add-node-modules-path))
 (eval-after-load 'vue-mode
   '(add-hook 'vue-mode-hook #'add-node-modules-path))
 (eval-after-load 'web-mode
@@ -296,7 +283,7 @@
 (add-hook 'dired-mode-hook 'dired-hide-details-mode)
 
 ;; Nicollet tools
-(load-file "~/.emacs.d/nicollet.el")
+(load-file "~/.emacs.d/geoff/nicollet.el")
 
 (defun jsx ()
   "Set the right modes for JSX in .js files."
@@ -342,6 +329,13 @@
    '(("shadertoy\\.com" . glsl-mode)))
   :init
   (atomic-chrome-start-server))
+
+(use-package polymode
+  :ensure t)
+
+;; unbind M-o from HTML mode
+(defvar html-mode-map)
+(unbind-key "M-o" html-mode-map)
 
 (defun edit-init ()
   "Edit the init.el."
