@@ -67,7 +67,7 @@
  '(org-export-with-section-numbers nil)
  '(package-enable-at-startup nil)
  '(package-selected-packages
-    '(html-mode ace-window add-node-modules-path ag all-the-icons all-the-icons-dired atomic-chrome auto-complete auto-package-update company counsel counsel-css counsel-projectile dockerfile-mode doom-themes dracula-theme edit-indirect edit-server editorconfig elpy emojify eshell-toggle exec-path-from-shell expand-region flycheck flycheck-mode gh-md glsl-mode iedit ivy js-doc json-mode kotlin-mode lispy magit markdown-mode neotree nginx-mode org-jira pcre2el polymode presentation prettier prettier-js-mode prettier-mode projectile projectile-ripgrep rainbow-mode restclient smart-mode-line string-inflection swift-mode tide typescript-mode use-packages visual-regexp visual-regexp-steroids web-mode with-editor yaml-mode yasnippet zenburn-theme))
+    '(tree-sitter-langs tree-sitter html-mode ace-window add-node-modules-path ag all-the-icons all-the-icons-dired atomic-chrome auto-complete auto-package-update company counsel counsel-css counsel-projectile dockerfile-mode doom-themes dracula-theme edit-indirect edit-server editorconfig elpy emojify eshell-toggle exec-path-from-shell expand-region flycheck flycheck-mode gh-md glsl-mode iedit ivy js-doc json-mode kotlin-mode lispy magit markdown-mode neotree nginx-mode org-jira pcre2el polymode presentation prettier prettier-js-mode prettier-mode projectile projectile-ripgrep rainbow-mode restclient smart-mode-line string-inflection swift-mode tide typescript-mode use-packages visual-regexp visual-regexp-steroids web-mode with-editor yaml-mode yasnippet zenburn-theme))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(presentation-default-text-scale 2)

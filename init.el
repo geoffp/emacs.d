@@ -166,7 +166,6 @@
     (flycheck-mode)))
 
 (use-package tide
-  :ensure t
   :after (typescript-mode company flycheck web-mode add-node-modules-path)
   :mode (("\\.ts\\'" . typescript-mode)
           ("\\.js\\'" . typescript-mode)
@@ -226,7 +225,6 @@
 
 ;; projectile
 (use-package projectile
-  :ensure t
   :config
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
@@ -313,25 +311,30 @@
 
 ;; Python IDE
 (use-package elpy
-  :ensure t
   :defer t
   :init
   (advice-add 'python-mode :before 'elpy-enable))
 
-(use-package glsl-mode
-  :ensure t)
+(use-package glsl-mode)
 
 ;; This makes GhostEdit (Firefox) work -- for editing text in browser from Emacs
 (use-package atomic-chrome
-  :ensure t
   :custom
   (atomic-chrome-url-major-mode-alist
    '(("shadertoy\\.com" . glsl-mode)))
   :init
   (atomic-chrome-start-server))
 
-(use-package polymode
-  :ensure t)
+(use-package polymode)
+
+(use-package tree-sitter
+  :init
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(use-package tree-sitter-langs)
+
+(use-package ts-fold)
 
 (defun markdown-mode-setup ()
   "In markdown mode, wrap lines by word."
@@ -339,8 +342,11 @@
 (add-hook 'markdown-mode-hook 'markdown-mode-setup)
 
 ;; unbind M-o from HTML mode
-(defvar html-mode-map)
-(unbind-key "M-o" html-mode-map)
+(defun html-mode-setup ()
+  "Customize keybindings for HTML mode."
+  (defvar html-mode-map)
+  (unbind-key "M-o" html-mode-map))
+(add-hook 'html-mode-hook 'html-mode-setup)
 
 (defun edit-init ()
   "Edit the init.el."
