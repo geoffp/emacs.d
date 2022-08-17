@@ -333,6 +333,11 @@
 (use-package polymode
   :ensure t)
 
+(defun markdown-mode-setup ()
+  "In markdown mode, wrap lines by word."
+  (visual-line-mode))
+(add-hook 'markdown-mode-hook 'markdown-mode-setup)
+
 ;; unbind M-o from HTML mode
 (defvar html-mode-map)
 (unbind-key "M-o" html-mode-map)
@@ -342,8 +347,11 @@
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
+;; Bring in my own packages
+(require 'slugify "~/.emacs.d/geoff/slugify.el")
+
+(put 'magit-clean 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
 
 (provide 'init)
 ;;; init.el ends here
-(put 'narrow-to-region 'disabled nil)
-(put 'magit-clean 'disabled nil)
