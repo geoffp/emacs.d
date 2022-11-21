@@ -81,9 +81,12 @@
 (use-package ace-window
   :bind (("M-o" . 'ace-window)))
 
+(use-package iedit)
+
 (use-package counsel)
 
-(use-package iedit)
+(use-package counsel-projectile
+  :after (counsel))
 
 (use-package ivy
   :after (counsel)
@@ -337,10 +340,9 @@
 
 (use-package ts-fold)
 
-(defun markdown-mode-setup ()
-  "In markdown mode, wrap lines by word."
+(use-package markdown-mode
+  :init
   (visual-line-mode))
-(add-hook 'markdown-mode-hook 'markdown-mode-setup)
 
 ;; unbind M-o from HTML mode
 (defun html-mode-setup ()
