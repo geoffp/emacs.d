@@ -2,54 +2,41 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("geoff@basementcat"
+(("2023-03-09.md"
+ (filename . "~/src/leads/docs/meeting-notes/2023/2023-03-09.md")
+ (front-context-string . "## Standup\n\n### ")
+ (rear-context-string . "ffrey.Pursell_\n\n")
+ (position . 50)
+ (last-modified 25610 4023 648843 0))
+("index.ts"
+ (filename . "~/src/uxe/rating-stars-demo/src/components/flyout/index.ts")
+ (front-context-string . "import htmlAndCS")
+ (rear-context-string)
+ (position . 1)
+ (last-modified 25608 61761 454519 0))
+("element-forge.ts"
+ (filename . "~/src/uxe/rating-stars-demo/src/components/util/element-forge.ts")
+ (front-context-string . "import { obj } f")
+ (rear-context-string)
+ (position . 1)
+ (last-modified 25608 46990 706603 0))
+("rating-stars-demo"
+ (filename . "~/src/uxe/rating-stars-demo/")
+ (front-context-string . ".editorconfig\n  ")
+ (rear-context-string . "22 Feb  8 15:44 ")
+ (position . 203)
+ (last-modified 25608 42482 16040 0))
+("geoff@basementcat"
  (filename . "/ssh:geoff@basementcat:~/")
  (front-context-string . ".aptitude\n  -rw-")
  (rear-context-string . "12 Apr  3  2019 ")
  (position . 188)
  (last-modified 25258 12716 667949 727000))
-("auth-components"
- (filename . "~/src/web/platform/packages/auth-components/")
- (front-context-string)
- (rear-context-string . "2 tsconfig.json\n")
- (position . 789))
-("PictureNew"
- (filename . "~/src/web/nicollet/packages/react/src/Picture/PictureNew/")
- (front-context-string . "\n  -rw-r--r--   ")
- (rear-context-string . "6:41 stories.tsx")
- (position . 614))
-("use-images.ts"
- (filename . "~/src/web/nicollet/packages/common/src/utilities/hooks/use-images.ts")
- (front-context-string . "import { useMemo")
- (rear-context-string)
- (position . 1))
-("Picture"
- (filename . "~/src/web/nicollet/packages/react/src/Picture/")
- (front-context-string . "FallbackImage.ts")
- (rear-context-string . "37 Jan  4 11:22 ")
- (position . 277))
 ("alter.py"
  (filename . "~/src/skunkworks/src/65c816/alter.py")
  (front-context-string . "\n        print(p")
  (rear-context-string . "  parts = lines.")
  (position . 2668))
-("CreateAccount"
- (filename . "~/src/AdaptiveUI/packages/tgt-web-auth-components/src/components/CreateAccount/")
- (front-context-string . "__tests__\n  -rw-")
- (rear-context-string . "96 Mar 29 14:55 ")
- (position . 306))
-("client.ts"
- (filename . "~/src/AdaptiveUI/packages/watchtower/src/client.ts")
- (front-context-string . "import { pathnam")
- (rear-context-string)
- (position . 1))
-("(ivy) Global key bindings"
- (front-context-string . "\n\n   You can als")
- (rear-context-string . "ounsel-org-file)")
- (position . 11385)
- (filename . "/Users/Z002KXX/.emacs.d/elpa/ivy-20210225.1251/ivy")
- (info-node . "Global key bindings")
- (handler . Info-bookmark-jump))
 ("init.el"
  (filename . "~/.emacs.d/init.el")
  (front-context-string . ";;; init --- my ")

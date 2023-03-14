@@ -18,7 +18,7 @@
  '(bookmark-save-flag 1)
  '(byte-compile-warnings nil)
  '(compilation-message-face 'default)
- '(counsel-projectile-mode t)
+ '(counsel-projectile-mode t nil (counsel-projectile))
  '(css-indent-offset 2)
  '(cua-global-mark-cursor-color "#2aa198")
  '(cua-normal-cursor-color "#839496")
@@ -54,6 +54,7 @@
  '(js2-skip-preprocessor-directives t)
  '(js2-strict-missing-semi-warning nil)
  '(js2-strict-trailing-comma-warning nil)
+ '(languagetool-console-command "/usr/local/bin/languagetool")
  '(magit-auto-revert-mode t)
  '(magit-diff-use-overlays nil)
  '(markdown-command "pandoc")
@@ -63,12 +64,12 @@
  '(nrepl-message-colors
    '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
  '(ns-command-modifier 'meta)
- '(org-blank-before-new-entry '((heading . auto) (plain-list-item . auto)))
+ '(org-cycle-separator-lines 1)
  '(org-export-headline-levels 2)
  '(org-export-with-section-numbers nil)
  '(package-enable-at-startup nil)
  '(package-selected-packages
-   '(ts-fold use-package tree-sitter-langs tree-sitter html-mode ace-window add-node-modules-path ag all-the-icons all-the-icons-dired atomic-chrome auto-complete auto-package-update company counsel counsel-css counsel-projectile dockerfile-mode doom-themes dracula-theme edit-indirect edit-server editorconfig elpy emojify eshell-toggle exec-path-from-shell expand-region flycheck flycheck-mode gh-md glsl-mode iedit ivy js-doc json-mode kotlin-mode lispy magit markdown-mode neotree nginx-mode org-jira pcre2el polymode presentation prettier prettier-js-mode prettier-mode projectile projectile-ripgrep rainbow-mode restclient smart-mode-line string-inflection swift-mode tide typescript-mode use-packages visual-regexp visual-regexp-steroids web-mode with-editor yaml-mode yasnippet zenburn-theme))
+   '(magit jsonian-mode jsonian org-mode svgo languagetool ts-fold use-package html-mode ace-window ag all-the-icons all-the-icons-dired atomic-chrome auto-complete auto-package-update company counsel counsel-css counsel-projectile dockerfile-mode doom-themes dracula-theme edit-indirect edit-server editorconfig elpy emojify eshell-toggle exec-path-from-shell expand-region flycheck flycheck-mode gh-md glsl-mode iedit ivy js-doc json-mode kotlin-mode lispy markdown-mode neotree nginx-mode pcre2el polymode presentation prettier prettier-js-mode prettier-mode projectile projectile-ripgrep rainbow-mode restclient smart-mode-line string-inflection swift-mode tide use-packages visual-regexp visual-regexp-steroids web-mode with-editor yaml-mode yasnippet zenburn-theme))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(presentation-default-text-scale 2)
@@ -103,6 +104,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Menlo" :foundry "nil" :slant normal :weight regular :height 150 :width normal))))
+ '(org-level-1 ((t (:height 2.0 :foreground "#DFAF8F" :extend nil :inherit default))))
  '(tide-hl-identifier-face ((t (:inherit region))))
  '(web-mode-interpolate-color1-face ((t (:inherit web-mode-css-property-name-face))))
  '(web-mode-interpolate-color2-face ((t (:inherit default)))))

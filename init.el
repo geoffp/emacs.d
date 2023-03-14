@@ -52,6 +52,9 @@
 ;; always install packages managed by use-package if they're missing
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
+;; (setq use-package-hook-name-suffix nil)
+
+
 
 ;; keep packages up to date
 (use-package auto-package-update
@@ -127,74 +130,124 @@
   :bind (("C-<tab>" . 'string-inflection-java-style-cycle)))
 
 ;; TIDE: TypeScript IDE mode
-(use-package typescript-mode)
+;; (use-package typescript-mode)
 (use-package company)
-(use-package web-mode)
+(use-package web-mode
+  :mode (("\\.svg\\'" . web-mode)))
 
-(defmacro js-mode-list ()
-  "Let's make a list of all the JS-ish modes for use-package hooks."
-  `(typescript-mode
-    web-mode
-    rjsx-mode
-    js2-mode
-    javascript-mode))
+;; (defmacro js-mode-list ()
+;;   "Let's make a list of all the JS-ish modes for `use-package` hooks."
+;;   `(typescript-mode
+;;     web-mode
+;;     rjsx-mode
+;;     js2-mode
+;;     javascript-mode))
 
 (use-package prettier
   :hook ((typescript-mode
-         web-mode
-         rjsx-mode
-         js2-mode
-           javascript-mode) . prettier-mode))
+          typescript-ts-mode
+          tsx-ts-mode
+          web-mode
+          rjsx-mode
+          js2-mode
+          javascript-mode) . prettier-mode))
+
+(use-package add-node-modules-path
+  :init
+  (eval-after-load 'markdown-mode
+    '(add-hook 'markdown-mode-hook #'add-node-modules-path))
+  (eval-after-load 'typescript-ts-mode
+    '(add-hook 'typescript-ts-mode-hook #'add-node-modules-path))
+  (eval-after-load 'tsx-ts-mode
+    '(add-hook 'tsx-ts-mode-hook #'add-node-modules-path)))
 
 (use-package flycheck
-  :hook ((json-mode emacs-lisp-mode) . flycheck-mode))
+  :hook (json-mode jsonian-mode emacs-lisp-mode markdown-mode css-mode))
 
-(use-package add-node-modules-path)
+;; (defmacro tide-hooks ()
+;;   "Let's make a list of all the JS-ish modes for `use-package` hooks."
+;;   `'((typescript-mode
+;;      typescript-ts-mode
+;;      tsx-ts-mode
+;;      web-mode
+;;      rjsx-mode
+;;      js2-mode
+;;      javascript-mode) . tide-setup))
 
-;; TODO: maybe make a list of filetypes and iterate over it here, and below.
-(defun tide-file-init-is-js (extension)
-  "Test whether a file EXTENSION implies a Javascript-like language."
-  (or (string= "tsx" extension)
-    (string= "jsx" extension)
-    (string= "ts" extension)
-    (string= "js" extension)
-    (string= "mjs" extension)))
+;; (message (tide-hooks))
 
-(defun tide-file-init ()
-  "Do everything necessary when we go into typescript-mode or web-mode."
-  (when (tide-file-init-is-js (file-name-extension buffer-file-name))
-    (message "hey, this is tide-file-init")
-    (tide-setup)
-    (tide-hl-identifier-mode)
-    (add-node-modules-path)
-    (flycheck-mode)))
-
+;; if you use treesitter based typescript-ts-mode (emacs 29+)
 (use-package tide
-  :after (typescript-mode company flycheck web-mode add-node-modules-path)
-  :mode (("\\.ts\\'" . typescript-mode)
-          ("\\.js\\'" . typescript-mode)
-          ("\\.jsx\\'" . web-mode)
-          ("\\.tsx\\'" . web-mode)
-          ("\\.mjs\\'" . typescript-mode))
-  :hook ((typescript-mode . tide-file-init)
-          (javascript-mode . tide-file-init)
-          (web-mode . tide-file-init))
+  :ensure t
+  :after (company flycheck)
+  :mode (("\\.ts\\'" . typescript-ts-mode)
+         ("\\.tsx\\'" . tsx-ts-mode))
+  :hook ((typescript-ts-mode . tide-setup)
+         (typescript-ts-mode . tide-hl-identifier-mode)
+         (typescript-ts-mode . flycheck-mode)
+         (tsx-ts-mode . tide-setup)
+         (tsx-ts-mode . tide-hl-identifier-mode)
+         (tsx-ts-mode . flycheck-mode)
+         ;; (before-save . tide-format-before-save)
+         )
   :bind (("C-c t n" . 'tide-rename-symbol)
-          ("C-c t f" . 'tide-refactor)
-          ("C-c t r" . 'tide-references)
-          ("C-c t p" . 'tide-documentation-at-point)
-          ("C-c t s" . 'tide-restart-server))
+         ("C-c t f" . 'tide-refactor)
+         ("C-c t r" . 'tide-references)
+         ("C-c t p" . 'tide-documentation-at-point)
+         ("C-c t s" . 'tide-restart-server))
   :config
-  ;; To make eslint work in .tsx files
-  (flycheck-add-mode 'javascript-eslint 'web-mode)
-
-  ;; For TS, I don't want tslint and do want eslint
+  (flycheck-add-mode 'typescript-tide 'typescript-ts-mode)
+  (flycheck-add-mode 'typescript-tide 'tsx-ts-mode)
   (flycheck-remove-next-checker 'typescript-tide 'typescript-tslint)
   (flycheck-remove-next-checker 'tsx-tide 'typescript-tslint)
   (flycheck-add-next-checker 'typescript-tide '(warning . javascript-eslint))
-  (flycheck-add-next-checker 'tsx-tide '(warning . javascript-eslint)))
+  (flycheck-add-next-checker 'tsx-tide '(warning . javascript-eslint))
+  )
 
-(use-package visual-regexp)
+;; TODO: maybe make a list of filetypes and iterate over it here, and below.
+;; (defun tide-file-init-is-js (extension)
+;;   "Test whether a file EXTENSION implies a Javascript-like language."
+;;   (or (string= "tsx" extension)
+;;     (string= "jsx" extension)
+;;     (string= "ts" extension)
+;;     (string= "js" extension)
+;;     (string= "mjs" extension)))
+
+;; (defun tide-file-init ()
+;;   "Do everything necessary when we go into typescript-mode or web-mode."
+;;   (when (tide-file-init-is-js (file-name-extension buffer-file-name))
+;;     (message "hey, this is tide-file-init")
+;;     (tide-setup)
+;;     (tide-hl-identifier-mode)
+;;     (add-node-modules-path)
+;;     (flycheck-mode)))
+
+;; (use-package tide
+;;   :after (typescript-mode company flycheck web-mode add-node-modules-path)
+;;   :mode (("\\.ts\\'" . typescript-mode)
+;;           ("\\.js\\'" . typescript-mode)
+;;           ("\\.jsx\\'" . web-mode)
+;;           ("\\.tsx\\'" . web-mode)
+;;           ("\\.mjs\\'" . typescript-mode))
+;;   :hook ((typescript-mode . tide-file-init)
+;;           (javascript-mode . tide-file-init)
+;;           (web-mode . tide-file-init))
+;;   :bind (("C-c t n" . 'tide-rename-symbol)
+;;           ("C-c t f" . 'tide-refactor)
+;;           ("C-c t r" . 'tide-references)
+;;           ("C-c t p" . 'tide-documentation-at-point)
+;;           ("C-c t s" . 'tide-restart-server))
+;;   :config
+;;   ;; To make eslint work in .tsx files
+;;   (flycheck-add-mode 'javascript-eslint 'web-mode)
+
+;;   ;; For TS, I don't want tslint and do want eslint
+;;   (flycheck-remove-next-checker 'typescript-tide 'typescript-tslint)
+;;   (flycheck-remove-next-checker 'tsx-tide 'typescript-tslint)
+;;   (flycheck-add-next-checker 'typescript-tide '(warning . javascript-eslint))
+;;   (flycheck-add-next-checker 'tsx-tide '(warning . javascript-eslint)))
+
+;; (use-package visual-regexp)
 
 ;;
 ;; company mode, for auto-completion wherever possible.
@@ -208,24 +261,9 @@
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 
-
 ;; load up rainbow-mode in various modes in which we may find it useful
 (use-package rainbow-mode
   :hook (javascript-mode typescript-mode css-mode vue-mode web-mode))
-
-;; load node_modules into the exec path when we open certain things in a buffer
-(eval-after-load 'js-mode
-  '(add-hook 'js-mode-hook #'add-node-modules-path))
-(eval-after-load 'css-mode
-  '(add-hook 'css-mode-hook #'add-node-modules-path))
-(eval-after-load 'scss-mode
-  '(add-hook 'scss-mode-hook #'add-node-modules-path))
-(eval-after-load 'vue-mode
-  '(add-hook 'vue-mode-hook #'add-node-modules-path))
-(eval-after-load 'web-mode
-  '(add-hook 'vue-mode-hook #'add-node-modules-path))
-(eval-after-load 'typescript-mode
-  '(add-hook 'typescript-mode-hook #'add-node-modules-path))
 
 ;; projectile
 (use-package projectile
@@ -293,10 +331,18 @@
   (web-mode)
   (web-mode-set-content-type "jsx"))
 
+
+;; Org-mode config
+;; (add-hook
+;;  'org-mode-hook
+;;  #'(lambda ()
+;;      (org-indent-mode)))
+
+
 ;; Org-Jira
-(use-package org-jira
-  :config
-  (setq jiralib-url "https://jira.target.com"))
+;; (use-package org-jira
+;;   :config
+;;   (setq jiralib-url "https://jira.target.com"))
 
 ;; eshell-toggle
 (use-package eshell-toggle
@@ -331,18 +377,48 @@
 
 (use-package polymode)
 
-(use-package tree-sitter
-  :init
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+;; (use-package tree-sitter
+;;   :init
+;;   (global-tree-sitter-mode)
+;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
-(use-package tree-sitter-langs)
+;; (use-package tree-sitter-langs)
 
-(use-package ts-fold)
+;; Built-in tree sitter config
+(setq treesit-extra-load-path '("~/.emacs.d/treesit"))
 
-(use-package markdown-mode
-  :init
-  (visual-line-mode))
+(use-package markdown-mode)
+
+(use-package jsonian
+  :after flycheck
+  :init (jsonian-enable-flycheck)
+  :mode ("\\.json\\'" . jsonian-mode))
+
+;; To start the server on MacOS:
+;; 
+;;   brew services start languagetool
+;; 
+;; See also https://dev.languagetool.org/http-server
+(use-package languagetool)
+
+(use-package presentation)
+
+;; (use-package edit-server
+;;   :ensure t
+;;   :commands edit-server-start
+;;   :init (if after-init-time
+;;             (edit-server-start)
+;;           (add-hook 'after-init-hook
+;;                     #'(lambda() (edit-server-start))))
+;;   :config (setq edit-server-new-frame-alist
+;;                 '((name . "Edit with Emacs FRAME")
+;;                   (top . 200)
+;;                   (left . 200)
+;;                   (width . 80)
+;;                   (height . 25)
+;;                   (minibuffer . t)
+;;                   (menu-bar-lines . t)
+;;                   (window-system . x))))
 
 ;; unbind M-o from HTML mode
 (defun html-mode-setup ()
@@ -355,6 +431,13 @@
   "Edit the init.el."
   (interactive)
   (find-file "~/.emacs.d/init.el"))
+
+(defun edit-tide-config ()
+  "Edit the tide config in init.el."
+  (interactive)
+  (edit-init)
+  (search-forward "(use-package tide")
+  (recenter-top-bottom 2))
 
 ;; Bring in my own packages
 (require 'slugify "~/.emacs.d/geoff/slugify.el")
