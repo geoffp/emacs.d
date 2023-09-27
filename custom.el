@@ -154,6 +154,7 @@
  '(magit-auto-revert-mode t)
  '(magit-diff-use-overlays nil)
  '(markdown-command "pandoc")
+ '(menu-bar-mode nil)
  '(mocha-options "--recursive --colors")
  '(mocha-reporter "spec")
  '(neo-theme 'icons)
