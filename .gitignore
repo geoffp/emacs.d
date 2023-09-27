@@ -50,3 +50,5 @@ eln-cache
 /.last-package-update-day
 init.local.el
 .lsp-session-*
+org-persist
+multisession

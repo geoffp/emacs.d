@@ -28,7 +28,7 @@
 ;; (add-to-list 'gnutls-trustfiles "/etc/ssl/certs/tgt-ca-bundle.crt")
 
 ;; Default working directory
-(let ((default-dir "~/src/"))
+(let ((default-dir "~/src/uxe/"))
   (when (file-directory-p default-dir)
     (setq default-directory default-dir)
     (setq command-line-default-directory default-dir)))
@@ -82,7 +82,8 @@
   :bind (("C-M-g" . 'magit-status)))
 
 (use-package ace-window
-  :bind (("M-o" . 'ace-window)))
+  :bind (("M-o" . 'ace-window)
+         ("M-O" . 'ace-swap-window)))
 
 (use-package iedit)
 
@@ -90,6 +91,10 @@
 
 (use-package counsel-projectile
   :after (counsel))
+
+(use-package wgrep)
+
+(use-package editorconfig)
 
 (use-package ivy
   :after (counsel)
@@ -162,7 +167,8 @@
     '(add-hook 'tsx-ts-mode-hook #'add-node-modules-path)))
 
 (use-package flycheck
-  :hook (json-mode jsonian-mode emacs-lisp-mode markdown-mode css-mode))
+  ;; :hook (json-mode emacs-lisp-mode markdown-mode css-mode)
+  :config (global-flycheck-mode))
 
 ;; (defmacro tide-hooks ()
 ;;   "Let's make a list of all the JS-ish modes for `use-package` hooks."
@@ -386,13 +392,16 @@
 
 ;; Built-in tree sitter config
 (setq treesit-extra-load-path '("~/.emacs.d/treesit"))
+(add-to-list 'auto-mode-alist '("/Dockerfile" . dockerfile-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
+
 
 (use-package markdown-mode)
 
 (use-package jsonian
   :after flycheck
-  :init (jsonian-enable-flycheck)
-  :mode ("\\.json\\'" . jsonian-mode))
+  :mode ("\\.json\\'" . jsonian-mode)
+  :config (jsonian-enable-flycheck))
 
 ;; To start the server on MacOS:
 ;; 
@@ -402,6 +411,8 @@
 (use-package languagetool)
 
 (use-package presentation)
+
+(use-package slack)
 
 ;; (use-package edit-server
 ;;   :ensure t
@@ -438,6 +449,31 @@
   (edit-init)
   (search-forward "(use-package tide")
   (recenter-top-bottom 2))
+
+
+;; Work in progress. Taken from:
+;; https://github.com/Qquanwei/emacs/blob/master/lisp/css-rem-convert.el
+(defun css-rem-convert ()
+  "Convert between CSS pixels and rems."
+  (interactive)
+  (setq debug-on-error t)
+  (message "hi")
+  (let ((text (sexp-at-point))
+        (location (bounds-of-thing-at-point 'sexp)))
+    (message "converting: %s at %s" text location)
+    (cond
+     ((s-ends-with? "rem" text)
+      (delete-region (car location) (cdr location))
+      (message "using font-size: %d" 16)
+      (insert (format "%dpx" (* 16 (string-to-number text)))))
+     ((s-ends-with? "px" text)
+      (delete-region (car location) (cdr location))
+      (insert (format "%.2frem" (/ (string-to-number text) 16)))))
+    )
+  )
+
+(find-file "~/OneDrive - Target Corporation/org/worklog.org")
+
 
 ;; Bring in my own packages
 (require 'slugify "~/.emacs.d/geoff/slugify.el")

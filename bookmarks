@@ -2,7 +2,31 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("2023-03-09.md"
+(("usertestingproxy"
+ (filename . "~/src/uxe/usertestingproxy/")
+ (front-context-string . ".editorconfig\n  ")
+ (rear-context-string . "00 Jul 24 15:46 ")
+ (position . 193)
+ (last-modified 25792 8142 5255 0))
+("hosts"
+ (filename . "/sudo:root@localhost:/etc/hosts")
+ (front-context-string . "##\n# Host Databa")
+ (rear-context-string)
+ (position . 1)
+ (last-modified 25720 63813 595283 0))
+("prototype"
+ (filename . "~/src/uxe/prototype/")
+ (front-context-string . ".editorconfig\n  ")
+ (rear-context-string . "93 Sep 22  2022 ")
+ (position . 195)
+ (last-modified 25707 38955 497139 0))
+("worklog.org"
+ (filename . "~/OneDrive - Target Corporation/org/worklog.org")
+ (front-context-string . "** Project: user")
+ (rear-context-string . "k into scaffold\n")
+ (position . 6480)
+ (last-modified 25809 17444 862912 0))
+("2023-03-09.md"
  (filename . "~/src/leads/docs/meeting-notes/2023/2023-03-09.md")
  (front-context-string . "## Standup\n\n### ")
  (rear-context-string . "ffrey.Pursell_\n\n")
