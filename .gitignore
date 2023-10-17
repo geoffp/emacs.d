@@ -52,3 +52,4 @@ init.local.el
 .lsp-session-*
 org-persist
 multisession
+tree-sitter

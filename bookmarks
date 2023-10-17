@@ -2,18 +2,30 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("usertestingproxy"
+(("typing"
+ (filename . "~/.zshrc")
+ (front-context-string . "# Lines configur")
+ (rear-context-string)
+ (position . 1)
+ (last-modified 25898 3305 264788 994000))
+("wayfire.ini"
+ (filename . "~/.config/wayfire/wayfire.ini")
+ (front-context-string . "# Default config")
+ (rear-context-string)
+ (position . 1)
+ (last-modified 25879 11582 121880 589000))
+("usertestingproxy"
  (filename . "~/src/uxe/usertestingproxy/")
  (front-context-string . ".editorconfig\n  ")
  (rear-context-string . "00 Jul 24 15:46 ")
  (position . 193)
  (last-modified 25792 8142 5255 0))
-("hosts"
- (filename . "/sudo:root@localhost:/etc/hosts")
+("etc"
+ (filename . "/sudo:root@localhost:/etc/")
  (front-context-string . "##\n# Host Databa")
  (rear-context-string)
  (position . 1)
- (last-modified 25720 63813 595283 0))
+ (last-modified 25892 5920 582728 173000))
 ("prototype"
  (filename . "~/src/uxe/prototype/")
  (front-context-string . ".editorconfig\n  ")
