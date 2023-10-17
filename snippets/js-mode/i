@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# key: i
+# name: named import
+# binding: C-c C-i
+# --
+import { $2 } from '$1';
