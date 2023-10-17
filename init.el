@@ -391,7 +391,9 @@
 ;; (use-package tree-sitter-langs)
 
 ;; Built-in tree sitter config
-(setq treesit-extra-load-path '("~/.emacs.d/treesit"))
+;; Disabled to make room for the more official way of installing tree-sitter
+;; grammars
+;; (setq treesit-extra-load-path '("~/.emacs.d/treesit"))
 
 (setq treesit-language-source-alist
    '((bash "https://github.com/tree-sitter/tree-sitter-bash")
