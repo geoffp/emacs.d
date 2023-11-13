@@ -53,3 +53,6 @@ init.local.el
 org-persist
 multisession
 tree-sitter
+/straight
+/projects
+/bookmarks

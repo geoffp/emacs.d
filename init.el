@@ -12,17 +12,37 @@
 ;; TODO:
 ;; - Consolidate defuns in their own file maybe?
 
+;; Load up customizations from their own file
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
+;; Disable package.el stuff per https://github.com/radian-software/straight.el#getting-started
+(setq package-enable-at-startup nil)
+
+;; Bootstrap straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+
+
 ;; add melpa
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (add-to-list
-   'package-archives
-   '("melpa" . "http://melpa.org/packages/")
-   t)
-  (package-initialize))
+;; (when (>= emacs-major-version 24)
+;;   (require 'package)
+;;   (add-to-list
+;;    'package-archives
+;;    '("melpa" . "http://melpa.org/packages/")
+;;    t)
+;;   (package-initialize))
 
 ;; SSL
 ;; (add-to-list 'gnutls-trustfiles "/etc/ssl/certs/tgt-ca-bundle.crt")
@@ -42,7 +62,9 @@
 ;; Message about native JSON
 (if (functionp 'json-serialize)
   (message "Native JSON is available")
-(message "Native JSON is *not* available"))
+  (message "Native JSON is *not* available"))
+
+
 
 
 ;;
@@ -50,18 +72,20 @@
 ;;
 
 ;; always install packages managed by use-package if they're missing
-(require 'use-package-ensure)
-(setq use-package-always-ensure t)
+;; NOTE: disabled due to straight.el
+;; (require 'use-package-ensure)
+;; (setq use-package-always-ensure t)
 ;; (setq use-package-hook-name-suffix nil)
 
 
 
 ;; keep packages up to date
-(use-package auto-package-update
-  :config
-  (setq auto-package-update-delete-old-versions t)
-  (setq auto-package-update-hide-results t)
-  (auto-package-update-maybe))
+;; NOTE: disabled due to straight.el
+;; (use-package auto-package-update
+;;   :config
+;;   (setq auto-package-update-delete-old-versions t)
+;;   (setq auto-package-update-hide-results t)
+;;   (auto-package-update-maybe))
 
 ;; start requiring packages we need
 
@@ -158,13 +182,14 @@
           javascript-mode) . prettier-mode))
 
 (use-package add-node-modules-path
-  :init
+  ;; :ensure t
+  :config
   (eval-after-load 'markdown-mode
-    '(add-hook 'markdown-mode-hook #'add-node-modules-path))
+    '(add-hook 'markdown-mode-hook 'add-node-modules-path))
   (eval-after-load 'typescript-ts-mode
-    '(add-hook 'typescript-ts-mode-hook #'add-node-modules-path))
+    '(add-hook 'typescript-ts-mode-hook 'add-node-modules-path))
   (eval-after-load 'tsx-ts-mode
-    '(add-hook 'tsx-ts-mode-hook #'add-node-modules-path)))
+    '(add-hook 'tsx-ts-mode-hook 'add-node-modules-path)))
 
 (use-package flycheck
   ;; :hook (json-mode emacs-lisp-mode markdown-mode css-mode)
@@ -184,8 +209,8 @@
 
 ;; if you use treesitter based typescript-ts-mode (emacs 29+)
 (use-package tide
-  :ensure t
-  :after (company flycheck)
+  ;; :ensure t
+  :after (company flycheck add-node-modules-path)
   :mode (("\\.ts\\'" . typescript-ts-mode)
          ("\\.tsx\\'" . tsx-ts-mode))
   :hook ((typescript-ts-mode . tide-setup)
@@ -450,6 +475,11 @@
 ;;                   (minibuffer . t)
 ;;                   (menu-bar-lines . t)
 ;;                   (window-system . x))))
+
+;; Enable menu bar on Mac OS. Why not, after all?
+(if (eq 'system-type :darwin)
+    (setq menu-bar-mode t)
+  (setq menu-bar-mode nil))
 
 ;; unbind M-o from HTML mode
 (defun html-mode-setup ()
