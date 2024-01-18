@@ -21,7 +21,9 @@
  '(byte-compile-warnings nil)
  '(compilation-message-face 'default)
  '(connection-local-criteria-alist
-   '(((:machine "usertestingproxy-proxy")
+   '(((:application tramp :machine "MJ2X1FC4CR")
+      tramp-connection-local-darwin-ps-profile)
+     ((:machine "usertestingproxy-proxy")
       usertestingproxy-proxy-vars)
      ((:application eshell)
       eshell-connection-default-profile)
@@ -160,7 +162,7 @@
  '(nrepl-message-colors
    '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
  '(ns-command-modifier 'meta)
- '(org-cycle-separator-lines 1)
+ '(org-cycle-separator-lines 2)
  '(org-export-headline-levels 2)
  '(org-export-with-section-numbers nil)
  '(package-enable-at-startup nil)
