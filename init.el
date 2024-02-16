@@ -40,15 +40,6 @@
           (codeberg . "geoffp")
           (bitbucket . "geoffp")))
 
-;; add melpa
-;; (when (>= emacs-major-version 24)
-;;   (require 'package)
-;;   (add-to-list
-;;    'package-archives
-;;    '("melpa" . "http://melpa.org/packages/")
-;;    t)
-;;   (package-initialize))
-
 ;; SSL
 ;; (add-to-list 'gnutls-trustfiles "/etc/ssl/certs/tgt-ca-bundle.crt")
 
@@ -70,33 +61,9 @@
   (message "Native JSON is *not* available"))
 
 
-
-
 ;;
-;; use-package config
+;; PACKAGE CONFIGS
 ;;
-
-;; always install packages managed by use-package if they're missing
-;; NOTE: disabled due to straight.el
-;; (require 'use-package-ensure)
-;; (setq use-package-always-ensure t)
-;; (setq use-package-hook-name-suffix nil)
-
-
-
-;; keep packages up to date
-;; NOTE: disabled due to straight.el
-;; (use-package auto-package-update
-;;   :config
-;;   (setq auto-package-update-delete-old-versions t)
-;;   (setq auto-package-update-hide-results t)
-;;   (auto-package-update-maybe))
-
-;; start requiring packages we need
-
-;; (use-package dracula-theme
-;;   :config
-;;   (load-theme 'dracula t))
 
 (use-package zenburn-theme
   :config
@@ -122,41 +89,6 @@
 
 (use-package editorconfig)
 
-;; IVY STUFF
-
-;; (use-package counsel)
-
-;; (use-package counsel-projectile
-;;   :after (counsel))
-
-;; (use-package ivy
-;;   :after (counsel)
-;;   :bind (
-;;           ;; Ivy-based interface to standard commands
-;;           ("C-s" . 'swiper-isearch)
-;;           ("M-x" . 'counsel-M-x)
-;;           ("C-x C-f" . 'counsel-find-file)
-;;           ("M-y" . 'counsel-yank-pop)
-;;           ("<f1> f" . 'counsel-describe-function)
-;;           ("<f1> v" . 'counsel-describe-variable)
-;;           ("<f1> l" . 'counsel-find-library)
-;;           ("<f2> i" . 'counsel-info-lookup-symbol)
-;;           ("<f2> u" . 'counsel-unicode-char)
-;;           ("<f2> j" . 'counsel-set-variable)
-;;           ("C-x b" . 'ivy-switch-buffer)
-;;           ("C-c v" . 'ivy-push-view)
-;;           ("C-c V" . 'ivy-pop-view)
-
-;;           ;; Ivy-resume and other commands
-;;           ("C-c C-r" . 'ivy-resume)
-;;           ("C-c b" . 'counsel-bookmark)
-;;           ("C-c d" . 'counsel-descbinds)
-;;           ("C-c g" . 'counsel-git)
-;;           ("C-c o" . 'counsel-outline)
-;;           ;; This conflicts with my typescript bindings
-;;           ;; ("C-c t" . 'counsel-load-theme)
-;;           ("C-c F" . 'counsel-org-file)
-;;           ))
 
 ;; VERTICO STUFF
 
@@ -388,14 +320,6 @@
 (use-package pug-mode
   :mode "\\.pug\\'")
 
-;; (defmacro js-mode-list ()
-;;   "Let's make a list of all the JS-ish modes for `use-package` hooks."
-;;   `(typescript-mode
-;;     web-mode
-;;     rjsx-mode
-;;     js2-mode
-;;     javascript-mode))
-
 ;; Configure stuff for eglot, js, ts, etc.
 (add-hook 'js-mode-hook
 	        (lambda()
@@ -422,9 +346,9 @@
   (eval-after-load 'tsx-ts-mode
     '(add-hook 'tsx-ts-mode-hook 'add-node-modules-path)))
 
-(use-package flycheck
-  ;; :hook (json-mode emacs-lisp-mode markdown-mode css-mode)
-  :config (global-flycheck-mode))
+;; (use-package flycheck
+;;   ;; :hook (json-mode emacs-lisp-mode markdown-mode css-mode)
+;;   :config (global-flycheck-mode))
 
 (use-package jsdoc
   :straight (:host github :repo "isamert/jsdoc.el"))
@@ -440,93 +364,10 @@
 ;; (add-to-list 'auto-mode-alist '("/Dockerfile" . dockerfile-ts-mode))
 ;; (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
 
-;; (defmacro tide-hooks ()
-;;   "Let's make a list of all the JS-ish modes for `use-package` hooks."
-;;   `'((typescript-mode
-;;      typescript-ts-mode
-;;      tsx-ts-mode
-;;      web-mode
-;;      rjsx-mode
-;;      js2-mode
-;;      javascript-mode) . tide-setup))
-
-;; (message (tide-hooks))
-
-;; if you use treesitter based typescript-ts-mode (emacs 29+)
-;; (use-package tide
-;;   :after (company flycheck add-node-modules-path)
-;;   :mode (("\\.ts\\'" . typescript-ts-mode)
-;;          ("\\.tsx\\'" . tsx-ts-mode))
-;;   :hook ((typescript-ts-mode . tide-setup)
-;;          (typescript-ts-mode . tide-hl-identifier-mode)
-;;          (typescript-ts-mode . flycheck-mode)
-;;          (tsx-ts-mode . tide-setup)
-;;          (tsx-ts-mode . tide-hl-identifier-mode)
-;;          (tsx-ts-mode . flycheck-mode)
-;;          ;; (before-save . tide-format-before-save)
-;;          )
-;;   :bind (("C-c t n" . 'tide-rename-symbol)
-;;          ("C-c t f" . 'tide-refactor)
-;;          ("C-c t r" . 'tide-references)
-;;          ("C-c t p" . 'tide-documentation-at-point)
-;;          ("C-c t s" . 'tide-restart-server))
-;;   :config
-;;   (flycheck-add-mode 'typescript-tide 'typescript-ts-mode)
-;;   (flycheck-add-mode 'typescript-tide 'tsx-ts-mode)
-;;   (flycheck-remove-next-checker 'typescript-tide 'typescript-tslint)
-;;   (flycheck-remove-next-checker 'tsx-tide 'typescript-tslint)
-;;   (flycheck-add-next-checker 'typescript-tide '(warning . javascript-eslint))
-;;   (flycheck-add-next-checker 'tsx-tide '(warning . javascript-eslint))
-;;   )
-
-
 (use-package css-in-js-mode
   :straight '(css-in-js-mode :type git :host github
               :repo "orzechowskid/tree-sitter-css-in-js"
               :fork t))
-
-;; TODO: maybe make a list of filetypes and iterate over it here, and below.
-;; (defun tide-file-init-is-js (extension)
-;;   "Test whether a file EXTENSION implies a Javascript-like language."
-;;   (or (string= "tsx" extension)
-;;     (string= "jsx" extension)
-;;     (string= "ts" extension)
-;;     (string= "js" extension)
-;;     (string= "mjs" extension)))
-
-;; (defun tide-file-init ()
-;;   "Do everything necessary when we go into typescript-mode or web-mode."
-;;   (when (tide-file-init-is-js (file-name-extension buffer-file-name))
-;;     (message "hey, this is tide-file-init")
-;;     (tide-setup)
-;;     (tide-hl-identifier-mode)
-;;     (add-node-modules-path)
-;;     (flycheck-mode)))
-
-;; (use-package tide
-;;   :after (typescript-mode company flycheck web-mode add-node-modules-path)
-;;   :mode (("\\.ts\\'" . typescript-mode)
-;;           ("\\.js\\'" . typescript-mode)
-;;           ("\\.jsx\\'" . web-mode)
-;;           ("\\.tsx\\'" . web-mode)
-;;           ("\\.mjs\\'" . typescript-mode))
-;;   :hook ((typescript-mode . tide-file-init)
-;;           (javascript-mode . tide-file-init)
-;;           (web-mode . tide-file-init))
-;;   :bind (("C-c t n" . 'tide-rename-symbol)
-;;           ("C-c t f" . 'tide-refactor)
-;;           ("C-c t r" . 'tide-references)
-;;           ("C-c t p" . 'tide-documentation-at-point)
-;;           ("C-c t s" . 'tide-restart-server))
-;;   :config
-;;   ;; To make eslint work in .tsx files
-;;   (flycheck-add-mode 'javascript-eslint 'web-mode)
-
-;;   ;; For TS, I don't want tslint and do want eslint
-;;   (flycheck-remove-next-checker 'typescript-tide 'typescript-tslint)
-;;   (flycheck-remove-next-checker 'tsx-tide 'typescript-tslint)
-;;   (flycheck-add-next-checker 'typescript-tide '(warning . javascript-eslint))
-;;   (flycheck-add-next-checker 'tsx-tide '(warning . javascript-eslint)))
 
 ;; (use-package visual-regexp)
 
@@ -629,23 +470,6 @@
                              :models '("test"))                   ;Any names, doesn't matter for Llama
               gptel-model "test")
                                         
-
-;; (Use-package edit-server
-;;   :commands edit-server-start
-;;   :init (if after-init-time
-;;             (edit-server-start)
-;;           (add-hook 'after-init-hook
-;;                     #'(lambda() (edit-server-start))))
-;;   :config (setq edit-server-new-frame-alist
-;;                 '((name . "Edit with Emacs FRAME")
-;;                   (top . 200)
-;;                   (left . 200)
-;;                   (width . 80)
-;;                   (height . 25)
-;;                   (minibuffer . t)
-;;                   (menu-bar-lines . t)
-;;                   (window-system . x))))
-
 ;; Enable menu bar on Mac OS. Why not, after all?
 (if (eq 'system-type :darwin)
     (setq menu-bar-mode t)
@@ -662,14 +486,6 @@
   "Edit the init.el."
   (interactive)
   (find-file "~/.emacs.d/init.el"))
-
-;; (defun edit-tide-config ()
-;;   "Edit the tide config in init.el."
-;;   (interactive)
-;;   (edit-init)
-;;   (search-forward "(use-package tide")
-;;   (recenter-top-bottom 2))
-
 
 ;; Work in progress. Taken from:
 ;; https://github.com/Qquanwei/emacs/blob/master/lisp/css-rem-convert.el
