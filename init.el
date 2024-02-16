@@ -220,6 +220,8 @@
         completion-category-defaults nil
         completion-category-overrides '((file (styles partial-completion)))))
 
+
+
 ;; Enable rich annotations using the Marginalia package
 (use-package marginalia
   ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
@@ -378,8 +380,13 @@
 ;; TIDE: TypeScript IDE mode
 ;; (use-package typescript-mode)
 (use-package company)
+
 (use-package web-mode
   :mode (("\\.svg\\'" . web-mode)))
+
+;; Pug templates!
+(use-package pug-mode
+  :mode "\\.pug\\'")
 
 ;; (defmacro js-mode-list ()
 ;;   "Let's make a list of all the JS-ish modes for `use-package` hooks."
@@ -388,6 +395,14 @@
 ;;     rjsx-mode
 ;;     js2-mode
 ;;     javascript-mode))
+
+;; Configure stuff for eglot, js, ts, etc.
+(add-hook 'js-mode-hook
+	        (lambda()
+		        (unbind-key "M-." js-mode-map)))
+(add-hook 'js-ts-mode-hook
+	        (lambda()
+		        (unbind-key "M-." js-ts-mode-map)))
 
 (use-package prettier
   :hook ((typescript-mode
@@ -411,6 +426,20 @@
   ;; :hook (json-mode emacs-lisp-mode markdown-mode css-mode)
   :config (global-flycheck-mode))
 
+(use-package jsdoc
+  :straight (:host github :repo "isamert/jsdoc.el"))
+
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
+
+;; Are these still needed, or does treesit-auto take care of them?
+;; (add-to-list 'auto-mode-alist '("/Dockerfile" . dockerfile-ts-mode))
+;; (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
+
 ;; (defmacro tide-hooks ()
 ;;   "Let's make a list of all the JS-ish modes for `use-package` hooks."
 ;;   `'((typescript-mode
@@ -424,31 +453,31 @@
 ;; (message (tide-hooks))
 
 ;; if you use treesitter based typescript-ts-mode (emacs 29+)
-(use-package tide
-  :after (company flycheck add-node-modules-path)
-  :mode (("\\.ts\\'" . typescript-ts-mode)
-         ("\\.tsx\\'" . tsx-ts-mode))
-  :hook ((typescript-ts-mode . tide-setup)
-         (typescript-ts-mode . tide-hl-identifier-mode)
-         (typescript-ts-mode . flycheck-mode)
-         (tsx-ts-mode . tide-setup)
-         (tsx-ts-mode . tide-hl-identifier-mode)
-         (tsx-ts-mode . flycheck-mode)
-         ;; (before-save . tide-format-before-save)
-         )
-  :bind (("C-c t n" . 'tide-rename-symbol)
-         ("C-c t f" . 'tide-refactor)
-         ("C-c t r" . 'tide-references)
-         ("C-c t p" . 'tide-documentation-at-point)
-         ("C-c t s" . 'tide-restart-server))
-  :config
-  (flycheck-add-mode 'typescript-tide 'typescript-ts-mode)
-  (flycheck-add-mode 'typescript-tide 'tsx-ts-mode)
-  (flycheck-remove-next-checker 'typescript-tide 'typescript-tslint)
-  (flycheck-remove-next-checker 'tsx-tide 'typescript-tslint)
-  (flycheck-add-next-checker 'typescript-tide '(warning . javascript-eslint))
-  (flycheck-add-next-checker 'tsx-tide '(warning . javascript-eslint))
-  )
+;; (use-package tide
+;;   :after (company flycheck add-node-modules-path)
+;;   :mode (("\\.ts\\'" . typescript-ts-mode)
+;;          ("\\.tsx\\'" . tsx-ts-mode))
+;;   :hook ((typescript-ts-mode . tide-setup)
+;;          (typescript-ts-mode . tide-hl-identifier-mode)
+;;          (typescript-ts-mode . flycheck-mode)
+;;          (tsx-ts-mode . tide-setup)
+;;          (tsx-ts-mode . tide-hl-identifier-mode)
+;;          (tsx-ts-mode . flycheck-mode)
+;;          ;; (before-save . tide-format-before-save)
+;;          )
+;;   :bind (("C-c t n" . 'tide-rename-symbol)
+;;          ("C-c t f" . 'tide-refactor)
+;;          ("C-c t r" . 'tide-references)
+;;          ("C-c t p" . 'tide-documentation-at-point)
+;;          ("C-c t s" . 'tide-restart-server))
+;;   :config
+;;   (flycheck-add-mode 'typescript-tide 'typescript-ts-mode)
+;;   (flycheck-add-mode 'typescript-tide 'tsx-ts-mode)
+;;   (flycheck-remove-next-checker 'typescript-tide 'typescript-tslint)
+;;   (flycheck-remove-next-checker 'tsx-tide 'typescript-tslint)
+;;   (flycheck-add-next-checker 'typescript-tide '(warning . javascript-eslint))
+;;   (flycheck-add-next-checker 'tsx-tide '(warning . javascript-eslint))
+;;   )
 
 
 (use-package css-in-js-mode
@@ -512,18 +541,12 @@
 (add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mjs\\'" . js-ts-mode))
+;; and in js-ts-mode
 
 ;; load up rainbow-mode in various modes in which we may find it useful
 (use-package rainbow-mode
   :hook (javascript-mode typescript-mode css-mode vue-mode web-mode))
-
-;; projectile
-;; (use-package projectile
-;;   :config
-;;   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-;;   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-;;   (projectile-mode +1))
-
 
 ;; store all backup and autosave files in the tmp dir
 (setq backup-directory-alist
@@ -533,27 +556,12 @@
 
 ;; also disable interlock symlinks
 (setq create-lockfiles nil)
-
-;; expand region binding
-(global-set-key (kbd "C-=") 'er/expand-region)
-
 ;; yasnippet setup
 ;; Bind yas-expand to shift-tab
 (use-package yasnippet
   :config
   (global-set-key (kbd "<S-tab>") 'yas-expand)
   (yas-global-mode 1))
-
-;; a function for reinstalling selected packages
-(defun package-reinstall-activated ()
-  "Reinstall all activated packages."
-  (interactive)
-  (dolist (package-name package-activated-list)
-    (when (package-installed-p package-name)
-      (unless (ignore-errors                   ;some packages may fail to install
-                (package-reinstall package-name)
-                (warn "Package %s failed to reinstall" package-name))))))
-
 ;; load machine-local init files
 (let ((f "~/.emacs.d/init.local.el"))
   (if (file-readable-p f)
@@ -565,49 +573,10 @@
   (interactive)
   (call-process-region (point-min) (point-max) "xmllint" t t t "--format" "-")
   (goto-char (point-min)))
-
-;; aligns annotation to the right hand side
-(setq company-tooltip-align-annotations t)
-
 ;; Dired
 ;; Add icons to dired
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 (add-hook 'dired-mode-hook 'dired-hide-details-mode)
-
-;; Nicollet tools
-(load-file "~/.emacs.d/geoff/nicollet.el")
-
-(defun jsx ()
-  "Set the right modes for JSX in .js files."
-  (interactive)
-  (web-mode)
-  (web-mode-set-content-type "jsx"))
-
-
-;; Org-mode config
-;; (add-hook
-;;  'org-mode-hook
-;;  #'(lambda ()
-;;      (org-indent-mode)))
-
-
-;; Org-Jira
-;; (use-package org-jira
-;;   :config
-;;   (setq jiralib-url "https://jira.target.com"))
-
-;; eshell-toggle
-(use-package eshell-toggle
-  :custom
-  (eshell-toggle-size-fraction 3)
-  ;; (eshell-toggle-use-projectile-root t)
-  (eshell-toggle-run-command nil)
-  (eshell-toggle-init-function #'eshell-toggle-init-ansi-term)
-  ;; :quelpa
-  ;; (eshell-toggle :repo "4DA/eshell-toggle" :fetcher github :version original)
-  :bind
-  ("C-`" . eshell-toggle))
-
 ;; Use Emacs terminfo, not system terminfo
 (setq system-uses-terminfo nil)
 
@@ -623,7 +592,7 @@
 
 (use-package glsl-mode)
 
-;; This makes GhostEdit (Firefox) work -- for editing text in browser from Emacs
+;; This makes GhostText (Firefox) work -- for editing text in browser from Emacs
 (use-package atomic-chrome
   :custom
   (atomic-chrome-url-major-mode-alist
@@ -631,48 +600,14 @@
   :init
   (atomic-chrome-start-server))
 
-(use-package polymode)
-
-;; (use-package tree-sitter
-;;   :init
-;;   (global-tree-sitter-mode)
-;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
-
-;; (use-package tree-sitter-langs)
-
-;; Built-in tree sitter config
-;; Disabled to make room for the more official way of installing tree-sitter
-;; grammars
-;; (setq treesit-extra-load-path '("~/.emacs.d/treesit"))
-
-(setq treesit-language-source-alist
-   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-     (cmake "https://github.com/uyha/tree-sitter-cmake")
-     (css "https://github.com/tree-sitter/tree-sitter-css")
-     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-     (go "https://github.com/tree-sitter/tree-sitter-go")
-     (html "https://github.com/tree-sitter/tree-sitter-html")
-     (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
-     (json "https://github.com/tree-sitter/tree-sitter-json")
-     (make "https://github.com/alemuller/tree-sitter-make")
-     (markdown "https://github.com/ikatyang/tree-sitter-markdown")
-     (python "https://github.com/tree-sitter/tree-sitter-python")
-     (toml "https://github.com/tree-sitter/tree-sitter-toml")
-     (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
-     (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
-     (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
-
-(add-to-list 'auto-mode-alist '("/Dockerfile" . dockerfile-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
-
-
-(use-package markdown-mode)
-
 (use-package jsonian
   :after flycheck
   :mode ("\\.json\\'" . jsonian-mode)
   :config (jsonian-enable-flycheck))
 
+;; 
+;; Languagetool! Spell checking and such.
+;; 
 ;; To start the server on MacOS:
 ;; 
 ;;   brew services start languagetool
@@ -680,12 +615,11 @@
 ;; See also https://dev.languagetool.org/http-server
 (use-package languagetool)
 
+;; Presentation mode, naturally.
 (use-package presentation)
 
-(use-package slack)
-
+;; AI integration
 (straight-use-package 'gptel)
-
 (setq-default gptel-backend (gptel-make-openai                    ;Not a typo, same API as OpenAI
                              "lmstudio"                           ;Any name
                              :stream t                            ;Stream responses
@@ -694,7 +628,6 @@
                              :key nil                             ;No key needed
                              :models '("test"))                   ;Any names, doesn't matter for Llama
               gptel-model "test")
-
                                         
 
 ;; (Use-package edit-server
@@ -730,12 +663,12 @@
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
-(defun edit-tide-config ()
-  "Edit the tide config in init.el."
-  (interactive)
-  (edit-init)
-  (search-forward "(use-package tide")
-  (recenter-top-bottom 2))
+;; (defun edit-tide-config ()
+;;   "Edit the tide config in init.el."
+;;   (interactive)
+;;   (edit-init)
+;;   (search-forward "(use-package tide")
+;;   (recenter-top-bottom 2))
 
 
 ;; Work in progress. Taken from:

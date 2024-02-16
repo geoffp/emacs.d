@@ -1,0 +1,64 @@
+# -*- mode: snippet -*-
+# name: component token audit
+# key: com
+# --
+# $2 Component
+[components.$1]
+name = "$2"
+notes = ""
+
+[components.$1.android]
+# Tokens
+$0color = "unknown"
+size = "unknown"
+border-radius = "unknown"
+font = "unknown"
+elevation = "unknown"
+spacing = "unknown"
+
+# Platform-specific name; URL to definition; notes
+name = ""
+code-url = ""
+notes = ""
+
+[components.$1.ios]
+# Tokens
+color = "unknown"
+size = "unknown"
+border-radius = "unknown"
+font = "unknown"
+elevation = "unknown"
+spacing = "unknown"
+
+# Platform-specific name; URL to definition; notes
+name = ""
+code-url = ""
+notes = ""
+
+[components.$1.web]
+# Tokens
+color = "unknown"
+size = "unknown"
+border-radius = "unknown"
+font = "unknown"
+elevation = "unknown"
+spacing = "unknown"
+
+# Platform-specific name; URL to definition; notes
+name = ""
+code-url = ""
+notes = ""
+
+[components.$1.figma]
+# Tokens
+color = "unknown"
+size = "unknown"
+border-radius = "unknown"
+font = "unknown"
+elevation = "unknown"
+spacing = "unknown"
+
+# Platform-specific name; URL to definition; notes
+name = ""
+code-url = ""
+notes = ""
