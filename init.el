@@ -89,6 +89,9 @@
 
 (use-package editorconfig)
 
+;; make eshell colorful
+(add-hook 'eshell-mode-hook (lambda () (setenv "TERM" "xterm-256color")))
+
 
 ;; VERTICO STUFF
 
@@ -117,6 +120,7 @@
 
 ;; A few more useful configurations...
 (use-package emacs
+  :bind (("M-o" . 'other-window))
   :init
   ;; Add prompt indicator to `completing-read-multiple'.
   ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
@@ -314,13 +318,20 @@
 (use-package company)
 
 (use-package web-mode
-  :mode (("\\.svg\\'" . web-mode)))
+  :mode (("\\.svg\\'" . web-mode)
+         ("\\.webc\\'" . web-mode)
+         ("\\.liquid\\'" . web-mode)))
 
 ;; Pug templates!
 (use-package pug-mode
   :mode "\\.pug\\'")
 
 ;; Configure stuff for eglot, js, ts, etc.
+(require 'eglot)
+(add-to-list 'eglot-server-programs '(toml-ts-mode "taplo" "lsp" "stdio"))
+;; (add-to-list 'eglot-server-programs '(((web-mode :language-id "javascript"))
+;;   "typescript-language-server" "--stdio"))
+
 (add-hook 'js-mode-hook
 	        (lambda()
 		        (unbind-key "M-." js-mode-map)))
@@ -430,6 +441,9 @@
             (lambda () (add-hook 'before-save-hook
                                  'elpy-format-code nil t)))
   )
+(use-package swift-mode)
+
+(use-package noccur)
 
 (use-package glsl-mode)
 
@@ -465,7 +479,7 @@
                              "lmstudio"                           ;Any name
                              :stream t                            ;Stream responses
                              :protocol "http"
-                             :host "localhost:1234"               ;Llama.cpp server location, typically localhost:8080 for Llamafile
+                             :host "localhost:5555"               ;Llama.cpp server location, typically localhost:8080 for Llamafile
                              :key nil                             ;No key needed
                              :models '("test"))                   ;Any names, doesn't matter for Llama
               gptel-model "test")
