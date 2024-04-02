@@ -1,4 +1,4 @@
- ;;; init --- my .emacs.d/init.el
+;;; init --- my .emacs.d/init.el
 ;;; Commentary:
 
 ;;; Code:
@@ -292,7 +292,16 @@
   ;; (setq consult-project-function (lambda (_) (projectile-project-root)))
   ;;;; 5. No project support
   ;; (setq consult-project-function nil)
-)
+  )
+
+;; Use `consult-completion-in-region' if Vertico is enabled.
+;; Otherwise use the default `completion--in-region' function.
+(setq completion-in-region-function
+      (lambda (&rest args)
+        (apply (if vertico-mode
+                   #'consult-completion-in-region
+                 #'completion--in-region)
+               args)))
 
 
 ;; Icons plz
@@ -331,6 +340,35 @@
 (add-to-list 'eglot-server-programs '(toml-ts-mode "taplo" "lsp" "stdio"))
 ;; (add-to-list 'eglot-server-programs '(((web-mode :language-id "javascript"))
 ;;   "typescript-language-server" "--stdio"))
+
+(use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         (css-mode . lsp)
+         (css-ts-mode . lsp)
+         ;; if you want which-key integration
+         ;; (lsp-mode . lsp-enable-which-key-integration)
+         )
+  :commands lsp)
+
+;; optionally
+(use-package lsp-ui :commands lsp-ui-mode)
+;; if you are helm user
+;; (use-package helm-lsp :commands helm-lsp-workspace-symbol)
+;; if you are ivy user
+;; (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+;; (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+
+;; optionally if you want to use debugger
+;; (use-package dap-mode)
+;; (use-package dap-LANGUAGE) to load the dap adapter for your language
+
+;; optional if you want which-key integration
+;; (use-package which-key
+;;     :config
+;;     (which-key-mode))
 
 (add-hook 'js-mode-hook
 	        (lambda()
@@ -472,6 +510,19 @@
 
 ;; Presentation mode, naturally.
 (use-package presentation)
+
+;; Edit-indirect mode: edit regions in separate buffers
+(use-package edit-indirect)
+
+;; Edit-indirect mode: edit regions in separate buffers
+(use-package polymode
+  :config
+  (add-to-list 'polymode-run-these-after-change-functions-in-other-buffers 'lsp-on-change)
+  (add-to-list 'polymode-run-these-before-change-functions-in-other-buffers 'lsp-before-change))
+
+;; Major mode for editing .nix files
+(use-package nix-mode)
+
 
 ;; AI integration
 (straight-use-package 'gptel)
