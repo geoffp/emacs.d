@@ -525,15 +525,17 @@
 
 
 ;; AI integration
-(straight-use-package 'gptel)
-(setq-default gptel-backend (gptel-make-openai                    ;Not a typo, same API as OpenAI
-                             "lmstudio"                           ;Any name
-                             :stream t                            ;Stream responses
-                             :protocol "http"
-                             :host "localhost:5555"               ;Llama.cpp server location, typically localhost:8080 for Llamafile
-                             :key nil                             ;No key needed
-                             :models '("test"))                   ;Any names, doesn't matter for Llama
-              gptel-model "test")
+(use-package gptel
+  :config
+  (setq-default gptel-backend (gptel-make-openai                    ;Not a typo, same API as OpenAI
+                                  "lmstudio"                           ;Any name
+                                :stream t                            ;Stream responses
+                                :protocol "http"
+                                :host "localhost:5555"               ;Llama.cpp server location, typically localhost:8080 for Llamafile
+                                :key nil                             ;No key needed
+                                :models '("test"))                   ;Any names, doesn't matter for Llama
+                gptel-model "test")
+  )
                                         
 ;; Enable menu bar on Mac OS. Why not, after all?
 (if (eq 'system-type :darwin)
