@@ -318,6 +318,7 @@
   :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
   :init (all-the-icons-completion-mode))
 
+(use-package markdown-mode)
 
 (use-package string-inflection
   :bind (("C-<tab>" . 'string-inflection-java-style-cycle)))
@@ -338,23 +339,25 @@
 ;; Configure stuff for eglot, js, ts, etc.
 (require 'eglot)
 (add-to-list 'eglot-server-programs '(toml-ts-mode "taplo" "lsp" "stdio"))
-;; (add-to-list 'eglot-server-programs '(((web-mode :language-id "javascript"))
-;;   "typescript-language-server" "--stdio"))
+(add-to-list 'eglot-server-programs '(((web-mode :language-id "javascript"))
+  "typescript-language-server" "--stdio"))
 
-(use-package lsp-mode
-  :init
-  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-  (setq lsp-keymap-prefix "C-c l")
-  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-         (css-mode . lsp)
-         (css-ts-mode . lsp)
-         ;; if you want which-key integration
-         ;; (lsp-mode . lsp-enable-which-key-integration)
-         )
-  :commands lsp)
+;; (use-package lsp-mode
+;;   :init
+;;   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+;;   (setq lsp-keymap-prefix "C-c l")
+;;   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+;;          (css-mode . lsp)
+;;          (css-ts-mode . lsp)
+;;          (js-mode . lsp)
+;;          (js-ts-mode . lsp)
+;;          ;; if you want which-key integration
+;;          ;; (lsp-mode . lsp-enable-which-key-integration)
+;;          )
+;;   :commands lsp)
 
-;; optionally
-(use-package lsp-ui :commands lsp-ui-mode)
+;; ;; optionally
+;; (use-package lsp-ui :commands lsp-ui-mode)
 ;; if you are helm user
 ;; (use-package helm-lsp :commands helm-lsp-workspace-symbol)
 ;; if you are ivy user
@@ -409,6 +412,24 @@
   (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode))
 
+(use-package combobulate
+  :preface
+  ;; You can customize Combobulate's key prefix here.
+  ;; Note that you may have to restart Emacs for this to take effect!
+  (setq combobulate-key-prefix "C-c o")
+  :hook
+  ((python-ts-mode . combobulate-mode)
+   (js-ts-mode . combobulate-mode)
+   (html-ts-mode . combobulate-mode)
+   (css-ts-mode . combobulate-mode)
+   (yaml-ts-mode . combobulate-mode)
+   (typescript-ts-mode . combobulate-mode)
+   (json-ts-mode . combobulate-mode)
+   (tsx-ts-mode . combobulate-mode))
+  ;; Amend this to the directory where you keep Combobulate's source
+  ;; code.
+  :load-path ("path-to-git-checkout-of-combobulate"))
+
 ;; Are these still needed, or does treesit-auto take care of them?
 ;; (add-to-list 'auto-mode-alist '("/Dockerfile" . dockerfile-ts-mode))
 ;; (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
@@ -446,12 +467,14 @@
 
 ;; also disable interlock symlinks
 (setq create-lockfiles nil)
+
 ;; yasnippet setup
 ;; Bind yas-expand to shift-tab
 (use-package yasnippet
   :config
   (global-set-key (kbd "<S-tab>") 'yas-expand)
   (yas-global-mode 1))
+
 ;; load machine-local init files
 (let ((f "~/.emacs.d/init.local.el"))
   (if (file-readable-p f)
@@ -463,6 +486,7 @@
   (interactive)
   (call-process-region (point-min) (point-max) "xmllint" t t t "--format" "-")
   (goto-char (point-min)))
+
 ;; Dired
 ;; Add icons to dired
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
@@ -484,6 +508,10 @@
 (use-package noccur)
 
 (use-package glsl-mode)
+
+(eval-after-load "term"
+  '(progn
+     (define-key term-raw-map (kbd "M-o") nil)))
 
 ;; This makes GhostText (Firefox) work -- for editing text in browser from Emacs
 (use-package atomic-chrome
@@ -549,40 +577,12 @@
   (unbind-key "M-o" html-mode-map))
 (add-hook 'html-mode-hook 'html-mode-setup)
 
-(defun edit-init ()
-  "Edit the init.el."
-  (interactive)
-  (find-file "~/.emacs.d/init.el"))
-
-;; Work in progress. Taken from:
-;; https://github.com/Qquanwei/emacs/blob/master/lisp/css-rem-convert.el
-(defun css-rem-convert ()
-  "Convert between CSS pixels and rems."
-  (interactive)
-  (setq debug-on-error t)
-  (message "hi")
-  (let ((text (sexp-at-point))
-        (location (bounds-of-thing-at-point 'sexp)))
-    (message "converting: %s at %s" text location)
-    (cond
-     ((s-ends-with? "rem" text)
-      (delete-region (car location) (cdr location))
-      (message "using font-size: %d" 16)
-      (insert (format "%dpx" (* 16 (string-to-number text)))))
-     ((s-ends-with? "px" text)
-      (delete-region (car location) (cdr location))
-      (insert (format "%.2frem" (/ (string-to-number text) 16)))))
-    )
-  )
-
-(find-file "~/OneDrive - Target Corporation/org/worklog.org")
-
-
 ;; Bring in my own packages
 (require 'slugify "~/.emacs.d/geoff/slugify.el")
+(require 'misc "~/.emacs.d/geoff/misc.el")
 
-(put 'magit-clean 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
+;; (put 'magit-clean 'disabled nil)
+;; (put 'narrow-to-region 'disabled nil)
 
 (provide 'init)
 ;;; init.el ends here
