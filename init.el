@@ -77,13 +77,7 @@
 (use-package magit
   :bind (("C-M-g" . 'magit-status)))
 
-(use-package ace-window
-  :bind (("M-o" . 'ace-window)
-         ("M-O" . 'ace-swap-window)))
-
 (use-package iedit)
-
-
 
 (use-package wgrep)
 
@@ -120,7 +114,7 @@
 
 ;; A few more useful configurations...
 (use-package emacs
-  :bind (("M-o" . 'other-window))
+  :bind (("M-o" . 'next-multiframe-window))
   :init
   ;; Add prompt indicator to `completing-read-multiple'.
   ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
@@ -340,7 +334,9 @@
 (require 'eglot)
 (add-to-list 'eglot-server-programs '(toml-ts-mode "taplo" "lsp" "stdio"))
 (add-to-list 'eglot-server-programs '(((web-mode :language-id "javascript"))
-  "typescript-language-server" "--stdio"))
+                                      "typescript-language-server" "--stdio"))
+(add-to-list 'eglot-server-programs '(((css-mode :language-id "css"))
+  "vscode-css-language-server" "--stdio"))
 
 ;; (use-package lsp-mode
 ;;   :init
@@ -564,6 +560,8 @@
                                 :models '("test"))                   ;Any names, doesn't matter for Llama
                 gptel-model "test")
   )
+
+(use-package vterm)
                                         
 ;; Enable menu bar on Mac OS. Why not, after all?
 (if (eq 'system-type :darwin)
@@ -580,9 +578,6 @@
 ;; Bring in my own packages
 (require 'slugify "~/.emacs.d/geoff/slugify.el")
 (require 'misc "~/.emacs.d/geoff/misc.el")
-
-;; (put 'magit-clean 'disabled nil)
-;; (put 'narrow-to-region 'disabled nil)
 
 (provide 'init)
 ;;; init.el ends here

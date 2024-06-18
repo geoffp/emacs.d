@@ -125,6 +125,7 @@
  '(dired-listing-switches "-alh")
  '(drag-stuff-global-mode t)
  '(editorconfig-mode t)
+ '(eglot-send-changes-idle-time 2)
  '(elpy-rpc-python-command "python3")
  '(fill-column 80)
  '(flycheck-check-syntax-automatically '(save idle-change mode-enabled))
