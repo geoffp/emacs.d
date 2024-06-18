@@ -3,4 +3,4 @@
 # name: console.log
 # binding: C-c C-c
 # --
-console.log('$1');
+console.log(\`$1\`);
