@@ -346,8 +346,12 @@
                                       "typescript-language-server" "--stdio"))
 (add-to-list 'eglot-server-programs '(((css-mode :language-id "css"))
                                       "vscode-css-language-server" "--stdio"))
-(add-to-list 'eglot-server-programs '(((css-mode :language-id "python"))
-  "pyright-langserver" "--stdio"))
+;; (add-to-list 'eglot-server-programs '(((css-mode :language-id "python"))
+;;   "pyright-langserver" "--stdio"))
+
+(add-to-list 'eglot-server-programs '(((python-ts-mode :language-id "python"))
+  "npx" "--yes" "--package=pyright" "--" "pyright-langserver" "--stdio"))
+
 
 ;; (use-package lsp-mode
 ;;   :init
