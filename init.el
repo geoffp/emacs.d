@@ -332,11 +332,22 @@
 
 ;; Configure stuff for eglot, js, ts, etc.
 (require 'eglot)
+
+;; Set eglot's Python language server
+(setq eglot-python-server "pyright")  ;; or "pylsp" if you prefer that
+;; Use eglot with flymake for on-the-fly syntax checking
+(add-hook 'python-mode-hook
+          (lambda ()
+            (setq-local flymake-no-changes-timeout nil)
+            (setq-local flymake-start-on-save-buffer nil)))
+
 (add-to-list 'eglot-server-programs '(toml-ts-mode "taplo" "lsp" "stdio"))
 (add-to-list 'eglot-server-programs '(((web-mode :language-id "javascript"))
                                       "typescript-language-server" "--stdio"))
 (add-to-list 'eglot-server-programs '(((css-mode :language-id "css"))
-  "vscode-css-language-server" "--stdio"))
+                                      "vscode-css-language-server" "--stdio"))
+(add-to-list 'eglot-server-programs '(((css-mode :language-id "python"))
+  "pyright-langserver" "--stdio"))
 
 ;; (use-package lsp-mode
 ;;   :init
