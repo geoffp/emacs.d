@@ -21,7 +21,9 @@
  '(byte-compile-warnings nil)
  '(compilation-message-face 'default)
  '(connection-local-criteria-alist
-   '(((:application tramp :machine "MJ2X1FC4CR")
+   '(((:machine "freebiez")
+      freebiez-vars)
+     ((:application tramp :machine "MJ2X1FC4CR")
       tramp-connection-local-darwin-ps-profile)
      ((:machine "usertestingproxy-proxy")
       usertestingproxy-proxy-vars)
@@ -36,7 +38,9 @@
      ((:application tramp)
       tramp-connection-local-default-system-profile tramp-connection-local-default-shell-profile)))
  '(connection-local-profile-alist
-   '((usertestingproxy-proxy-vars
+   '((freebiez-vars
+      (company-gtags--executable-connection))
+     (usertestingproxy-proxy-vars
       (company-gtags--executable-connection))
      (eshell-connection-default-profile
       (eshell-path-env-list))
@@ -161,6 +165,7 @@
  '(magit-auto-revert-mode t)
  '(magit-diff-use-overlays nil)
  '(markdown-command "pandoc")
+ '(menu-bar-mode nil)
  '(mocha-options "--recursive --colors")
  '(mocha-reporter "spec")
  '(neo-theme 'icons)
@@ -209,7 +214,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Menlo" :foundry "nil" :slant normal :weight regular :height 150 :width normal))))
+ '(default ((t (:family "Fira Code" :foundry "CTDB" :slant normal :weight regular :height 113 :width normal))))
  '(org-level-1 ((t (:height 2.0 :foreground "#DFAF8F" :extend nil :inherit default))))
  '(tide-hl-identifier-face ((t (:inherit region))))
  '(web-mode-interpolate-color1-face ((t (:inherit web-mode-css-property-name-face))))
