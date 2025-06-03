@@ -60,6 +60,9 @@
   (message "Native JSON is available")
   (message "Native JSON is *not* available"))
 
+(straight-use-package 'use-package)
+
+
 
 ;;
 ;; PACKAGE CONFIGS
@@ -82,6 +85,44 @@
 (use-package wgrep)
 
 (use-package editorconfig)
+
+;; Can't get it to work...
+(use-package flymake-json)
+
+;; (use-package flymake-eslint
+;;   :ensure t
+;;   :config
+;;   ;; If Emacs is compiled with JSON support
+;;   (setq flymake-eslint-prefer-json-diagnostics t)
+
+;;   (defun lemacs/use-local-eslint ()
+;;     "Set project's `node_modules' binary eslint as first priority.
+;; If nothing is found, keep the default value flymake-eslint set or
+;; your override of `flymake-eslint-executable-name.'"
+;;     (interactive)
+;;     (let* ((root (locate-dominating-file (buffer-file-name) "node_modules"))
+;;            (eslint (and root
+;;                         (expand-file-name "node_modules/.bin/eslint"
+;;                                           root))))
+;;       (when (and eslint (file-executable-p eslint))
+;;         (setq-local flymake-eslint-executable-name eslint)
+;;         (message (format "Found local ESLINT! Setting: %s" eslint))
+;;         (flymake-eslint-enable))))
+
+
+;;   (defun lemacs/configure-eslint-with-flymake ()
+;; 	  (when (or (eq major-mode 'tsx-ts-mode)
+;; 			        (eq major-mode 'typescript-ts-mode)
+;; 			        (eq major-mode 'typescriptreact-mode))
+;;       (lemacs/use-local-eslint)))
+
+;;   (add-hook 'eglot-managed-mode-hook #'lemacs/use-local-eslint)
+
+;;   ;; With older projects without LSP or if eglot fails
+;;   ;; you can call interactivelly M-x lemacs/use-local-eslint RET
+;;   ;; or add a hook like:
+;;   (add-hook 'js-ts-mode-hook #'lemacs/use-local-eslint))
+
 
 ;; make eshell colorful
 (add-hook 'eshell-mode-hook (lambda () (setenv "TERM" "xterm-256color")))
@@ -114,7 +155,8 @@
 
 ;; A few more useful configurations...
 (use-package emacs
-  :bind (("M-o" . 'next-multiframe-window))
+  :bind (("M-o" . 'next-multiframe-window)
+          ("M-." . 'xref-find-definitions))
   :init
   ;; Add prompt indicator to `completing-read-multiple'.
   ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
@@ -317,12 +359,10 @@
 (use-package string-inflection
   :bind (("C-<tab>" . 'string-inflection-java-style-cycle)))
 
-;; TIDE: TypeScript IDE mode
-;; (use-package typescript-mode)
 (use-package company)
 
 (use-package web-mode
-  :mode (("\\.svg\\'" . web-mode)
+  :mode (;; ("\\.svg\\'" . web-mode)
          ("\\.webc\\'" . web-mode)
          ("\\.liquid\\'" . web-mode)))
 
@@ -330,50 +370,11 @@
 (use-package pug-mode
   :mode "\\.pug\\'")
 
-;; Configure stuff for eglot, js, ts, etc.
-(require 'eglot)
-
-;; Set eglot's Python language server
-(setq eglot-python-server "pyright")  ;; or "pylsp" if you prefer that
-;; Use eglot with flymake for on-the-fly syntax checking
-(add-hook 'python-mode-hook
-          (lambda ()
-            (setq-local flymake-no-changes-timeout nil)
-            (setq-local flymake-start-on-save-buffer nil)))
-
-(add-to-list 'eglot-server-programs '(toml-ts-mode "taplo" "lsp" "stdio"))
-(add-to-list 'eglot-server-programs '(((web-mode :language-id "javascript"))
-                                      "typescript-language-server" "--stdio"))
-(add-to-list 'eglot-server-programs '(((css-mode :language-id "css"))
-                                      "vscode-css-language-server" "--stdio"))
-;; (add-to-list 'eglot-server-programs '(((css-mode :language-id "python"))
-;;   "pyright-langserver" "--stdio"))
-
-(add-to-list 'eglot-server-programs '(((python-ts-mode :language-id "python"))
-  "npx" "--yes" "--package=pyright" "--" "pyright-langserver" "--stdio"))
+;; Eglot or LSP? You decide
+;; (require 'eglot-config "~/.emacs.d/eglot-config.el")
+(require 'lsp-mode-config "~/.emacs.d/lsp-mode-config.el")
 
 
-;; (use-package lsp-mode
-;;   :init
-;;   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-;;   (setq lsp-keymap-prefix "C-c l")
-;;   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-;;          (css-mode . lsp)
-;;          (css-ts-mode . lsp)
-;;          (js-mode . lsp)
-;;          (js-ts-mode . lsp)
-;;          ;; if you want which-key integration
-;;          ;; (lsp-mode . lsp-enable-which-key-integration)
-;;          )
-;;   :commands lsp)
-
-;; ;; optionally
-;; (use-package lsp-ui :commands lsp-ui-mode)
-;; if you are helm user
-;; (use-package helm-lsp :commands helm-lsp-workspace-symbol)
-;; if you are ivy user
-;; (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-;; (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
 ;; optionally if you want to use debugger
 ;; (use-package dap-mode)
@@ -392,26 +393,85 @@
 		        (unbind-key "M-." js-ts-mode-map)))
 
 (use-package prettier
+  ;; :hook ((typescript-mode
+  ;;         typescript-ts-mode
+  ;;         tsx-ts-mode
+  ;;         js-mode
+  ;;         js-ts-mode
+  ;;         web-mode
+  ;;         rjsx-mode
+  ;;         js2-mode
+  ;;         javascript-mode) . prettier-mode)
+  )
+
+
+
+
+
+
+;; Flymake
+
+(use-package flymake
   :hook ((typescript-mode
           typescript-ts-mode
+          typescript-ts-mode
           tsx-ts-mode
+          js-mode
+          js-ts-mode
           web-mode
           rjsx-mode
           js2-mode
-          javascript-mode) . prettier-mode))
+          javascript-mode) . flymake-mode))
+
+; BIOME
+
+;; (use-package flymake-biome
+;;   :ensure t
+;;   :hook ((typescript-mode
+;;           typescript-ts-mode
+;;           typescript-ts-mode
+;;           tsx-ts-mode
+;;           js-mode
+;;           js-ts-mode
+;;           rjsx-mode
+;;           js2-mode
+;;           javascript-mode) . #'flymake-biome-load)
+;;   )
+
+(use-package biomejs-format
+  ;; :hook ((typescript-mode
+  ;;         typescript-ts-mode
+  ;;         typescript-ts-mode
+  ;;         tsx-ts-mode
+  ;;         js-mode
+  ;;         js-ts-mode
+  ;;         rjsx-mode
+  ;;         js2-mode
+  ;;         javascript-mode) . biomejs-format-mode)
+  )
 
 (use-package add-node-modules-path
   :config
+  (eval-after-load 'js-mode
+    '(add-hook 'js-mode-hook #'add-node-modules-path))
+  (eval-after-load 'js-ts-mode
+    '(add-hook 'js-ts-mode-hook #'add-node-modules-path))
   (eval-after-load 'markdown-mode
-    '(add-hook 'markdown-mode-hook 'add-node-modules-path))
+    '(add-hook 'markdown-mode-hook #'add-node-modules-path))
   (eval-after-load 'typescript-ts-mode
-    '(add-hook 'typescript-ts-mode-hook 'add-node-modules-path))
+    '(add-hook 'typescript-ts-mode-hook #'add-node-modules-path))
   (eval-after-load 'tsx-ts-mode
-    '(add-hook 'tsx-ts-mode-hook 'add-node-modules-path)))
+    '(add-hook 'tsx-ts-mode-hook #'add-node-modules-path))
+  ;; (eval-after-load 'css-ts-mode
+  ;;   '(add-hook 'css-ts-mode-hook #'add-node-modules-path))
+
+  (add-hook 'css-ts-mode-hook 'add-node-modules-path))
 
 ;; (use-package flycheck
-;;   ;; :hook (json-mode emacs-lisp-mode markdown-mode css-mode)
-;;   :config (global-flycheck-mode))
+;;   :hook (jsonian-mode))
+
+(use-package flymake-stylelint
+  :straight '(flymake-stylelint :type git :host github :repo "orzechowskid/flymake-stylelint" :branch "master"))
 
 (use-package jsdoc
   :straight (:host github :repo "isamert/jsdoc.el"))
@@ -489,6 +549,10 @@
 ;; load machine-local init files
 (let ((f "~/.emacs.d/init.local.el"))
   (if (file-readable-p f)
+    (load-file f)))
+
+(let ((f "~/.emacs.d/geoff/js-code-formatting.el"))
+  (if (file-readable-p f)
       (load-file f)))
 
 ;; pretty printing commands
@@ -525,25 +589,51 @@
      (define-key term-raw-map (kbd "M-o") nil)))
 
 ;; This makes GhostText (Firefox) work -- for editing text in browser from Emacs
-(use-package atomic-chrome
+;; (use-package atomic-chrome
+;;   :custom
+;;   (atomic-chrome-url-major-mode-alist
+;;    '(("shadertoy\\.com" . glsl-mode)))
+;;   :init
+;;   (atomic-chrome-start-server))
+
+;; (use-package edit-server
+;;   :ensure t
+;;   :commands edit-server-start
+;;   :init (if after-init-time
+;;               (edit-server-start)
+;;             (add-hook 'after-init-hook
+;;                       #'(lambda() (edit-server-start))))
+;;   :config (setq edit-server-new-frame-alist
+;;                 '((name . "Edit with Emacs FRAME")
+;;                   (top . 200)
+;;                   (left . 200)
+;;                   (width . 80)
+;;                   (height . 25)
+;;                   (minibuffer . t)
+;;                   (menu-bar-lines . t)
+;;                   (window-system . x))))
+
+(use-package confluence-reader
+  :straight (confluence-reader :type git :host sourcehut :repo "sebasmonia/confluence-reader.el")
   :custom
-  (atomic-chrome-url-major-mode-alist
-   '(("shadertoy\\.com" . glsl-mode)))
-  :init
-  (atomic-chrome-start-server))
+  (confluence-host "confluence.target.com")
+  (confluence-buffer-name-style 'page-title)
+  :commands
+  (confluence-search confluence-page-by-id confluence-page-from-url))
 
-(use-package jsonian
-  :after flycheck
-  :mode ("\\.json\\'" . jsonian-mode)
-  :config (jsonian-enable-flycheck))
 
-;; 
+;; (use-package jsonian
+;;   :after (flycheck)
+;;   :mode ("\\.json\\'" . jsonian-mode)
+;;   :init (jsonian-enable-flycheck))
+
+;;
 ;; Languagetool! Spell checking and such.
-;; 
+;;
 ;; To start the server on MacOS:
-;; 
+;;
 ;;   brew services start languagetool
-;; 
+;;
 ;; See also https://dev.languagetool.org/http-server
 (use-package languagetool)
 
@@ -553,28 +643,49 @@
 ;; Edit-indirect mode: edit regions in separate buffers
 (use-package edit-indirect)
 
-;; Edit-indirect mode: edit regions in separate buffers
-(use-package polymode
-  :config
-  (add-to-list 'polymode-run-these-after-change-functions-in-other-buffers 'lsp-on-change)
-  (add-to-list 'polymode-run-these-before-change-functions-in-other-buffers 'lsp-before-change))
-
 ;; Major mode for editing .nix files
 (use-package nix-mode)
-
 
 ;; AI integration
 (use-package gptel
   :config
-  (setq-default gptel-backend (gptel-make-openai                    ;Not a typo, same API as OpenAI
-                                  "lmstudio"                           ;Any name
-                                :stream t                            ;Stream responses
-                                :protocol "http"
-                                :host "localhost:5555"               ;Llama.cpp server location, typically localhost:8080 for Llamafile
-                                :key nil                             ;No key needed
-                                :models '("test"))                   ;Any names, doesn't matter for Llama
-                gptel-model "test")
-  )
+  (let* ((lmstudio (gptel-make-openai           ;Not a typo, same API as OpenAI
+                    "lmstudio"                  ;Any name
+                  :stream t                     ;Stream responses
+                  :protocol "http"
+                  :host "localhost:5555"        ;Llama.cpp server location, typically localhost:8080 for Llamafile
+                  :key nil                      ;No key needed
+                  :models '("test")))           ;Any names, doesn't matter for Llama
+         (ollama (gptel-make-ollama "Ollama"    ;any name of your choosing
+                   :host "localhost:11434"      ;where it's running
+                   :stream t                    ;stream responses
+                   :models '(llama3.1:8b llama3.3 mistral-nemo qwen2.5-coder:14b)) ;list of models
+                 ))
+    (setq-default gptel-backend ollama
+                  gptel-model 'llama3.1:8b)
+    ))
+
+
+;; (use-package copilot
+;;   :vc (:url "https://github.com/copilot-emacs/copilot.el"
+;;             :rev :newest
+;;         :branch "main")
+;;   :hook prog-mode
+;;   :init
+;;   (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+;;   (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
+;;   (define-key copilot-completion-map (kbd "S-<tab>") 'copilot-accept-completion-by-word)
+;;   (define-key copilot-completion-map (kbd "S-TAB") 'copilot-accept-completion-by-word))
+
+
+;; (use-package ellama
+;;   :init
+;;     (setopt ellama-provider
+;; 	  (make-llm-ollama
+;; 	   ;; this model should be pulled to use it
+;; 	   ;; value should be the same as you print in terminal during pull
+;; 	   :chat-model "llama3.1:8b"
+;; 	   :embedding-model "nomic-embed-text")))
 
 (use-package vterm)
 
@@ -602,7 +713,12 @@
   ;; Enables ligature checks globally in all buffers. You can also do it
   ;; per mode with `ligature-mode'.
   (global-ligature-mode t))
-                                        
+
+(use-package which-key)
+
+(add-to-list 'load-path "~/.emacs.d/geoff")
+(require 'edit-server)
+
 ;; Enable menu bar on Mac OS. Why not, after all?
 (if (eq 'system-type :darwin)
     (setq menu-bar-mode t)
@@ -613,14 +729,19 @@
   "Customize keybindings for HTML mode."
   (defvar html-mode-map)
   (unbind-key "M-o" html-mode-map))
+
 (add-hook 'html-mode-hook 'html-mode-setup)
 
 ;; alias the font window since I can't ever remember the command
 (defalias 'font-window 'menu-set-font)
+;; Bind help keys
+(bind-key "C-h SPC" 'help-follow-symbol)
 
 ;; Bring in my own packages
 (require 'slugify "~/.emacs.d/geoff/slugify.el")
 (require 'misc "~/.emacs.d/geoff/misc.el")
 
+
 (provide 'init)
 ;;; init.el ends here
+(put 'narrow-to-region 'disabled nil)
