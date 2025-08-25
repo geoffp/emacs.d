@@ -23,30 +23,6 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
-;; Disable package.el stuff per https://github.com/radian-software/straight.el#getting-started
-;; (setq package-enable-at-startup nil)
-
-;; Bootstrap straight.el
-;; (defvar bootstrap-version)
-;; (let ((bootstrap-file
-;;        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-;;       (bootstrap-version 6))
-;;   (unless (file-exists-p bootstrap-file)
-;;     (with-current-buffer
-;;         (url-retrieve-synchronously
-;;          "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-;;          'silent 'inhibit-cookies)
-;;       (goto-char (point-max))
-;;       (eval-print-last-sexp)))
-;;   (load bootstrap-file nil 'nomessage))
-
-;; set usernames for source forges
-;; (setq straight-host-usernames
-;;         '((github . "geoffp")
-;;           (gitlab . "geoffp")
-;;           (codeberg . "geoffp")
-;;           (bitbucket . "geoffp")))
-
 ;; Default working directory
 (let ((default-dir "~/src/uxe/"))
   (when (file-directory-p default-dir)
@@ -63,9 +39,6 @@
 (if (functionp 'json-serialize)
   (message "Native JSON is available")
   (message "Native JSON is *not* available"))
-
-;; (straight-use-package 'use-package)
-
 
 
 ;;
@@ -376,8 +349,6 @@
 ;; (require 'eglot-config "~/.emacs.d/eglot-config.el")
 (require 'lsp-mode-config "~/.emacs.d/lsp-mode-config.el")
 
-
-
 ;; optionally if you want to use debugger
 ;; (use-package dap-mode)
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
@@ -472,20 +443,13 @@
 ;; (use-package flycheck
 ;;   :hook (jsonian-mode))
 
-(use-package flymake-stylelint
-  ;; :straight '(flymake-stylelint :type git :host github :repo "orzechowskid/flymake-stylelint" :branch "master")
-  )
+;; (use-package flymake-stylelint
+;;   ;; :straight '(flymake-stylelint :type git :host github :repo "orzechowskid/flymake-stylelint" :branch "master")
+;;   )
 
 (use-package jsdoc
   ;; :straight (:host github :repo "isamert/jsdoc.el")
   )
-
-;; (use-package treesit-auto
-;;   :custom
-;;   (treesit-auto-install 'prompt)
-;;   :config
-;;   (treesit-auto-add-to-auto-mode-alist 'all)
-;;   (global-treesit-auto-mode))
 
 (use-package combobulate
   :preface
@@ -509,11 +473,11 @@
 ;; (add-to-list 'auto-mode-alist '("/Dockerfile" . dockerfile-ts-mode))
 ;; (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
 
-(use-package css-in-js-mode
-  ;; :straight '(css-in-js-mode :type git :host github
-  ;;             :repo "orzechowskid/tree-sitter-css-in-js"
-  ;;             :fork t)
-  )
+;; (use-package css-in-js-mode
+;;   ;; :straight '(css-in-js-mode :type git :host github
+;;   ;;             :repo "orzechowskid/tree-sitter-css-in-js"
+;;   ;;             :fork t)
+;;   )
 
 ;; (use-package visual-regexp)
 
@@ -593,45 +557,6 @@
   '(progn
      (define-key term-raw-map (kbd "M-o") nil)))
 
-;; This makes GhostText (Firefox) work -- for editing text in browser from Emacs
-;; (use-package atomic-chrome
-;;   :custom
-;;   (atomic-chrome-url-major-mode-alist
-;;    '(("shadertoy\\.com" . glsl-mode)))
-;;   :init
-;;   (atomic-chrome-start-server))
-
-;; (use-package edit-server
-;;   :ensure t
-;;   :commands edit-server-start
-;;   :init (if after-init-time
-;;               (edit-server-start)
-;;             (add-hook 'after-init-hook
-;;                       #'(lambda() (edit-server-start))))
-;;   :config (setq edit-server-new-frame-alist
-;;                 '((name . "Edit with Emacs FRAME")
-;;                   (top . 200)
-;;                   (left . 200)
-;;                   (width . 80)
-;;                   (height . 25)
-;;                   (minibuffer . t)
-;;                   (menu-bar-lines . t)
-;;                   (window-system . x))))
-
-(use-package confluence-reader
-  ;; :straight (confluence-reader :type git :host sourcehut :repo "sebasmonia/confluence-reader.el")
-  :custom
-  (confluence-host "confluence.target.com")
-  (confluence-buffer-name-style 'pae-title)
-  :commands
-  (confluence-search confluence-page-by-id confluence-page-from-url))
-
-
-;; (use-package jsonian
-;;   :after (flycheck)
-;;   :mode ("\\.json\\'" . jsonian-mode)
-;;   :init (jsonian-enable-flycheck))
-
 ;;
 ;; Languagetool! Spell checking and such.
 ;;
@@ -685,15 +610,6 @@
 
 
 (use-package indent-bars)
-
-;; (use-package ellama
-;;   :init
-;;     (setopt ellama-provider
-;; 	  (make-llm-ollama
-;; 	   ;; this model should be pulled to use it
-;; 	   ;; value should be the same as you print in terminal during pull
-;; 	   :chat-model "llama3.1:8b"
-;; 	   :embedding-model "nomic-embed-text")))
 
 (use-package vterm)
 
