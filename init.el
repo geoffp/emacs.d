@@ -650,33 +650,36 @@
 (use-package gptel
   :config
   (let* ((lmstudio (gptel-make-openai           ;Not a typo, same API as OpenAI
-                    "lmstudio"                  ;Any name
-                  :stream t                     ;Stream responses
-                  :protocol "http"
-                  :host "localhost:5555"        ;Llama.cpp server location, typically localhost:8080 for Llamafile
-                  :key nil                      ;No key needed
-                  :models '("test")))           ;Any names, doesn't matter for Llama
-         (ollama (gptel-make-ollama "Ollama"    ;any name of your choosing
-                   :host "localhost:11434"      ;where it's running
-                   :stream t                    ;stream responses
-                   :models '(llama3.1:8b llama3.3 mistral-nemo qwen2.5-coder:14b)) ;list of models
-                 ))
+                     "lmstudio"                  ;Any name
+                     :stream t                     ;Stream responses
+                     :protocol "http"
+                     :host "localhost:5555"        ;Llama.cpp server location, typically localhost:8080 for Llamafile
+                     :key nil                      ;No key needed
+                     :models '("test")))           ;Any names, doesn't matter for Llama
+          (ollama (gptel-make-ollama "Ollama"    ;any name of your choosing
+                    :host "localhost:11434"      ;where it's running
+                    :stream t                    ;stream responses
+                    :models '(llama3.1:8b llama3.3 mistral-nemo qwen2.5-coder:14b)) ;list of models
+            ))
     (setq-default gptel-backend ollama
-                  gptel-model 'llama3.1:8b)
+      gptel-model 'llama3.1:8b)
     ))
 
 
-;; (use-package copilot
-;;   :vc (:url "https://github.com/copilot-emacs/copilot.el"
-;;             :rev :newest
-;;         :branch "main")
-;;   :hook prog-mode
-;;   :init
-;;   (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-;;   (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
-;;   (define-key copilot-completion-map (kbd "S-<tab>") 'copilot-accept-completion-by-word)
-;;   (define-key copilot-completion-map (kbd "S-TAB") 'copilot-accept-completion-by-word))
+(use-package copilot
+  :vc (:url "https://github.com/copilot-emacs/copilot.el"
+            :rev :newest
+        :branch "main")
+  :hook prog-mode
+  :init
+  (define-key copilot-completion-map (kbd "S-<tab>") 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "S-TAB") 'copilot-accept-completion)
+  ;; (define-key copilot-completion-map (kbd "S-<tab>") 'copilot-accept-completion-by-word)
+  ;; (define-key copilot-completion-map (kbd "S-TAB") 'copilot-accept-completion-by-word)
+  )
 
+
+(use-package indent-bars)
 
 ;; (use-package ellama
 ;;   :init
