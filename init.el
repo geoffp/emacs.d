@@ -40,9 +40,6 @@
           (codeberg . "geoffp")
           (bitbucket . "geoffp")))
 
-;; SSL
-;; (add-to-list 'gnutls-trustfiles "/etc/ssl/certs/tgt-ca-bundle.crt")
-
 ;; Default working directory
 (let ((default-dir "~/src/uxe/"))
   (when (file-directory-p default-dir)
