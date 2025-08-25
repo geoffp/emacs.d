@@ -241,23 +241,7 @@
  '(org-export-headline-levels 2)
  '(org-export-with-section-numbers nil)
  '(org-log-done-with-time nil)
- '(package-enable-at-startup nil)
- '(package-selected-packages
-    '(elpy notmuch-addr ztree add-node-modules-path urlenc jinja2-mode slack
-       editorconfig markdown-mode counsel magit wgrep jsonian-mode jsonian
-       org-mode svgo languagetool ts-fold use-package html-mode ace-window ag
-       all-the-icons all-the-icons-dired atomic-chrome auto-complete
-       auto-package-update company counsel-css counsel-projectile
-       dockerfile-mode doom-themes dracula-theme edit-indirect edit-server
-       emojify eshell-toggle exec-path-from-shell expand-region flycheck
-       flycheck-mode gh-md glsl-mode iedit js-doc json-mode kotlin-mode lispy
-       neotree nginx-mode pcre2el polymode presentation prettier
-       prettier-js-mode prettier-mode projectile projectile-ripgrep rainbow-mode
-       restclient smart-mode-line string-inflection swift-mode tide use-packages
-       visual-regexp visual-regexp-steroids web-mode with-editor yaml-mode
-       yasnippet zenburn-theme))
- '(package-vc-selected-packages
-    '((copilot :url "https://github.com/copilot-emacs/copilot.el" :branch "main")))
+ '(package-selected-packages nil)
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(presentation-default-text-scale 2)
@@ -276,7 +260,6 @@
  '(sh-indentation 2)
  '(sh-shellcheck-arguments '("-x"))
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
- '(straight-use-package-by-default t)
  '(tab-width 2)
  '(tide-native-json-parsing t)
  '(tool-bar-mode nil)

@@ -7,7 +7,14 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 
-;; (package-initialize)
+(require 'package)
+(add-to-list 'package-archives
+  '("melpa" . "https://melpa.org/packages/") t)
+
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+
+(package-initialize)
 
 ;; TODO:
 ;; - Consolidate defuns in their own file maybe?
@@ -17,28 +24,28 @@
 (load custom-file)
 
 ;; Disable package.el stuff per https://github.com/radian-software/straight.el#getting-started
-(setq package-enable-at-startup nil)
+;; (setq package-enable-at-startup nil)
 
 ;; Bootstrap straight.el
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 6))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+;; (defvar bootstrap-version)
+;; (let ((bootstrap-file
+;;        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+;;       (bootstrap-version 6))
+;;   (unless (file-exists-p bootstrap-file)
+;;     (with-current-buffer
+;;         (url-retrieve-synchronously
+;;          "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+;;          'silent 'inhibit-cookies)
+;;       (goto-char (point-max))
+;;       (eval-print-last-sexp)))
+;;   (load bootstrap-file nil 'nomessage))
 
 ;; set usernames for source forges
-(setq straight-host-usernames
-        '((github . "geoffp")
-          (gitlab . "geoffp")
-          (codeberg . "geoffp")
-          (bitbucket . "geoffp")))
+;; (setq straight-host-usernames
+;;         '((github . "geoffp")
+;;           (gitlab . "geoffp")
+;;           (codeberg . "geoffp")
+;;           (bitbucket . "geoffp")))
 
 ;; Default working directory
 (let ((default-dir "~/src/uxe/"))
@@ -57,7 +64,7 @@
   (message "Native JSON is available")
   (message "Native JSON is *not* available"))
 
-(straight-use-package 'use-package)
+;; (straight-use-package 'use-package)
 
 
 
@@ -356,8 +363,6 @@
 (use-package string-inflection
   :bind (("C-<tab>" . 'string-inflection-java-style-cycle)))
 
-(use-package company)
-
 (use-package web-mode
   :mode (;; ("\\.svg\\'" . web-mode)
          ("\\.webc\\'" . web-mode)
@@ -468,10 +473,12 @@
 ;;   :hook (jsonian-mode))
 
 (use-package flymake-stylelint
-  :straight '(flymake-stylelint :type git :host github :repo "orzechowskid/flymake-stylelint" :branch "master"))
+  ;; :straight '(flymake-stylelint :type git :host github :repo "orzechowskid/flymake-stylelint" :branch "master")
+  )
 
 (use-package jsdoc
-  :straight (:host github :repo "isamert/jsdoc.el"))
+  ;; :straight (:host github :repo "isamert/jsdoc.el")
+  )
 
 ;; (use-package treesit-auto
 ;;   :custom
@@ -503,18 +510,19 @@
 ;; (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
 
 (use-package css-in-js-mode
-  :straight '(css-in-js-mode :type git :host github
-              :repo "orzechowskid/tree-sitter-css-in-js"
-              :fork t))
+  ;; :straight '(css-in-js-mode :type git :host github
+  ;;             :repo "orzechowskid/tree-sitter-css-in-js"
+  ;;             :fork t)
+  )
 
 ;; (use-package visual-regexp)
 
 ;;
 ;; company mode, for auto-completion wherever possible.
 ;;
-(require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
-(global-set-key (kbd "M-RET") 'company-complete)
+(use-package company)
+;; (add-hook 'after-init-hook 'global-company-mode)
+;; (global-set-key (kbd "M-RET") 'company-complete)
 
 ;; file types to open in web-mode
 (add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
@@ -611,10 +619,10 @@
 ;;                   (window-system . x))))
 
 (use-package confluence-reader
-  :straight (confluence-reader :type git :host sourcehut :repo "sebasmonia/confluence-reader.el")
+  ;; :straight (confluence-reader :type git :host sourcehut :repo "sebasmonia/confluence-reader.el")
   :custom
   (confluence-host "confluence.target.com")
-  (confluence-buffer-name-style 'page-title)
+  (confluence-buffer-name-style 'pae-title)
   :commands
   (confluence-search confluence-page-by-id confluence-page-from-url))
 
@@ -663,17 +671,17 @@
     ))
 
 
-(use-package copilot
-  :vc (:url "https://github.com/copilot-emacs/copilot.el"
-            :rev :newest
-        :branch "main")
-  :hook prog-mode
-  :init
-  (define-key copilot-completion-map (kbd "S-<tab>") 'copilot-accept-completion)
-  (define-key copilot-completion-map (kbd "S-TAB") 'copilot-accept-completion)
-  ;; (define-key copilot-completion-map (kbd "S-<tab>") 'copilot-accept-completion-by-word)
-  ;; (define-key copilot-completion-map (kbd "S-TAB") 'copilot-accept-completion-by-word)
-  )
+;; (use-package copilot
+;;   :vc (:url "https://github.com/copilot-emacs/copilot.el"
+;;             :rev :newest
+;;         :branch "main")
+;;   :hook prog-mode
+;;   :init
+;;   (define-key copilot-completion-map (kbd "S-<tab>") 'copilot-accept-completion)
+;;   (define-key copilot-completion-map (kbd "S-TAB") 'copilot-accept-completion)
+;;   ;; (define-key copilot-completion-map (kbd "S-<tab>") 'copilot-accept-completion-by-word)
+;;   ;; (define-key copilot-completion-map (kbd "S-TAB") 'copilot-accept-completion-by-word)
+;;   )
 
 
 (use-package indent-bars)
@@ -740,6 +748,8 @@
 ;; Bring in my own packages
 (require 'slugify "~/.emacs.d/geoff/slugify.el")
 (require 'misc "~/.emacs.d/geoff/misc.el")
+
+(message "hello world")
 
 
 (provide 'init)
