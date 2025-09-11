@@ -26,103 +26,67 @@
  '(byte-compile-warnings nil)
  '(compilation-message-face 'default)
  '(connection-local-criteria-alist
-   '(((:machine "freebiez")
-      freebiez-vars)
-     ((:application tramp :machine "MJ2X1FC4CR")
-      tramp-connection-local-darwin-ps-profile)
-     ((:machine "usertestingproxy-proxy")
-      usertestingproxy-proxy-vars)
-     ((:application eshell)
-      eshell-connection-default-profile)
-     ((:machine "basementcat")
-      basementcat-vars)
-     ((:application tramp :machine "localhost")
-      tramp-connection-local-darwin-ps-profile)
-     ((:application tramp :machine "C02ZW65MMD6R")
-      tramp-connection-local-darwin-ps-profile)
-     ((:application tramp)
-      tramp-connection-local-default-system-profile tramp-connection-local-default-shell-profile)))
+    '(((:application tramp :protocol "kubernetes")
+        tramp-kubernetes-connection-local-default-profile)
+       ((:machine "freebiez") freebiez-vars)
+       ((:application tramp :machine "MJ2X1FC4CR")
+         tramp-connection-local-darwin-ps-profile)
+       ((:machine "usertestingproxy-proxy") usertestingproxy-proxy-vars)
+       ((:application eshell) eshell-connection-default-profile)
+       ((:machine "basementcat") basementcat-vars)
+       ((:application tramp :machine "localhost")
+         tramp-connection-local-darwin-ps-profile)
+       ((:application tramp :machine "C02ZW65MMD6R")
+         tramp-connection-local-darwin-ps-profile)
+       ((:application tramp) tramp-connection-local-default-system-profile
+         tramp-connection-local-default-shell-profile)))
  '(connection-local-profile-alist
-   '((freebiez-vars
-      (company-gtags--executable-connection))
-     (usertestingproxy-proxy-vars
-      (company-gtags--executable-connection))
-     (eshell-connection-default-profile
-      (eshell-path-env-list))
-     (basementcat-vars
-      (company-gtags--executable-connection))
-     (tramp-connection-local-darwin-ps-profile
-      (tramp-process-attributes-ps-args "-acxww" "-o" "pid,uid,user,gid,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" "-o" "state=abcde" "-o" "ppid,pgid,sess,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etime,pcpu,pmem,args")
-      (tramp-process-attributes-ps-format
-       (pid . number)
-       (euid . number)
-       (user . string)
-       (egid . number)
-       (comm . 52)
-       (state . 5)
-       (ppid . number)
-       (pgrp . number)
-       (sess . number)
-       (ttname . string)
-       (tpgid . number)
-       (minflt . number)
-       (majflt . number)
-       (time . tramp-ps-time)
-       (pri . number)
-       (nice . number)
-       (vsize . number)
-       (rss . number)
-       (etime . tramp-ps-time)
-       (pcpu . number)
-       (pmem . number)
-       (args)))
-     (tramp-connection-local-busybox-ps-profile
-      (tramp-process-attributes-ps-args "-o" "pid,user,group,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" "-o" "stat=abcde" "-o" "ppid,pgid,tty,time,nice,etime,args")
-      (tramp-process-attributes-ps-format
-       (pid . number)
-       (user . string)
-       (group . string)
-       (comm . 52)
-       (state . 5)
-       (ppid . number)
-       (pgrp . number)
-       (ttname . string)
-       (time . tramp-ps-time)
-       (nice . number)
-       (etime . tramp-ps-time)
-       (args)))
-     (tramp-connection-local-bsd-ps-profile
-      (tramp-process-attributes-ps-args "-acxww" "-o" "pid,euid,user,egid,egroup,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" "-o" "state,ppid,pgid,sid,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etimes,pcpu,pmem,args")
-      (tramp-process-attributes-ps-format
-       (pid . number)
-       (euid . number)
-       (user . string)
-       (egid . number)
-       (group . string)
-       (comm . 52)
-       (state . string)
-       (ppid . number)
-       (pgrp . number)
-       (sess . number)
-       (ttname . string)
-       (tpgid . number)
-       (minflt . number)
-       (majflt . number)
-       (time . tramp-ps-time)
-       (pri . number)
-       (nice . number)
-       (vsize . number)
-       (rss . number)
-       (etime . number)
-       (pcpu . number)
-       (pmem . number)
-       (args)))
-     (tramp-connection-local-default-shell-profile
-      (shell-file-name . "/bin/sh")
-      (shell-command-switch . "-c"))
-     (tramp-connection-local-default-system-profile
-      (path-separator . ":")
-      (null-device . "/dev/null"))))
+    '((tramp-kubernetes-connection-local-default-profile
+        (tramp-config-check . tramp-kubernetes--current-context-data)
+        (tramp-extra-expand-args 97
+          (tramp-kubernetes--container (car tramp-current-connection)) 104
+          (tramp-kubernetes--pod (car tramp-current-connection)) 120
+          (tramp-kubernetes--context-namespace (car tramp-current-connection))))
+       (freebiez-vars (company-gtags--executable-connection))
+       (usertestingproxy-proxy-vars (company-gtags--executable-connection))
+       (eshell-connection-default-profile (eshell-path-env-list))
+       (basementcat-vars (company-gtags--executable-connection))
+       (tramp-connection-local-darwin-ps-profile
+         (tramp-process-attributes-ps-args "-acxww" "-o"
+           "pid,uid,user,gid,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+           "-o" "state=abcde" "-o"
+           "ppid,pgid,sess,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etime,pcpu,pmem,args")
+         (tramp-process-attributes-ps-format (pid . number) (euid . number)
+           (user . string) (egid . number) (comm . 52) (state . 5)
+           (ppid . number) (pgrp . number) (sess . number) (ttname . string)
+           (tpgid . number) (minflt . number) (majflt . number)
+           (time . tramp-ps-time) (pri . number) (nice . number)
+           (vsize . number) (rss . number) (etime . tramp-ps-time)
+           (pcpu . number) (pmem . number) (args)))
+       (tramp-connection-local-busybox-ps-profile
+         (tramp-process-attributes-ps-args "-o"
+           "pid,user,group,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+           "-o" "stat=abcde" "-o" "ppid,pgid,tty,time,nice,etime,args")
+         (tramp-process-attributes-ps-format (pid . number) (user . string)
+           (group . string) (comm . 52) (state . 5) (ppid . number)
+           (pgrp . number) (ttname . string) (time . tramp-ps-time)
+           (nice . number) (etime . tramp-ps-time) (args)))
+       (tramp-connection-local-bsd-ps-profile
+         (tramp-process-attributes-ps-args "-acxww" "-o"
+           "pid,euid,user,egid,egroup,comm=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+           "-o"
+           "state,ppid,pgid,sid,tty,tpgid,minflt,majflt,time,pri,nice,vsz,rss,etimes,pcpu,pmem,args")
+         (tramp-process-attributes-ps-format (pid . number) (euid . number)
+           (user . string) (egid . number) (group . string) (comm . 52)
+           (state . string) (ppid . number) (pgrp . number) (sess . number)
+           (ttname . string) (tpgid . number) (minflt . number)
+           (majflt . number) (time . tramp-ps-time) (pri . number)
+           (nice . number) (vsize . number) (rss . number) (etime . number)
+           (pcpu . number) (pmem . number) (args)))
+       (tramp-connection-local-default-shell-profile
+         (shell-file-name . "/bin/sh") (shell-command-switch . "-c"))
+       (tramp-connection-local-default-system-profile (path-separator . ":")
+         (null-device . "/dev/null"))))
  '(counsel-projectile-mode t)
  '(css-indent-offset 2)
  '(cua-global-mark-cursor-color "#2aa198")
@@ -241,13 +205,7 @@
  '(org-export-headline-levels 2)
  '(org-export-with-section-numbers nil)
  '(org-log-done-with-time nil)
- '(package-selected-packages
-    '(add-node-modules-path all-the-icons-completion all-the-icons-dired
-       biomejs-format combobulate consult edit-indirect elpy
-       exec-path-from-shell flymake-json glsl-mode gptel iedit indent-bars jsdoc
-       languagetool lsp-ui magit marginalia nix-mode noccur orderless
-       presentation prettier pug-mode rainbow-mode string-inflection swift-mode
-       treesit-auto vertico vterm web-mode wgrep zenburn-theme))
+ '(package-selected-packages nil)
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(presentation-default-text-scale 2)
@@ -292,7 +250,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Fira Code" :foundry "CTDB" :slant normal :weight regular :height 113 :width normal))))
+ '(default ((t (:family "Fira Code" :foundry "nil" :slant normal :weight regular :height 140 :width normal))))
  '(org-level-1 ((t (:height 2.0 :foreground "#DFAF8F" :extend nil :inherit default))))
  '(tide-hl-identifier-face ((t (:inherit region))))
  '(web-mode-interpolate-color1-face ((t (:inherit web-mode-css-property-name-face))))
