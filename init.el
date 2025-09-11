@@ -66,6 +66,21 @@
 ;; Can't get it to work...
 (use-package flymake-json)
 
+(use-package treesit-auto
+  :config
+  (global-treesit-auto-mode)
+  (treesit-auto-add-to-auto-mode-alist))
+
+(use-package combobulate
+   :custom
+   ;; You can customize Combobulate's key prefix here.
+   ;; Note that you may have to restart Emacs for this to take effect!
+   (combobulate-key-prefix "C-c o")
+   :hook ((prog-mode . combobulate-mode))
+   ;; Amend this to the directory where you keep Combobulate's source
+   ;; code.
+   :load-path ("path-to-git-checkout-of-combobulate"))
+
 ;; (use-package flymake-eslint
 ;;   :ensure t
 ;;   :config
@@ -451,23 +466,23 @@
   ;; :straight (:host github :repo "isamert/jsdoc.el")
   )
 
-(use-package combobulate
-  :preface
-  ;; You can customize Combobulate's key prefix here.
-  ;; Note that you may have to restart Emacs for this to take effect!
-  (setq combobulate-key-prefix "C-c o")
-  :hook
-  ((python-ts-mode . combobulate-mode)
-   (js-ts-mode . combobulate-mode)
-   (html-ts-mode . combobulate-mode)
-   (css-ts-mode . combobulate-mode)
-   (yaml-ts-mode . combobulate-mode)
-   (typescript-ts-mode . combobulate-mode)
-   (json-ts-mode . combobulate-mode)
-   (tsx-ts-mode . combobulate-mode))
-  ;; Amend this to the directory where you keep Combobulate's source
-  ;; code.
-  :load-path ("path-to-git-checkout-of-combobulate"))
+;; (use-package combobulate
+;;   :preface
+;;   ;; You can customize Combobulate's key prefix here.
+;;   ;; Note that you may have to restart Emacs for this to take effect!
+;;   (setq combobulate-key-prefix "C-c o")
+;;   :hook
+;;   ((python-ts-mode . combobulate-mode)
+;;    (js-ts-mode . combobulate-mode)
+;;    (html-ts-mode . combobulate-mode)
+;;    (css-ts-mode . combobulate-mode)
+;;    (yaml-ts-mode . combobulate-mode)
+;;    (typescript-ts-mode . combobulate-mode)
+;;    (json-ts-mode . combobulate-mode)
+;;    (tsx-ts-mode . combobulate-mode))
+;;   ;; Amend this to the directory where you keep Combobulate's source
+;;   ;; code.
+;;   :load-path ("path-to-git-checkout-of-combobulate"))
 
 ;; Are these still needed, or does treesit-auto take care of them?
 ;; (add-to-list 'auto-mode-alist '("/Dockerfile" . dockerfile-ts-mode))

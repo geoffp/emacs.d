@@ -241,7 +241,13 @@
  '(org-export-headline-levels 2)
  '(org-export-with-section-numbers nil)
  '(org-log-done-with-time nil)
- '(package-selected-packages nil)
+ '(package-selected-packages
+    '(add-node-modules-path all-the-icons-completion all-the-icons-dired
+       biomejs-format combobulate consult edit-indirect elpy
+       exec-path-from-shell flymake-json glsl-mode gptel iedit indent-bars jsdoc
+       languagetool lsp-ui magit marginalia nix-mode noccur orderless
+       presentation prettier pug-mode rainbow-mode string-inflection swift-mode
+       treesit-auto vertico vterm web-mode wgrep zenburn-theme))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(presentation-default-text-scale 2)
