@@ -1,0 +1,3 @@
+[submodule "geoff/combobulate"]
+	path = geoff/combobulate
+	url = git@github.com:mickeynp/combobulate.git
