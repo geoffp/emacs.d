@@ -79,7 +79,7 @@
    :hook ((prog-mode . combobulate-mode))
    ;; Amend this to the directory where you keep Combobulate's source
    ;; code.
-   :load-path ("path-to-git-checkout-of-combobulate"))
+   :load-path ("geoff/combobulate"))
 
 ;; (use-package flymake-eslint
 ;;   :ensure t
