@@ -51,7 +51,7 @@
 
 (use-package exec-path-from-shell
   :config
-  (when (memq window-system '(mac ns x))
+  (when (memq window-system '(mac ns x pgtk))
     (exec-path-from-shell-initialize)))
 
 (use-package magit
