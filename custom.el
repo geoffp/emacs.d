@@ -186,13 +186,13 @@
  '(js2-strict-trailing-comma-warning nil)
  '(languagetool-console-command
     "/opt/homebrew/Cellar/languagetool/6.4/libexec/languagetool-commandline.jar")
+ '(lsp-apply-edits-after-file-operations nil)
  '(lsp-auto-execute-action nil)
  '(lsp-ui-doc-delay 1)
  '(lsp-ui-doc-show-with-cursor t)
  '(magit-auto-revert-mode t)
  '(magit-diff-use-overlays nil)
  '(markdown-command "pandoc")
- '(menu-bar-mode nil)
  '(mocha-options "--recursive --colors")
  '(mocha-reporter "spec")
  '(neo-theme 'icons)
@@ -250,7 +250,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Fira Code" :foundry "nil" :slant normal :weight regular :height 140 :width normal))))
+ '(default ((t (:family "JetBrains Mono" :foundry "nil" :slant normal :weight regular :height 150 :width normal))))
  '(org-level-1 ((t (:height 2.0 :foreground "#DFAF8F" :extend nil :inherit default))))
  '(tide-hl-identifier-face ((t (:inherit region))))
  '(web-mode-interpolate-color1-face ((t (:inherit web-mode-css-property-name-face))))

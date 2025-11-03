@@ -390,6 +390,8 @@
   ;;         rjsx-mode
   ;;         js2-mode
   ;;         javascript-mode) . prettier-mode)
+  :init
+  (setq prettier-js-use-modules-bin t)
   )
 
 
