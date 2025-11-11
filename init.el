@@ -66,10 +66,10 @@
 ;; Can't get it to work...
 (use-package flymake-json)
 
-(use-package treesit-auto
-  :config
-  (global-treesit-auto-mode)
-  (treesit-auto-add-to-auto-mode-alist))
+;; (use-package treesit-auto
+;;   :config
+;;   (global-treesit-auto-mode)
+;;   (treesit-auto-add-to-auto-mode-alist))
 
 (use-package combobulate
    :custom
