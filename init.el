@@ -361,8 +361,8 @@
   :mode "\\.pug\\'")
 
 ;; Eglot or LSP? You decide
-;; (require 'eglot-config "~/.emacs.d/eglot-config.el")
-(require 'lsp-mode-config "~/.emacs.d/lsp-mode-config.el")
+(require 'eglot-config "~/.emacs.d/eglot-config.el")
+;; (require 'lsp-mode-config "~/.emacs.d/lsp-mode-config.el")
 
 ;; optionally if you want to use debugger
 ;; (use-package dap-mode)
