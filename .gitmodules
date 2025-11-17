@@ -1,3 +1,6 @@
 [submodule "geoff/combobulate"]
 	path = geoff/combobulate
 	url = git@github.com:mickeynp/combobulate.git
+[submodule "geoff/flymake-stylelint"]
+	path = geoff/flymake-stylelint
+	url = git@github.com:geoffp/flymake-stylelint.git
