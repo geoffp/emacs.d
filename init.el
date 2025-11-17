@@ -457,13 +457,6 @@
 
   (add-hook 'css-ts-mode-hook 'add-node-modules-path))
 
-;; (use-package flycheck
-;;   :hook (jsonian-mode))
-
-;; (use-package flymake-stylelint
-;;   ;; :straight '(flymake-stylelint :type git :host github :repo "orzechowskid/flymake-stylelint" :branch "master")
-;;   )
-
 (use-package jsdoc
   ;; :straight (:host github :repo "isamert/jsdoc.el")
   )
@@ -656,6 +649,28 @@
   (global-ligature-mode t))
 
 (use-package which-key)
+
+;; (use-package flymake-stylelint
+;;   :vc (:url "git@github.com:orzechowskid/flymake-stylelint.git"
+;;         :rev :newest))
+;; (use-package flymake-stylelint
+;;   :vc (:url "https://github.com/orzechowskid/flymake-stylelint.git"
+;;         :rev :newest))
+
+(use-package flymake-stylelint
+  :vc t
+  :load-path "geoff/flymake-stylelint")
+
+;; (use-package flymake-jsts
+;;   :vc (:url "git@github.com:orzechowskid/flymake-jsts" :rev :newest))
+
+
+
+(use-package typescript-ts-mode
+  :mode ("\\.ts\\'" "\\.tsx\\'"))
+
+(use-package json-ts-mode
+  :mode ("\\.json\\'"))
 
 (add-to-list 'load-path "~/.emacs.d/geoff")
 (require 'edit-server)

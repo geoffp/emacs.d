@@ -172,7 +172,11 @@
     '("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36"
        "#002b36"))
  '(hl-paren-colors '("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900"))
- '(ignored-local-variable-values '((jsonian-default-indentation . 2)))
+ '(ignored-local-variable-values
+    '((eval combobulate-test-fixture-mode t)
+       (combobulate-test-point-overlays (1 outline 167) (2 outline 185)
+         (3 outline 200) (4 outline 201))
+       (jsonian-default-indentation . 2)))
  '(indent-bars-pattern "  .  .")
  '(indent-bars-treesit-support t)
  '(indent-bars-zigzag 0.1)
@@ -205,7 +209,16 @@
  '(org-export-headline-levels 2)
  '(org-export-with-section-numbers nil)
  '(org-log-done-with-time nil)
- '(package-selected-packages nil)
+ '(package-selected-packages
+    '(add-node-modules-path all-the-icons-completion all-the-icons-dired
+       biomejs-format consult edit-indirect elpy exec-path-from-shell
+       flymake-json flymake-stylelint glsl-mode gptel iedit indent-bars jsdoc
+       languagetool ligature lsp-ui magit marginalia nix-mode noccur orderless
+       presentation prettier pug-mode rainbow-mode string-inflection swift-mode
+       treesit-auto vertico vterm web-mode wgrep zenburn-theme))
+ '(package-vc-selected-packages
+    '((flymake-stylelint :url
+        "https://github.com/orzechowskid/flymake-stylelint.git")))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(presentation-default-text-scale 2)
