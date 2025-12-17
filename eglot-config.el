@@ -22,8 +22,9 @@
   (lambda ()
     (let* ((is-blocklisted (member (symbol-name major-mode) eglot-blocklisted-diagnostics-modes)))
       (if is-blocklisted
-        (message (format "eglot diagnostics blocklisted in %s" major-mode)))
-      (remove-hook 'flymake-diagnostic-functions 'eglot-flymake-backend))))
+        (progn
+          (message (format "eglot diagnostics blocklisted in %s" major-mode))
+          (remove-hook 'flymake-diagnostic-functions 'eglot-flymake-backend))))))
 
 ;; (use-package eglot-booster
 ;;   :straight '(eglot-booster :type git :host github

@@ -666,11 +666,18 @@
 
 
 
-(use-package typescript-ts-mode
-  :mode ("\\.ts\\'" "\\.tsx\\'"))
+;; (use-package typescript-ts-mode
+;;   :mode ("\\.ts\\'"))
 
-(use-package json-ts-mode
-  :mode ("\\.json\\'"))
+;; (use-package tsx-ts-mode
+;;   :mode ("\\.tsx\\'"))
+
+;; (use-package json-ts-mode
+;;   :mode ("\\.json\\'"))
+
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
 
 (add-to-list 'load-path "~/.emacs.d/geoff")
 (require 'edit-server)
