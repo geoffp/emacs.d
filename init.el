@@ -71,6 +71,8 @@
 ;;   (global-treesit-auto-mode)
 ;;   (treesit-auto-add-to-auto-mode-alist))
 
+(use-package tree-sitter-langs)
+
 (use-package combobulate
    :custom
    ;; You can customize Combobulate's key prefix here.
@@ -674,6 +676,22 @@
 
 ;; (use-package json-ts-mode
 ;;   :mode ("\\.json\\'"))
+
+(use-package go-ts-mode
+  :hook
+  (go-ts-mode . eglot-ensure)
+  ;; (go-ts-mode . go-format-on-save-mode)
+  :init
+  ;; (add-to-list 'treesit-language-source-alist '(go "https://github.com/tree-sitter/tree-sitter-go"))
+  (add-to-list 'treesit-language-source-alist '(gomod "https://github.com/camdencheek/tree-sitter-go-mod"))
+  ;; (dolist (lang '(go gomod)) (treesit-install-language-grammar lang))
+  (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
+  (add-to-list 'auto-mode-alist '("/go\\.mod\\'" . go-mod-ts-mode))
+  :config
+  ;; (reformatter-define go-format
+  ;;   :program "goimports"
+  ;;   :args '("/dev/stdin"))
+  )
 
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
