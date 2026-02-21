@@ -693,6 +693,14 @@
   ;;   :args '("/dev/stdin"))
   )
 
+(use-package eat
+  :config
+  (setq eat-kill-buffer-on-exit t)
+  ;; Make eat not interfere with my M-o (other-window) binding
+  (defun my-eat--semi-char-mode-fn ()
+    (define-key eat-semi-char-mode-map (kbd "ESC o") nil))
+  :hook (eat--semi-char-mode . my-eat--semi-char-mode-fn))
+
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
