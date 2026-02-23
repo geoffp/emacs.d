@@ -701,6 +701,12 @@
     (define-key eat-semi-char-mode-map (kbd "ESC o") nil))
   :hook (eat--semi-char-mode . my-eat--semi-char-mode-fn))
 
+;; Caddy files
+(use-package caddyfile-mode
+  :ensure t
+  :mode (("Caddyfile\\'" . caddyfile-mode)
+         ("caddy\\.conf\\'" . caddyfile-mode)))
+
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
