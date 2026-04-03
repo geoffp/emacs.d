@@ -707,8 +707,18 @@
   :mode (("Caddyfile\\'" . caddyfile-mode)
          ("caddy\\.conf\\'" . caddyfile-mode)))
 
+;; REST client
+(use-package restclient
+  :mode ((".http\\'" . restclient-mode)))
+
+(use-package koopa-mode
+  :mode (("\\.ps1\\'" . koopa-mode)))
+
+(require 'typescript-ts-mode nil t)
+
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
 
 (add-to-list 'load-path "~/.emacs.d/geoff")
@@ -737,6 +747,11 @@
 (require 'misc "~/.emacs.d/geoff/misc.el")
 
 (message "hello world")
+
+(add-hook 'find-file-hook
+          (lambda ()
+            (when (string-match "\\.ts\\'" (buffer-file-name))
+              (message "TS file opened as: %s" major-mode))))
 
 
 (provide 'init)
