@@ -44,5 +44,14 @@
           (message "Debug mode disabled.")
           )))))
 
+(defun decode-html-entities (start end)
+    "Replace HTML entities in current region with their literal characters."
+    (interactive "r")
+    (let* ((s (buffer-substring-no-properties start end))
+           (decoded (mm-url-decode-entities-string s)))
+      (save-excursion (delete-region start end)
+                      (goto-char start)
+                      (insert decoded))))
+
 (provide 'misc)
 ;;; misc.el ends here
