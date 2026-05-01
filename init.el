@@ -476,7 +476,8 @@
 (use-package web-mode
   :mode (;; ("\\.svg\\'" . web-mode)
          ("\\.webc\\'" . web-mode)
-         ("\\.liquid\\'" . web-mode)))
+         ("\\.liquid\\'" . web-mode)
+         ("\\.eta\\'" . web-mode)))
 
 ;; Pug templates!
 (use-package pug-mode
