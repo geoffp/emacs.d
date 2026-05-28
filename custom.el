@@ -201,9 +201,6 @@
  '(mocha-options "--recursive --colors")
  '(mocha-reporter "spec")
  '(neo-theme 'icons)
- '(nrepl-message-colors
-    '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3"
-       "#DC8CC3"))
  '(ns-command-modifier 'meta)
  '(org-agenda-files '("~/OneDrive - Target Corporation/org/worklog.org"))
  '(org-cycle-separator-lines 2)
@@ -212,13 +209,13 @@
  '(org-log-done-with-time nil)
  '(package-selected-packages
     '(add-node-modules-path all-the-icons-completion all-the-icons-dired
-       biomejs-format caddyfile-mode cape consult corfu eat edit-indirect elpy
-       embark embark-consult exec-path-from-shell flymake-json flymake-stylelint
-       glsl-mode gptel iedit indent-bars jsdoc kind-icon languagetool ligature
-       lsp-ui magit marginalia nix-mode noccur orderless prescient
-       prescient-vertico presentation prettier pug-mode rainbow-mode sh-mode
-       string-inflection swift-mode tree-sitter-langs treesit-auto vertico
-       vertico-prescient vterm web-mode wgrep zenburn-theme))
+       biomejs-format caddyfile-mode cape compat cond-let consult corfu eat
+       edit-indirect elpy embark-consult exec-path-from-shell flymake-json
+       flymake-stylelint glsl-mode gptel iedit indent-bars jsdoc kind-icon
+       koopa-mode languagetool ligature lsp-ui magit marginalia nix-mode noccur
+       orderless org-modern presentation prettier pug-mode rainbow-mode
+       restclient string-inflection swift-mode tree-sitter-langs treesit-auto
+       vertico vertico-prescient vterm web-mode wgrep zenburn-theme))
  '(package-vc-selected-packages
     '((flymake-stylelint :url
         "https://github.com/orzechowskid/flymake-stylelint.git")))
@@ -266,8 +263,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "FiraCode Nerd Font Mono" :foundry "nil" :slant normal :weight regular :height 150 :width normal))))
- '(org-level-1 ((t (:height 2.0 :foreground "#DFAF8F" :extend nil :inherit default))))
  '(tide-hl-identifier-face ((t (:inherit region))))
  '(web-mode-interpolate-color1-face ((t (:inherit web-mode-css-property-name-face))))
  '(web-mode-interpolate-color2-face ((t (:inherit default)))))
