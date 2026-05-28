@@ -12,7 +12,9 @@
   (yas-global-mode 1))
 
 ;; --- Multi-cursor editing ---
-(use-package iedit)
+(use-package iedit
+  :init (setq iedit-toggle-key-default nil)
+  :bind ("C-c ;" . iedit-mode))
 
 ;; --- Editable grep buffers ---
 (use-package wgrep)

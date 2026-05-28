@@ -94,4 +94,5 @@
 
 (js-code-formatting--enable)
 
+(provide 'js-code-formatting)
 ;;; js-code-formatting.el ends here

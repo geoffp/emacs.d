@@ -53,6 +53,7 @@
   :mode ("\\.go\\'" . go-ts-mode)
   :hook (go-ts-mode . eglot-ensure)
   :init
+  (require 'treesit)
   (add-to-list 'treesit-language-source-alist
     '(gomod "https://github.com/camdencheek/tree-sitter-go-mod"))
   (add-to-list 'auto-mode-alist '("/go\\.mod\\'" . go-mod-ts-mode)))
