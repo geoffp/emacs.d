@@ -208,14 +208,12 @@
  '(org-export-with-section-numbers nil)
  '(org-log-done-with-time nil)
  '(package-selected-packages
-    '(add-node-modules-path all-the-icons-completion all-the-icons-dired
-       biomejs-format caddyfile-mode cape compat cond-let consult corfu eat
-       edit-indirect elpy embark-consult exec-path-from-shell flymake-json
-       flymake-stylelint glsl-mode gptel iedit indent-bars jsdoc kind-icon
-       koopa-mode languagetool ligature lsp-ui magit marginalia nix-mode noccur
-       orderless org-modern presentation prettier pug-mode rainbow-mode
-       restclient string-inflection swift-mode tree-sitter-langs treesit-auto
-       vertico vertico-prescient vterm web-mode wgrep zenburn-theme))
+    '(biomejs-format caddyfile-mode cape corfu eat edit-indirect embark-consult
+       exec-path-from-shell flymake-stylelint iedit jsdoc kind-icon ligature
+       lsp-ui magit marginalia nerd-icons nerd-icons-completion nerd-icons-dired
+       nix-mode noccur orderless org-modern presentation prettier pug-mode
+       rainbow-mode restclient string-inflection treesit-auto vertico-prescient
+       web-mode wgrep zenburn-theme))
  '(package-vc-selected-packages
     '((flymake-stylelint :url
         "https://github.com/orzechowskid/flymake-stylelint.git")))

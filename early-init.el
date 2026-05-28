@@ -10,4 +10,9 @@
 ;; newer MELPA version that magit requires.
 (setq package-install-upgrade-built-in t)
 
+;; Faster startup: reduce GC during init, restore after.
+(setq gc-cons-threshold most-positive-fixnum)
+(add-hook 'emacs-startup-hook
+          (lambda () (setq gc-cons-threshold (* 16 1024 1024))))
+
 ;;; early-init.el ends here
