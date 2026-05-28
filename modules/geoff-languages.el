@@ -61,7 +61,7 @@
 ;; --- Web / HTML / templates ---
 (use-package web-mode
   :mode ("\\.hbs\\'" "\\.html\\'" "\\.mustache\\'"
-         "\\.webc\\'" "\\.liquid\\'"))
+         "\\.webc\\'" "\\.liquid\\'" "\\.eta\\'"))
 
 (use-package pug-mode
   :mode "\\.pug\\'")
