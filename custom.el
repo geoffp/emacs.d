@@ -207,13 +207,7 @@
  '(org-export-headline-levels 2)
  '(org-export-with-section-numbers nil)
  '(org-log-done-with-time nil)
- '(package-selected-packages
-    '(biomejs-format caddyfile-mode cape corfu eat edit-indirect embark-consult
-       exec-path-from-shell flymake-stylelint iedit jsdoc kind-icon ligature
-       lsp-ui magit marginalia nerd-icons nerd-icons-completion nerd-icons-dired
-       nix-mode noccur orderless org-modern presentation prettier pug-mode
-       rainbow-mode restclient string-inflection treesit-auto vertico-prescient
-       web-mode wgrep zenburn-theme))
+ '(package-selected-packages nil)
  '(package-vc-selected-packages
     '((flymake-stylelint :url
         "https://github.com/orzechowskid/flymake-stylelint.git")))
