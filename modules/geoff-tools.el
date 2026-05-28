@@ -16,14 +16,9 @@
   :bind ("C-M-g" . magit-status))
 
 ;; --- Terminal ---
-(use-package eat
+(use-package vterm
   :config
-  (setq eat-kill-buffer-on-exit t)
-  :hook (eat--semi-char-mode . my/eat-unbind-meta-o)
-  :init
-  (defun my/eat-unbind-meta-o ()
-    "Don't let eat steal M-o (other-window)."
-    (define-key eat-semi-char-mode-map (kbd "ESC o") nil)))
+  (setq vterm-kill-buffer-on-exit t))
 
 ;; --- REST client ---
 (use-package restclient
