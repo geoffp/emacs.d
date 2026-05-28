@@ -14,6 +14,10 @@
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
+(add-to-list 'load-path (expand-file-name "geoff" user-emacs-directory))
+(require 'url-direct)
+(url-direct-maybe-enable)
+
 (package-initialize)
 
 ;; TODO:
@@ -44,6 +48,11 @@
 ;;
 ;; PACKAGE CONFIGS
 ;;
+
+(use-package mcp-server
+  :load-path "~/src/emacs-mcp-server"
+  :config
+  (add-hook 'emacs-startup-hook #'mcp-server-start-unix))
 
 (use-package zenburn-theme
   :config
@@ -127,27 +136,11 @@
 ;; Enable vertico
 (use-package vertico
   :init
-  (vertico-mode)
-
-  ;; Different scroll margin
-  ;; (setq vertico-scroll-margin 0)
-
-  ;; Show more candidates
-  ;; (setq vertico-count 20)
-
-  ;; Grow and shrink the Vertico minibuffer
-  ;; (setq vertico-resize t)
-
-  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
-  ;; (setq vertico-cycle t)
-  )
+  (vertico-mode))
 
 ;; Optionally use the `orderless' completion style.
 (use-package orderless
   :init
-  ;; Configure a custom style dispatcher (see the Consult wiki)
-  ;; (setq orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch)
-  ;;       orderless-component-separator #'orderless-escapable-split-on-space)
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil
         completion-category-overrides '((file (styles partial-completion)))))
@@ -329,15 +322,15 @@
 
 ;; Use `consult-completion-in-region' if Vertico is enabled.
 ;; Otherwise use the default `completion--in-region' function.
-(setq completion-in-region-function
-      (lambda (&rest args)
-        (apply (if vertico-mode
-                   #'consult-completion-in-region
-                 #'completion--in-region)
-          args)))
+;; (setq completion-in-region-function
+;;       (lambda (&rest args)
+;;         (apply (if vertico-mode
+;;                    #'consult-completion-in-region
+;;                  #'completion--in-region)
+;;           args)))
 
-(use-package prescient)
-(use-package vertico-prescient)
+;; (use-package prescient)
+;; (use-package vertico-prescient)
 
 
 
@@ -613,13 +606,6 @@
 
 ;; (use-package visual-regexp)
 
-;;
-;; company mode, for auto-completion wherever possible.
-;;
-;; (use-package company)
-;; (add-hook 'after-init-hook 'global-company-mode)
-;; (global-set-key (kbd "M-RET") 'company-complete)
-
 ;; file types to open in web-mode
 (add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
@@ -848,15 +834,17 @@
 (use-package koopa-mode
   :mode (("\\.ps1\\'" . koopa-mode)))
 
+(use-package org-modern)
+
 (require 'typescript-ts-mode nil t)
 
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
-
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-ts-mode))
 
 (add-to-list 'load-path "~/.emacs.d/geoff")
-(require 'edit-server)
+;; (require 'edit-server)
 
 ;; Enable menu bar on Mac OS. Why not, after all?
 (if (eq 'system-type :darwin)
