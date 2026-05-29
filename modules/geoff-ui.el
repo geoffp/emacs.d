@@ -9,9 +9,11 @@
 (use-package zenburn-theme
   :config (load-theme 'zenburn t))
 
-;; --- Icons (nerd-icons: single package, fast, no font install needed) ---
+;; --- Icons (nerd-icons: single package, fast) ---
 (use-package nerd-icons
-  :if (display-graphic-p))
+  :if (display-graphic-p)
+  :custom
+  (nerd-icons-font-family "FiraCode Nerd Font Mono"))
 
 (use-package nerd-icons-dired
   :if (display-graphic-p)
