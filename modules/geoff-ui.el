@@ -10,6 +10,10 @@
   :config (load-theme 'zenburn t))
 
 ;; --- Icons (nerd-icons: single package, fast) ---
+;; nerd-icons defaults to "Symbols Nerd Font Mono" for glyphs, which is a
+;; separate font you'd need to install.  Since our main font (FiraCode Nerd
+;; Font Mono) already includes all the Nerd Font glyphs, we just point
+;; nerd-icons at it directly.
 (use-package nerd-icons
   :if (display-graphic-p)
   :custom
