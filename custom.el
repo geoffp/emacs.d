@@ -222,7 +222,7 @@
  '(rainbow-html-colors-major-mode-list
     '(html-mode css-mode php-mode nxml-mode xml-mode web-mode js2-mode rjsx-mode))
  '(safe-local-variable-values
-    '((web-mode-indent-style . 2) (web-mode-block-padding . 2)
+    '((pug-tab-width . 2) (web-mode-indent-style . 2) (web-mode-block-padding . 2)
        (web-mode-script-padding . 2) (web-mode-style-padding . 2)))
  '(scroll-bar-mode nil)
  '(sh-basic-offset 2)
