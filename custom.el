@@ -26,8 +26,24 @@
  '(byte-compile-warnings nil)
  '(compilation-message-face 'default)
  '(connection-local-criteria-alist
-    '(((:application tramp :protocol "kubernetes")
-        tramp-kubernetes-connection-local-default-profile)
+    '(((:application tramp :machine "ipv6-loopback")
+        tramp-connection-local-darwin-ps-profile)
+       ((:application tramp :machine "ipv6-localhost")
+         tramp-connection-local-darwin-ps-profile)
+       ((:application tramp :machine "ip6-loopback")
+         tramp-connection-local-darwin-ps-profile)
+       ((:application tramp :machine "ip6-localhost")
+         tramp-connection-local-darwin-ps-profile)
+       ((:application tramp :machine "localhost6")
+         tramp-connection-local-darwin-ps-profile)
+       ((:application tramp :machine "localhost4")
+         tramp-connection-local-darwin-ps-profile)
+       ((:application tramp :machine "::1")
+         tramp-connection-local-darwin-ps-profile)
+       ((:application tramp :machine "127.0.0.1")
+         tramp-connection-local-darwin-ps-profile)
+       ((:application tramp :protocol "kubernetes")
+         tramp-kubernetes-connection-local-default-profile)
        ((:machine "freebiez") freebiez-vars)
        ((:application tramp :machine "MJ2X1FC4CR")
          tramp-connection-local-darwin-ps-profile)
@@ -86,7 +102,7 @@
        (tramp-connection-local-default-shell-profile
          (shell-file-name . "/bin/sh") (shell-command-switch . "-c"))
        (tramp-connection-local-default-system-profile (path-separator . ":")
-         (null-device . "/dev/null"))))
+         (null-device . "/dev/null") (exec-suffixes ""))))
  '(counsel-projectile-mode t)
  '(css-indent-offset 2)
  '(cua-global-mark-cursor-color "#2aa198")
@@ -130,6 +146,7 @@
  '(dired-listing-switches "-alh")
  '(drag-stuff-global-mode t)
  '(editorconfig-mode t)
+ '(eglot-code-action-indications '(eldoc-hint mode-line))
  '(eglot-events-buffer-size 0)
  '(eglot-send-changes-idle-time 2)
  '(elpy-rpc-python-command "python3")
@@ -207,7 +224,10 @@
  '(org-export-headline-levels 2)
  '(org-export-with-section-numbers nil)
  '(org-log-done-with-time nil)
- '(package-selected-packages nil)
+ '(package-selected-packages
+    '(editorconfig eglot eldoc erc faceup flymake flymake-stylelint idlwave jsonrpc
+       org peg project python track-changes tramp verilog-mode which-key
+       window-tool-bar))
  '(package-vc-selected-packages
     '((flymake-stylelint :url
         "https://github.com/orzechowskid/flymake-stylelint.git")))

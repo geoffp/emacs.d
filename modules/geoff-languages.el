@@ -19,7 +19,7 @@
 
 ;; Blocklist diagnostics in modes where LSP diagnostics don't work well
 (defcustom geoff-eglot-diagnostics-blocklist
-  '(css-mode css-ts-mode json-mode json-ts-mode)
+  '(css-mode css-ts-mode scss-ts-mode)
   "Modes where eglot's flymake integration should be disabled."
   :group 'eglot
   :type '(repeat symbol))
@@ -58,6 +58,20 @@
     '(gomod "https://github.com/camdencheek/tree-sitter-go-mod"))
   (add-to-list 'auto-mode-alist '("/go\\.mod\\'" . go-mod-ts-mode)))
 
+;; --- JavaScript ---
+(use-package js-ts-mode
+  :ensure nil ; built-in
+  :mode ("\\.js\\'" . js-ts-mode)
+  :hook (js-ts-mode . eglot-ensure))
+
+;; --- CSS / SCSS ---
+(use-package css-ts-mode
+  :ensure nil ; built-in
+  :mode (("\\.css\\'" . css-ts-mode)
+         ("\\.scss\\'" . scss-ts-mode))
+  :hook ((css-ts-mode . eglot-ensure)
+         (scss-ts-mode . eglot-ensure)))
+
 ;; --- Web / HTML / templates ---
 (use-package web-mode
   :mode ("\\.hbs\\'" "\\.html\\'" "\\.mustache\\'"
@@ -70,6 +84,13 @@
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.mjs\\'" . js-ts-mode))
+
+;; --- JSON syntax checking (flymake, no external tools needed) ---
+(load (expand-file-name "json-simple-flymake.el" (expand-file-name "geoff" user-emacs-directory)))
+(add-hook 'json-ts-mode-hook
+  (lambda ()
+    (json-simple-setup-flymake-backend)
+    (flymake-mode)))
 
 ;; --- Code formatting: prettier / biome ---
 ;; Auto-detects which formatter to use based on project config files.
